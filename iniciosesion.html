@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Página principal</title>
+    <link rel="stylesheet" href="Estilos/Estilos.Css" />
+    <link rel="stylesheet" href="Estilos/EstilosCuenta.css" />
+</head>
+<header class="header">
+  <div class="logo">
+    <a href="Home.html">
+      <img src="Recursos/Logo.png" alt="Logo" />
+    </a>
+  </div>
+  <nav>
+    <a class="MENUA" href="Home.html">
+      <img src="Recursos/Home.png" alt="Home">
+    </a>
+    <a class="MENUA" href="iniciosesion.html">
+      <img src="Recursos/User.png" alt="Cuenta">
+    </a>
+    <a class="MENUA" href="Carrito.html">
+      <img src="Recursos/Carrito.png" alt="">
+    </a>
+  </nav>
+</header>
+<body>
+    <br>
+    <h1>Inicio de sesión</h1>
+    <br>
+    <h5>Por favor introduzca su usuario y contraseña para el inicio de sesión
+    </h5>
+    <br>
+    <div style="display: flex; justify-content: center">
+    <form>
+        <label for="nombre">Usuario:</label>
+        <input class="Barra" type="email" id="email" name="email" placeholder="Ingrese su email">
+
+        <label for="contraseña">Contraseña:</label>
+        <input class="Barra" type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña">
+        <button type="button" onclick="consultarDatos()">Ingresar</button>
+        <a href="Registro.html">
+          <h5>¿Es un nuevo cliente? Cree una cuenta</h5>
+        </a>
+        
+    </form>
+    
+  </div>
+    <footer class="Pie">
+      <div class="contenedor">
+        <div class="pie-row">
+          <div class="pie-links">
+            <h4>Quienes somos</h4>
+            <ul>
+              <li><a href="#">Nosotros</a></li>
+              <li><a href="#">Nuestros servicios</a></li>
+              <li><a href="#">Politica de privacidad</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Cuenta</h4>
+            <ul>
+              <li><a href="#">Cuenta</a></li>
+              <li><a href="#">Carrito</a></li>
+              <li><a href="#">Compras</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Tienda</h4>
+            <ul>
+              <li><a href="#">Inicio</a></li>
+              <li><a href="#">Novedades</a></li>
+              <li><a href="#">Categorias</a></li>
+            </ul>
+          </div>       
+        </div>
+      </div>
+    </footer>
+</body>
+
+</html>

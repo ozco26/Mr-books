@@ -1,0 +1,166 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.pago{
+    margin-left: 70%;
+
+}
+
+.checkout-btn {
+    background-color: #8a5929;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.checkout-btn:hover {
+    background-color: #75481b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+}
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: white;
+    padding-top: 80px;
+}
+h1{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin: 30px 0px;
+}
+img {
+    width: 110px;
+    height: 150px;
+    position: relative;
+    margin-top: 10px;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:15%;
+    height: 70px;
+    top: 0;
+    position: fixed;
+    width: 100%;
+}
+.scroll{
+    background-color: aliceblue;
+    box-shadow: .1rem .2rem .3rem #333;
+}
+.scroll img{
+    filter: invert(15%);
+}           
+.scroll h1{
+    color: #F3DD78;
+}
+.carrito{
+    filter: invert(100%);
+    width: 45px;
+    height: auto;
+}
+.contenedorc{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+.contenedorc>div{
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+    background-color: #AA8E70;
+    width: 160px;
+    border-radius: 20px;
+    
+}
+.contenedorc>div:hover{
+    background-color: #977b5c;
+}
+
+.informacion{
+    margin-top: 0px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:15px;
+    position: relative; /* Add this line */
+}
+.informacion>p:first-child{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    position: relative;
+    top: -30px;
+}
+.informacion .precio {
+    font-size: 20px;
+    font-weight: 500;
+    position: relative;
+    bottom: 25px;
+}
+.informacion .precio span{
+    font-size: 17px;
+    font-weight: 300;
+}
+.informacion button {
+    background-color: #8a5929;
+    width: 100px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    font-size: 17px;
+    font-weight: 300;
+    cursor: pointer;
+    position: absolute; 
+    bottom: 10px; 
+}
+
+.informacion button:hover {
+    background-color: #75481b;
+}
+
+
+.resumen {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.fila {
+    display: flex;
+    margin-left: 70%;
+    margin-bottom: 5px;
+}
+
+.etiqueta {
+    font-weight: bold;
+}
+
+.valor {
+    font-weight: bold;
+}
+.resumen span{
+    color: black;
+}

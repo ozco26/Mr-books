@@ -1,0 +1,297 @@
+/*GENERAL*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: Montserrat-Regular;
+}
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url(../Fuentes/Montserrat-Regular.ttf);
+}
+@font-face {
+    font-family: Montserrat-Bold;
+    src: url(../Fuentes/Montserrat-Bold.ttf);
+}
+@font-face {
+    font-family: Montserrat-Light;
+    src: url(../Fuentes/Montserrat-ExtraLight.ttf);
+}
+body{
+    padding-top: 72px;
+    
+}
+
+p{
+    font-family: Montserrat-Regular;
+    
+}
+
+/*Encabezado*/
+.header {
+    display: flex;
+    height: 70px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #AA8E70; 
+    z-index: 100; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-right: 10px;
+    width: 120px;
+    height: auto;
+}
+.MENUA {
+    font-family: 'steelfish';
+    font-size: 25px;
+    text-decoration: none;
+    color: #F3DD78;
+    padding: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.MENUA img{
+    height:25px;
+    width: auto;
+    padding-right: 20px;
+}
+/*PIE DE PÁGINA*/
+footer {
+    position: relative; 
+    width: 100%;
+    background-color: #AA8E70;
+    padding: 25px 0;
+    z-index: 1; 
+    margin-top: 10px;
+}
+
+.contenedor {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 60px; 
+}
+
+.pie-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pie-links {
+    width: 25%;
+    padding: 0 15px;
+}
+
+.pie-links h4 {
+    font-size: 20px;
+    color: #703B07;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border-bottom: 2px solid #703B07;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.pie-links ul li a {
+    font-size: 15px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    margin-bottom: 15px;
+    transition: all .3s ease;
+}
+
+.pie-links ul li a:hover {
+    color: #703B07;
+    padding-left: 6px;
+    text-decoration: underline;
+}
+/*Barra de busqueda*/
+.Barra{
+    display: flex;
+    cursor: pointer;
+    padding: 10px 20px;
+    width: 500px;
+    height: 40px;
+    background-color: #E1C2A1;
+    border-radius: 30px;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+.Barra:hover input{
+    width: 500px;
+    height: 40px;
+}
+
+.Barra input{
+    width: 0;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    transition: 0.8s;
+    background: transparent;
+}
+
+.Barra a img{
+    width: 30px;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: Montserrat-Bold;
+    color: #703B07;
+}
+
+
+
+/*** ESTILOS BOTÓN GROW SKEW ***/
+.boton-efecto {
+    background: #fff; /* color de fondo */
+    color: #AA8E70; /* color de fuente */
+    border: 2px solid #AA8E70; /* tamaño y color de borde */
+    padding: 16px 20px;
+    border-radius: 3px; /* redondear bordes */
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: inline-block;
+  }
+  .boton-efecto:hover {
+    color: #fff;/* color de fuente hover */
+  }
+  .boton-efecto::after {
+    content: "";
+    background: #AA8E70; /* color de fondo hover */
+    position: absolute;
+    z-index: -1;
+    padding: 16px 20px;
+    display: block;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.3s ease;
+  }
+  .boton-efecto:hover::after {
+    transition: all 0.3s ease-out;
+    transform: skewX(-45deg) scale(1, 1);
+  }
+
+
+
+  .ec-stars-wrapper {
+	/* Espacio entre los inline-block (los hijos, los `a`) 
+	   http://ksesocss.blogspot.com/2012/03/display-inline-block-y-sus-empeno-en.html */
+	font-size: 0;
+	/* Podríamos quitarlo, 
+		pero de esta manera (siempre que no le demos padding), 
+		sólo aplicará la regla .ec-stars-wrapper:hover a cuando
+		también se esté haciendo hover a alguna estrella */
+	display: inline-block;
+}
+.ec-stars-wrapper a {
+	text-decoration: none;
+	display: inline-block;
+	/* Volver a dar tamaño al texto */
+	font-size: 32px;
+	font-size: 2rem;
+	
+	color: #888;
+}
+
+.ec-stars-wrapper:hover a {
+	color: yellow;
+}
+/*
+ * El selector de hijo, es necesario para aumentar la especifidad
+ */
+.ec-stars-wrapper > a:hover ~ a {
+	color: #888;
+}
+
+/*SLIDER*/
+.slider-frame {
+    width: 80%;
+    min-width: 320px;
+    max-width: 1200px;
+    height: auto;
+    margin: 0px auto 0;
+    overflow: hidden;
+}
+
+.slider-frame ul {
+    display: flex;
+    padding: 0;
+    padding-left: 45px;
+    margin: 0; /* Añadido: elimina el margen predeterminado de la lista */
+    width: 400%;
+    animation: slide 35s infinite alternate ease-in-out;
+}
+
+.slider-frame li {
+    width: 100%;
+    list-style: none;
+}
+
+.slider-frame img {
+    width: 95%;
+    height: auto; /* Añadido: ajusta la altura automáticamente para mantener la proporción original */
+    object-fit: cover; /* Añadido: ajusta la imagen al contenedor sin deformarla */
+}
+
+@keyframes slide {
+    0% {margin-left: 0;}
+	20% {margin-left: 0;}
+	
+	25% {margin-left: -99%;}
+	45% {margin-left: -99%;}
+	
+	50% {margin-left: -200%;}
+	70% {margin-left: -200%;}
+	
+	75% {margin-left: -299%;}
+	100% {margin-left: -299%;}
+    
+}
+
+/*Catalogo*/
+.CatalogoA {
+    font-size: 20px;
+    text-decoration: none;
+    color: #703B07;
+    padding: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.Catalogo{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.Catalogo a{
+    text-align: center;
+    margin: 10px;
+    display: block;
+}
+.Catalogo p:hover{
+    color: #ce8b89;
+}
+.Catalogo a:hover img{
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}

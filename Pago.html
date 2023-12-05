@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Página principal</title>
+    <link rel="stylesheet" href="Estilos/Estilos.Css" />
+    <link rel="stylesheet" href="Estilos/EstilosPago.css">
+</head>
+<header class="header">
+  <div class="logo">
+    <a href="Home.html">
+      <img src="Recursos/Logo.png" alt="Logo" />
+    </a>
+  </div>
+  <nav>
+    <a class="MENUA" href="Home.html">
+      <img src="Recursos/Home.png" alt="Home">
+    </a>
+    <a class="MENUA" href="#">
+      <img src="Recursos/User.png" alt="">
+    </a>
+    <a class="MENUA" href="Carrito.html">
+      <img src="Recursos/Carrito.png" alt="">
+    </a>
+  </nav>
+
+
+</header>
+
+<body>
+
+  
+  <form action="/procesar-pago" method="post">
+    <p class="pagos">
+      <img src="Recursos/Metodos de pago.png" alt="Metodos de pago">
+    </p>
+    
+    <label for="nombre-titular">Nombre del Titular:</label>
+    <input type="text" id="nombre-titular" name="nombre-titular" required>
+
+    <label for="num-tarjeta">Número de Tarjeta:</label>
+    <input type="text" id="num-tarjeta" name="num-tarjeta" placeholder="XXXX XXXX XXXX XXXX" required>
+
+    <div >
+      <label for="fecha-exp">Caducidad:</label>
+      <input type="text" id="fecha-exp" name="fecha-exp" placeholder="MM/AA" required>
+
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" name="cvv" required>
+    </div>
+    <DIV >
+      <div >
+          <table>
+              <tr>
+                  <td>
+                    <label for="Dirección">Dirección:</label>      
+                      
+                  </td>
+              </tr>
+              <tr>
+                <td>
+                  <textarea class="Texto" name="Descripción" id="Descripción" cols="30" rows="10" placeholder="Se le contactará para calcular el precio de envío..."></textarea> 
+                </td>
+              </tr>
+          </table>
+      </div>
+</DIV>
+    
+
+    <button type="submit">Pagar</button>
+</form>
+    
+
+      
+      <footer class="Pie">
+        <div class="contenedor">
+          <div class="pie-row">
+            <div class="pie-links">
+              <h4>Quienes somos</h4>
+              <ul>
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">Nuestros servicios</a></li>
+                <li><a href="#">Politica de privacidad</a></li>
+              </ul>
+            </div>
+            <div class="pie-links">
+              <h4>Cuenta</h4>
+              <ul>
+                <li><a href="#">Cuenta</a></li>
+                <li><a href="#">Carrito</a></li>
+                <li><a href="#">Compras</a></li>
+              </ul>
+            </div>
+            <div class="pie-links">
+              <h4>Tienda</h4>
+              <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Novedades</a></li>
+                <li><a href="#">Categorias</a></li>
+              </ul>
+            </div>
+            
+          </div>
+        </div>
+      </footer>
+      
+
+    
+</body>
+
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mis libros</title>
+  <link rel="stylesheet" href="Estilos/Estilos.Css" />
+  <link rel="stylesheet" href="Estilos/EstilosCRUDP.css">
+  <script src="Javascript/CrearArticulo.js"></script>
+</head>
+<header class="header">
+  <div class="logo">
+    <a href="Home.html" title="Home">
+      <img src="Recursos/Logo.png" alt="Home" />
+    </a>
+  </div>
+  <nav>
+    <a class="MENUA" href="Home.html" title="Home">
+      <img src="Recursos/Home.png" alt="Home">
+    </a>
+    <a class="MENUA" href="Cuenta.html" title="Cuenta de Usuario">
+      <img src="Recursos/User.png" alt="Cuenta">
+    </a>
+    <a class="MENUA" href="Carrito.html" title="Carrito de Compras">
+      <img src="Recursos/Carrito.png" alt="Carrito de Compras">
+    </a>
+  </nav>
+</header>
+
+<body>
+    <h1 style="text-align: center; text-decoration:underline;">Mis libros</h1>
+  <div style="display: flex; justify-content: center">
+    <table style="padding-top:1cm;">
+      <tr>
+        <td rowspan="7">
+            <img id="imagenLibro" src="#" alt="ImagenLibro">
+            <form action="/ruta/de/controlador" method="post" enctype="multipart/form-data">
+              <label for="imagen">Selecciona una imagen:</label>
+              <input type="file" id="imagen" name="imagen" accept="image/*" onchange="cargarImagen()">
+          </form>
+        </td>
+        <td>
+          <h3>Titulo del libro</h3>
+          <input class="Barra" type="text" placeholder="Ingrese el titulo del libro...">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Autor:</h3>
+          <select class="Selector"  id="autoresSelect"></select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Editorial:</h3>
+          <select class="Selector" id="Selector_Editorial"></select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Año de Publicación:</h3>
+          <select class="Selector" id="Selector_Año"></select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Idioma:</h3>
+          <select class="Selector" id="Idiomas" name="Idiomas">
+            <option value="Español">Español</option>
+            <option value="Inglés">Inglés</option>
+            <option value="Portugués">Portugués</option>
+        </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Categoría:</h3>
+          <select class="Selector" id="colores" name="colores"></select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Precio:</h3>
+          <input class="Barra" type="number" placeholder="Ingrese un monto...">
+        </td>
+      </tr>
+    </table>
+  </div>
+
+<DIV style="text-align: center; ">
+            <div  style="display: flex; justify-content: center; padding-top: 0px">
+                <table>
+                    <tr>
+                        <td>
+                            <H3 style="padding-bottom: 5px;">DETALLES</H3>        
+                            <textarea class="Texto" name="Descripción" id="Descripción" cols="30" rows="10" placeholder="Añada una breve descripción del libro, su estado, etc."></textarea> 
+                        </td>
+                    </tr>
+                </table>
+            </div>
+</DIV>
+<div style="text-align: center; padding-top: 10px;">
+    <button type="submit" value="Submit">
+      Publicar libro
+    </button></th>
+</div>
+
+<div style="display: flex; justify-content: center">
+  <table class="tabla" >
+      <thead>
+          <tr>
+              <th >ID</th>
+              <th >Libro</th>
+              <th >Estado</th>
+              <th >Opciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>001</td>
+              <td>La forma del agua</td>
+              <td>Aprobado</td>
+              <td>
+                <a href="#">
+                  <button ><img src="Recursos/edit_modify_icon_149489.png" alt="Modificar" style="height: 24px; width: auto;"></button>
+                </a>
+                  <button ><img src="Recursos/seo-social-web-network-internet_262_icon-icons.com_61518.png" alt="Eliminar" style="height: 24px; width: auto;"></button>
+              </td>
+                
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>Alicia en el país de las maravillas</td>
+            <td>Aprobado</td>
+            <td>
+              <a href="#">
+                <button ><img src="Recursos/edit_modify_icon_149489.png" alt="Modificar" style="height: 24px; width: auto;"></button>
+              </a>
+                <button ><img src="Recursos/seo-social-web-network-internet_262_icon-icons.com_61518.png" alt="Eliminar" style="height: 24px; width: auto;"></button>
+            </td>
+          </tr>
+          <tr>
+            <td>003</td>
+            <td>Harry Potter</td>
+            <td>Pendiente</td>
+            <td>
+              <a href="#">
+                <button ><img src="Recursos/edit_modify_icon_149489.png" alt="Modificar" style="height: 24px; width: auto;"></button>
+              </a>
+                <button ><img src="Recursos/seo-social-web-network-internet_262_icon-icons.com_61518.png" alt="Eliminar" style="height: 24px; width: auto;"></button>
+            </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+
+</body>
+
+<footer class="Pie">
+  <div class="contenedor">
+    <div class="pie-row">
+      <div class="pie-links">
+        <h4>Quienes somos</h4>
+        <ul>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Nuestros servicios</a></li>
+          <li><a href="#">Politica de privacidad</a></li>
+        </ul>
+      </div>
+      <div class="pie-links">
+        <h4>Cuenta</h4>
+        <ul>
+          <li><a href="#">Cuenta</a></li>
+          <li><a href="#">Carrito</a></li>
+          <li><a href="#">Compras</a></li>
+        </ul>
+      </div>
+      <div class="pie-links">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Novedades</a></li>
+          <li><a href="#">Categorias</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+</html>

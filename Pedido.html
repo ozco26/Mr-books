@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Pedidos - Admin</title>
+    <link rel="stylesheet" href="Estilos/Estilos.Css" />
+    <link rel="stylesheet" href="Estilos/EstiloPedido.css" />
+</head>
+<header class="header">
+  <div class="logo">
+    <a href="Home.html">
+      <img src="Recursos/Logo.png" alt="Logo" />
+    </a>
+  </div>
+  <nav>
+    <a class="MENUA" href="Home.html">
+      <img src="Recursos/Home.png" alt="Home">
+    </a>
+    <a class="MENUA" href="Cuenta.html">
+      <img src="Recursos/User.png" alt="Cuenta">
+    </a>
+    <a class="MENUA" href="Carrito.html">
+      <img src="Recursos/Carrito.png" alt="">
+    </a>
+  </nav>
+</header>
+<body>
+    <div class="pedido">
+        <br>
+        <h1>Gestión de Pedidos - Admin</h1>
+        <br>
+        <div class="filters">
+            <label for="filtroPedido">Buscar por Número de Pedido:</label>
+            <input type="text" id="filtroPedido" name="filtroPedido" placeholder="Número de Pedido">
+            <button id="btnBuscar" onclick="buscarPedido()">Buscar</button>
+        </div>
+        <div class="estados">
+            <span>Todos (5)</span>
+            <span>Pendiente (2)</span>
+            <span>En Proceso (2)</span>
+            <span>Completo (1)</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Número de Pedido</th>
+                    <th>Descripción</th>
+                    <th>Fecha del Pedido</th>
+                    <th>Estado</th>
+                    <th>Dirección</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>001</td>
+                    <td>Producto 1</td>
+                    <td>2023-11-09</td>
+                    <td><button >Pendiente</button></td>
+                    <td>Dirección 1</td>
+                    <td>$50.00</td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>Producto 2</td>
+                    <td>2023-11-10</td>
+                    <td><button >En proceso</button></td>
+                    <td>Dirección 2</td>
+                    <td>$30.00</td>
+                </tr>
+                <tr>
+                    <td>003</td>
+                    <td>Producto 3</td>
+                    <td>2023-11-11</td>
+                    <td><button class="">Completo</button></td>
+                    <td>Dirección 3</td>
+                    <td>$25.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="Pie">
+      <div class="contenedor">
+        <div class="pie-row">
+          <div class="pie-links">
+            <h4>Quienes somos</h4>
+            <ul>
+              <li><a href="#">Nosotros</a></li>
+              <li><a href="#">Nuestros servicios</a></li>
+              <li><a href="#">Politica de privacidad</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Cuenta</h4>
+            <ul>
+              <li><a href="#">Cuenta</a></li>
+              <li><a href="#">Carrito</a></li>
+              <li><a href="#">Compras</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Tienda</h4>
+            <ul>
+              <li><a href="#">Inicio</a></li>
+              <li><a href="#">Novedades</a></li>
+              <li><a href="#">Categorias</a></li>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+
+</body>
+</html>

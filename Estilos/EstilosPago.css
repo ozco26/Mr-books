@@ -1,0 +1,40 @@
+form {
+    max-width: 600px;
+    margin: auto;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+div input{
+    max-width:100px;
+}
+
+button {
+    background-color: #46220f;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #aa7444    ;
+}
+p img{
+    width: 340px;
+    display: block;
+    margin: 0% auto;
+}
+
+textarea{
+    width: 595px;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
