@@ -18,8 +18,12 @@ router.get('/registro',(req,res)=>{
     res.render('registro');    
 })
 
-router.get('/homecliente',(req,res)=>{
+router.get('/homecliente/:id',(req,res)=>{
     res.render('HomeCliente');    
+})
+
+router.get('/homeAdmnin/:id',(req,res)=>{
+    res.render('home_administrador');    
 })
 
 router.post("/saveReg", controller.saveReg);

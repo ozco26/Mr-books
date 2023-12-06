@@ -31,6 +31,7 @@ exports.saveReg = async (req, res) => {
     const rol = req.body.rol;
     const algoritmo = "sha256";
     const hash = generarHash(algoritmo, Contrasena);
+    const fecha_creacion = new Date();
 
     const check1 = "SELECT COUNT(*) as count FROM usuarios WHERE Cedula = ?";
     const check2 = "SELECT COUNT(*) as count FROM usuarios WHERE Correo = ?";
@@ -55,7 +56,7 @@ exports.saveReg = async (req, res) => {
             Contrasenna: hash,
             Fecha_nacimiento: FechaNacimiento,
             Rol: rol,
-            Fecha_ingreso : Date(),
+            Fecha_ingreso : fecha_creacion,
             
             },
             (err, results) => {
@@ -75,3 +76,63 @@ exports.saveReg = async (req, res) => {
         res.redirect("/AdministradorViewCreateUS");
     }
 };
+
+exports.loginUser = async(req, res) =>{
+  const correo = req.body.email;
+  const password = req.body.contrasena;
+  const algoritmo = 'sha256';
+  const hash = generarHash(algoritmo,password);
+
+  const query = "SELECT * FROM usuarios WHERE Correo  = ? AND Contrasenna = ?";
+  conexion.query(query, [correo, hash], (err, result) => {
+
+    if (err) {
+      throw err;
+    } else {
+      try {
+        console.log("Usuario encontrado:", result[0]);
+        if (hash === result[0].Contrasenna) {
+          
+            if (result[0].Rol === 1) {
+
+              res.redirect('/homecliente/'+result[0].ID)
+
+            } else if (result[0].Rol === 2) {
+                
+              res.redirect('/homeAdmnin/'+result[0].ID)
+
+            } else if (result[0].Rol === 3) {
+              console.log("cargar pagina de vendedor")
+              
+            } else if (result[0].Rol === 4) {
+              res.redirect('/views/pagSinAcceso.ejs')
+              
+            }else {
+
+              console.log("Fallo en comprobacion");
+
+              res.locals.popupMessage =
+                "Fallo en comprobacion, pongase en contacto con la administración";
+              res.render("Login");
+              res.locals.mostrarMensaje = true; // Nueva variable para indicar que se debe mostrar el mensaje
+            }
+          
+        } else {
+          console.log("Contraseña Invalida");
+          res.locals.popupMessage =
+            "Contraseña Inválida o Usuario no encontrado";
+          res.locals.mostrarMensaje = true; // Nueva variable para indicar que se debe mostrar el mensaje
+          res.render("inicioSesion");
+        }
+      } catch (err) {
+        console.log("Usuario no existe");
+        res.locals.popupMessage = "Contraseña Inválida o Usuario no encontrado";
+        res.render("inicioSesion");
+        res.locals.mostrarMensaje = true; // Nueva variable para indicar que se debe mostrar el mensaje
+      }
+    }
+  });
+};
+
+
+

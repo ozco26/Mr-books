@@ -5,6 +5,7 @@
     <title>Página principal</title>
     <link rel="stylesheet" href="Estilos/Estilos.Css" />
     <link rel="stylesheet" href="Estilos/EstilosCuenta.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <header class="header">
   <div class="logo">
@@ -14,15 +15,18 @@
   </div>
   <nav>
     </a>
-    <a class="MENUA" href="login">
-      <img src="Recursos/User.png" alt="Cuenta">
+    <a class="MENUA" href="inicioSesion"  title="Login">
+      <img src="Recursos/User.png" alt="Inicio de sesión">
     </a>
-    <a class="MENUA" href="registro">
-      <img  src="Recursos/UserRegistro.png" alt="Cuenta">
+    <a class="MENUA" href="registro"  title="Registro">
+      <img  src="Recursos/UserRegistro.png" alt="Registro">
     </a>
   </nav>
 </header>
 <body>
+  <% var mostrarMensaje ; %>
+    <% var popupMessage %>
+    <div id="oculto" style{"<%= mostrarMensaje ? 'display: block;' : 'display: none;' %>"}></div>
     <br>
     <h1>Inicio de sesión</h1>
     <br>
@@ -35,7 +39,7 @@
         <input class="Barra" type="email" id="email" name="email" placeholder="Ingrese su email">
 
         <label for="contraseña">Contraseña:</label>
-        <input class="Barra" type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña">
+        <input class="Barra" type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña">
         <button type="submit">Ingresar</button>
         <a href="registro">
           <h5>¿Es un nuevo cliente? Cree una cuenta</h5>
@@ -75,5 +79,19 @@
       </div>
     </footer>
 </body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+        const mensaje = "<%= popupMessage %>";
+        if (mensaje) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: mensaje
+            });
+        }
+    });
+</script>
+
 
 </html>
