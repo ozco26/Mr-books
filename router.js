@@ -10,7 +10,7 @@ router.get('/',(req,res)=>{
     res.render('home');    
 })
 
-router.get('/login',(req,res)=>{
+router.get('/inicioSesion',(req,res)=>{
     res.render('inicioSesion');    
 })
 
@@ -23,4 +23,5 @@ router.get('/homecliente',(req,res)=>{
 })
 
 router.post("/saveReg", controller.saveReg);
+router.post('/login', controller.loginUser); 
 module.exports = router;

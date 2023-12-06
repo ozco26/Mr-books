@@ -30,13 +30,13 @@
     </h5>
     <br>
     <div style="display: flex; justify-content: center">
-    <form>
+    <form id="formLogin" action="/login" method="POST">
         <label for="nombre">Usuario:</label>
         <input class="Barra" type="email" id="email" name="email" placeholder="Ingrese su email">
 
         <label for="contraseña">Contraseña:</label>
         <input class="Barra" type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña">
-        <button type="button" onclick="consultarDatos()">Ingresar</button>
+        <button type="submit">Ingresar</button>
         <a href="registro">
           <h5>¿Es un nuevo cliente? Cree una cuenta</h5>
         </a>
