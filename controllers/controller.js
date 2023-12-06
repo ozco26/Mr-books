@@ -95,17 +95,17 @@ exports.loginUser = async(req, res) =>{
           
             if (result[0].Rol === 1) {
 
-              res.redirect('/homecliente/'+result[0].ID)
+              res.redirect('/homeAdmnin/'+result[0].ID)
 
             } else if (result[0].Rol === 2) {
                 
-              res.redirect('/homeAdmnin/'+result[0].ID)
+              res.redirect('/homecliente/'+result[0].ID)
 
             } else if (result[0].Rol === 3) {
               console.log("cargar pagina de vendedor")
               
             } else if (result[0].Rol === 4) {
-              res.redirect('/views/pagSinAcceso.ejs')
+              res.redirect('/bloqueado')
               
             }else {
 
