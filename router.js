@@ -3,7 +3,6 @@ const router = express.Router();
 //const conexion = require('./database/db');
 const controller = require('./controllers/controller');
 
-
 const conexion = require('./database/db');
 
 router.get('/',(req,res)=>{
@@ -63,6 +62,33 @@ router.get('/bloqueado',(req,res)=>{
     res.render('pagSinAcceso');    
 })
 
+router.get("/GestionClientes", (req, res) => {
+  const CargaUsuarios = /*'select * from Usuarios'*/
+  
+'   SELECT Usuarios.*, roles.Rol FROM Usuarios INNER JOIN roles ON Usuarios.Rol = roles.ID';
+
+  conexion.query(CargaUsuarios, (err, results) => {
+    if (err) {
+      throw err;
+    } else {
+      res.render("crudClientes", {
+        results: results,
+        
+      });
+    }
+  });
+});
+
+router.get('/delete/:id', (req, res) => {
+    const id = req.params.id;
+    conexion.query('DELETE FROM usuarios WHERE ID = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect("/GestionClientes");
+        }
+    })
+});
 
 
 

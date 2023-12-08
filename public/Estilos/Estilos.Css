@@ -28,6 +28,26 @@ p{
     
 }
 
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+    padding: 15px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 4px;
+    text-align: left;
+  }
+
+  td {
+    max-width: 60px; /* Establece el ancho máximo que deseas */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más contenido */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  }
+
 /*Encabezado*/
 .header {
     display: flex;
