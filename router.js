@@ -64,9 +64,6 @@ router.get('/bloqueado',(req,res)=>{
 })
 
 
-router.get('/homeVend/:id',(req,res)=>{
-    res.render('home_vendedor');    
-})
 
 
 router.post("/saveReg", controller.saveReg);

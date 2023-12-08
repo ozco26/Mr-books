@@ -1,5 +1,3 @@
-
-
 <head>
   <meta charset="UTF-8">
   <title>Página principal - Cliente</title>
@@ -7,24 +5,25 @@
 </head>
 <header class="header">
   <div class="logo">
-    <a href="#" id="irhome" title="Home">
+    <a href='/homecliente/<%=usuario.ID%>' title="Home" >
       <img src="/Recursos/Logo.png" alt="Home" />
     </a>
   </div>
   <nav>
-
-    
-    <a class="MENUA" href="cerrarSesion" title="Cerrar Sesion">
+    <a class="MENUA" href="/" title="Cerrar Sesion">
       <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
+    <a class="MENUA" href="Cuenta.html" title="Cuenta de Usuario">
+      <img src="/Recursos/User.png" alt="Cuenta">
+    </a>
     <a class="MENUA" href="Carrito.html" title="Carrito de Compras">
       <img src="/Recursos/Carrito.png" alt="Carrito de Compras">
     </a>
-   
   </nav>
 </header>
-
 <body>
 <br> 
+<h4 style="text-align: center;">Hola <%= usuario?.Nombre %>, es un gusto tenerte de vuelta! </h4>
+<h5 style="text-align: center;">Como podemos ayudarte?</h5>
   <div class="slider-frame">
     <ul>
         <li>
@@ -69,7 +68,6 @@
       <th> <a href="#" class="boton-efecto">RECOMENDADOS</a></th>
     </tr>
   </table>
-
   <div class="Catalogo">
     <a class="CatalogoA" href="libro.html">
       <img src="Recursos/libro.png" alt="Holly" title="Holly" height="300"
