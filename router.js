@@ -133,6 +133,38 @@ router.get('/Pedido', (req, res)=>{
     
 })
 
+//Redirige a pantalla de vendedor
+router.get('/homeVendedor/:id',(req,res)=>{
+    const id = req.params.id;
+    const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
+    
+    conexion.query(usuario, [id], (err, infousuario) => {
+        if (err) {
+            throw err;
+        } else if (!infousuario || infousuario.length === 0) {
+            // Si no se encuentra el usuario, redirige a la página bloqueado
+            res.redirect('/bloqueado');
+        } else if (infousuario[0].Rol !== 3) {
+            res.redirect('/bloqueado');
+        } else {
+            res.render("HomeVendedor.ejs", {usuario: infousuario[0]});
+        }
+    }) 
+});
+
+//  CRUD PRODUCTOS
+router.get('/Productos', (req, res)=>{
+    conexion.query('SELECT * FROM productos', (err, results)=>{
+        if(err){
+            throw err;
+        } else{
+            res.render('CRUDProductos.ejs', {productos:results});
+        }
+
+
+    })
+    
+})
 
 
 router.post("/saveReg", controller.saveReg);

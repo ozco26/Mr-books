@@ -1,0 +1,142 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Página principal - Cliente</title>
+    <link rel="stylesheet" href="/Estilos/Estilos.Css" />
+  </head>
+  <header class="header">
+    <div class="logo">
+      <a href='/homecliente/<%=usuario.ID%>' title="Home" >
+        <img src="/Recursos/Logo.png" alt="Home" />
+      </a>
+    </div>
+    <nav>
+      <a class="MENUA" href="/" title="Cerrar Sesion">
+        <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
+      <a class="MENUA" href="Cuenta.html" title="Cuenta de Usuario">
+        <img src="/Recursos/User.png" alt="Cuenta">
+      </a>
+      <a class="MENUA" href="/Productos" title="Publicar">
+        <img src="/public/Recursos/Mas.png" alt="Publicar">
+      </a>
+    </nav>
+  </header>
+  <body>
+  <br> 
+  <h4 style="text-align: center;">Hola <%= usuario?.Nombre %>, es un gusto tenerte de vuelta! </h4>
+  <h5 style="text-align: center;">Como podemos ayudarte?</h5>
+    <div class="slider-frame">
+      <ul>
+          <li>
+            <a href="#">
+              <img src="Recursos/Ofertas especiales.png" alt="">
+            </a>
+          </li>
+            <li>
+              <a href="#">
+                <img src="Recursos/Educativo.png" alt="">
+              </a>
+            </li>
+  
+            <li>
+              <a href="#">
+                <img src="Recursos/Infantil.png" alt="">
+              </a>
+            </li>
+  
+            <li>
+              <a href="#">
+                <img src="Recursos/Terror.png" alt="">
+              </a>
+            </li>
+      </ul>
+  </div>
+  <br>
+    <div style="display: flex; justify-content: center">
+      <div class="Barra">
+        <input type="text" placeholder="Buscar...">
+        <a href="#">
+          <img src="/Recursos/Lupa.png" alt="Buscar">
+        </a>
+      </div>
+    </div>
+    <br>
+  
+    <table style="width: 100%; ">
+      <tr>
+        <th> <a href="#" class="boton-efecto">MEJOR CALIFICADOS </a></th>
+        <th> <a href="#" class="boton-efecto">NOVEDADES</a></th>
+        <th> <a href="#" class="boton-efecto">RECOMENDADOS</a></th>
+      </tr>
+    </table>
+    <div class="Catalogo">
+      <a class="CatalogoA" href="libro.html">
+        <img src="Recursos/libro.png" alt="Holly" title="Holly" height="300"
+            width="auto">
+        <p>Holly</p>
+    </a>
+      <a class="CatalogoA" href="">
+          <img src="Recursos/Carrie(libro).jpg" alt="Carrie" title="Carrie" height="300" width="auto">
+          <p>Carrie</p>
+      </a>
+      <a class="CatalogoA" href="#">
+          <img src="Recursos/No sé como demostrar donde me duele.jpg" alt="No sé como demostrar donde me duele" title="No sé como demostrar donde me duele" height="300" width="auto">
+          <p>No sé cómo demostrar donde me duele</p>
+      </a>
+      <a class="CatalogoA" href="#">
+          <img src="Recursos/13RW.jpg" alt="13 reasons why" title="13 reasons why" height="300"
+              width="auto">
+          <p>13 reasons why</p>
+      </a>
+      <a class="CatalogoA" href="#">
+          <img src="Recursos/No te olvidaré.jpg" alt="No te olvidaré" title="No te olvidaré" height="300"
+              width="auto">
+          <p>No te olvidaré</p>
+      </a>
+      <a class="CatalogoA" href="#">
+          <img src="Recursos/Alpaca's Maracas.jpg" alt="Alpaca's Maracas" title="Alpaca's Maracas" height="300"
+              width="auto">
+          <p>Alpaca's Maracas</p>
+      </a>
+  </div>
+  
+  
+    <footer class="Pie">
+      <div class="contenedor">
+        <div class="pie-row">
+          <div class="pie-links">
+            <h4>Quienes somos</h4>
+            <ul>
+              <li><a href="#">Nosotros</a></li>
+              <li><a href="#">Nuestros servicios</a></li>
+              <li><a href="#">Politica de privacidad</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Cuenta</h4>
+            <ul>
+              <li><a href="#">Cuenta</a></li>
+              <li><a href="#">Carrito</a></li>
+              <li><a href="#">Compras</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Tienda</h4>
+            <ul>
+              <li><a href="Home.html">Inicio</a></li>
+              <li><a href="#">Novedades</a></li>
+              <li><a href="#">Categorias</a></li>
+            </ul>
+          </div>
+    
+        </div>
+      </div>
+    </footer>
+  
+  </body>
+  <script>
+  document.getElementById("irhome").addEventListener("click", function(event) {
+    event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+    window.location.href = window.location.href;
+  });
+  </script>
+  
