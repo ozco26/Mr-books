@@ -135,6 +135,7 @@ exports.loginUser = async(req, res) =>{
 };
 
 exports.updateUserbyAdmin = async(req,res)=>{
+  console.log(req.body);
   const IDADminsitrador =req.body.IDADminsitrador
   const id = req.body.id;
   const Cedula = req.body.cedula;
@@ -142,9 +143,9 @@ exports.updateUserbyAdmin = async(req,res)=>{
   const Apellidos = req.body.apellidos;
   
   const telefono = req.body.telefono;
-  const Correo = req.body.coreo;
+  const Correo = req.body.correo;
   const Contrasena = req.body.contrasenna;
-  console.log(Contrasena);
+
   const FechaNacimiento = req.body.fecha_nacimiento;
   const rol = req.body.rol;
   const algoritmo = "sha256";
@@ -155,6 +156,7 @@ exports.updateUserbyAdmin = async(req,res)=>{
     conexion.query(
       "UPDATE usuarios SET ? WHERE id = ?",
       [{
+      ID: id,
       Cedula: Cedula,
       Nombre: Nombre,
       Apellidos: Apellidos,
@@ -171,8 +173,7 @@ exports.updateUserbyAdmin = async(req,res)=>{
           console.log("Error en update de usuario:", err);
           res.redirect("/GestionClientes/"+IDADminsitrador);
       } else {
-          console.log("Edit en usuario exitoso");
-          
+          console.log("Edit en usuario exitoso");          
           res.redirect("/GestionClientes/"+IDADminsitrador);
       }
       });
