@@ -114,9 +114,22 @@ router.get('/editar/:id/:idUsuario',(req,res)=>{
             res.render("editarCuentaAdministrador", {usuario: infousuario[0],idUsuario});
         }
     })
-})
+});
 
 //actualiza usuario por administrador
+
+router.get('/editarUsuario/:id',(req,res)=>{
+    const id = req.params.id;
+    const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
+    
+    conexion.query(usuario, [id], (err, infousuario) => {
+        if (err) {
+            throw err;
+        } else {
+            res.render("editarCuentaCliente", {usuario: infousuario[0]});
+        }
+    })
+});
 
 //Gestión de pedidos
 router.get('/Pedido', (req, res)=>{
@@ -167,7 +180,9 @@ router.get('/Productos', (req, res)=>{
 })
 
 
+
 router.post("/saveReg", controller.saveReg);
 router.post('/login', controller.loginUser); 
 router.post('/updateUserbyAdmin', controller.updateUserbyAdmin);
+router.post('/updateUserbyUser', controller.updateUserbyUser);
 module.exports = router;
