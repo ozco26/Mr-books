@@ -32,7 +32,7 @@
 <br>
   <table style="width: 100%; ">
     <tr>
-      <th> <a href="/GestionClientes" class="boton-efecto">Gestion de usuarios</a></th>
+      <th> <a href="/GestionClientes/<%= usuario?.ID %>" class="boton-efecto">Gestion de usuarios</a></th>
       <th> <a href="#" class="boton-efecto">Aprobación de libros</a></th>
       <th> <a href="gestionCategoria.html" class="boton-efecto">Creación de Categorias</a></th>
       <th> <a href="#" class="boton-efecto">Gestion de Pedidos</a></th>
@@ -75,7 +75,11 @@
   </div>
 </footer>
 <script>
-  
+  function obtenerIdDeUsuario(){
+    return usuario.ID;
+  }
+  const userId = obtenerIdDeUsuario(); 
 </script>
+
 
 </html>

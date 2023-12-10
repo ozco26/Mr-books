@@ -55,8 +55,8 @@
                     <td><%= USUARIOS.Rol  %></td>
                     
                     <td>
-                        <a href="/AdministradorViewEdit/<%=USUARIOS.ID %>" >Editar</a>
-                        <a  href="#" onclick="confirmar('<%= USUARIOS.ID %>')" class="btn btn-outline-danger">Borrar</i></a>
+                        <a href="#" onclick="editar('<%= USUARIOS.ID %>', '<%=id %>')" >Editar</i></a>
+                        <a href="#" onclick="borrar('<%= USUARIOS.ID %>', '<%=id %>')" >Borrar</i></a>
 
                     </td>
                 </tr>
@@ -105,7 +105,7 @@
         window.history.back();
     }
 
-    function confirmar(id) {
+    function borrar(id,idUsusario) {
             Swal.fire({
                 title: 'Esta seguro?',
                 text: "Eliminaras el registro permanentemente!",
@@ -116,10 +116,23 @@
                 confirmButtonText: 'Si, eliminar!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location = '/delete/' + id;
+                    window.location = '/delete/' + id+'/'+idUsusario;
                 }
             })
         }
+    function editar (id,idUsusario){
+        console.log("ID:", id);
+        console.log("ID Usuario:", idUsusario);
+        window.location = '/editar/' + id + '/' + idUsusario;
+                }
+
+    
+     
+     function obtenerIdDeUsuario(){
+        return id;
+    }
+    const userId = obtenerIdDeUsuario(); 
+
 
 </script>
 

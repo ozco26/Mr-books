@@ -134,5 +134,51 @@ exports.loginUser = async(req, res) =>{
   });
 };
 
-
+exports.updateUserbyAdmin = async(req,res)=>{
+  const IDADminsitrador =req.body.IDADminsitrador
+  const id = req.body.id;
+  const Cedula = req.body.cedula;
+  const Nombre = req.body.nombre;
+  const Apellidos = req.body.apellidos;
+  
+  const telefono = req.body.telefono;
+  const Correo = req.body.coreo;
+  const Contrasena = req.body.contrasenna;
+  console.log(Contrasena);
+  const FechaNacimiento = req.body.fecha_nacimiento;
+  const rol = req.body.rol;
+  const algoritmo = "sha256";
+  const hash = generarHash(algoritmo, Contrasena);
+  const fecha_creacion = req.body.Fecha_ingreso;
+  
+  try{
+    conexion.query(
+      "UPDATE usuarios SET ? WHERE id = ?",
+      [{
+      Cedula: Cedula,
+      Nombre: Nombre,
+      Apellidos: Apellidos,
+      Telefono: telefono,
+      Correo: Correo,
+      Contrasenna: hash,
+      Fecha_nacimiento: FechaNacimiento,
+      Rol: rol,
+      Fecha_ingreso : fecha_creacion,
+      
+      },id,],
+      (err, results) => {
+      if (err) {
+          console.log("Error en update de usuario:", err);
+          res.redirect("/GestionClientes/"+IDADminsitrador);
+      } else {
+          console.log("Edit en usuario exitoso");
+          
+          res.redirect("/GestionClientes/"+IDADminsitrador);
+      }
+      });
+  }catch (err) {
+    console.log(err);
+    res.redirect("/GestionClientes/"+IDADminsitrador);
+  }
+};
 

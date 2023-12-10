@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Editar usuario - Administrador</title>
+    <link rel="stylesheet" href="/Estilos/Estilos.Css" />
+    <link rel="stylesheet" href="/Estilos/EstilosCuenta.css" />
+</head>
+<header class="header">
+  <div class="logo">
+    <a href="/">
+      <img src="/Recursos/Logo.png" alt="Logo" />
+    </a>
+  </div>
+  <nav>
+    <a class="MENUA" href="/" title="Cerrar Sesion">
+      <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
+    <a class="MENUA" href="Cuenta.html" title="Cuenta de Usuario">
+      <img src="/Recursos/User.png" alt="Cuenta">
+    </a>
+    <a class="MENUA" href="Carrito.html" title="Carrito de Compras">
+      <img src="/Recursos/Carrito.png" alt="Carrito de Compras">
+    </a>
+  </nav>
+</header>
+<body>
+    <br>
+    <h1>¿Quieres Modificar del usuario <%= usuario.ID %> </h1>
+    <br>
+    <h5>Es este espacio podrás modificar datos personales y selecciona el rol.</h5>
+    <br>
+    <form>
+
+        <input class="Barra" type="text" id="ID" name="nombre"  value="<%= usuario.ID %>" hidden >
+
+        <label for="nombre">Cedula:</label>
+        <input class="Barra" type="text" id="cedula" name="cedula" value="<%= usuario.Cedula %>" hidden >
+
+        <label for="nombre">Nombre:</label>
+        <input class="Barra" type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<%= usuario.Nombre %>" >
+
+        <label for="apellido">Apellidos:</label>
+        <input class="Barra" type="text" id="apellido" name="apellido" placeholder="Ingrese sus apellidos" value="<%= usuario.Apellidos %>">
+
+        <label for="telefono">Teléfono:</label>
+        <input class="Barra" type="text" id="telefono" name="telefono" placeholder="Ingrese su número de teléfono" value="<%= usuario.Telefono %>">
+
+        <label for="telefono">Correo:</label>
+        <input class="Barra" type="text" id="coreo" name="correo" value="<%= usuario.Correo %>" placeholder="Ingrese el correo" hidden >
+
+        <label for="telefono">Contrasenna:</label>
+        <input class="Barra" type="text" id="contrasenna" name="Contrasenna" value="<%= usuario.Contrasenna %>" placeholder="Ingrese la Contraseña" hidden >
+
+        <label for="telefono">Fecha_nacimiento:</label>
+        <input class="Barra" type="text" id="fecha_nacimiento" name="Fecha_nacimiento" value="<%= usuario.Fecha_nacimiento %>" placeholder="Ingrese la fecha de nacimiento" hidden >
+
+        <input class="Barra" type="text" id="Fecha_ingreso" name="Fecha_ingreso" value="<%= usuario.Fecha_ingreso  %>" hidden >
+
+        <div >
+          <label for="rol" class="form-label">Rol</label>
+          <select id="rol" name="rol" class="form-select" aria-label="Default select example">
+              <option <%= usuario.Rol=='1' ? "selected" : '' %> value="1">Admin</option>
+              <option <%= usuario.Rol=='2' ? "selected" : '' %> value="2">Cliente</option>
+              <option <%= usuario.Rol=='3' ? "selected" : '' %> value="3">Vendedor</option>
+              <option <%= usuario.Rol=='4' ? "selected" : '' %> value="4">Bloqueado</option>
+            </select>
+          </div>
+        
+        <input class="Barra" type="text" id="Fecha_ingreso" name="Fecha_ingreso" value="<%= usuario.Fecha_ingreso %>" hidden >
+
+        <label for="contraseña">Contraseña:</label>
+        <input class="Barra" type="contra" id="contrasenna" name="contrasenna" placeholder="Ingrese su nueva contraseña">
+        <button type="button" onclick="guardarDatos()">Guardar</button>
+    </form>
+    <footer class="Pie">
+      <div class="contenedor">
+        <div class="pie-row">
+          <div class="pie-links">
+            <h4>Quienes somos</h4>
+            <ul>
+              <li><a href="#">Nosotros</a></li>
+              <li><a href="#">Nuestros servicios</a></li>
+              <li><a href="#">Politica de privacidad</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Cuenta</h4>
+            <ul>
+              <li><a href="#">Cuenta</a></li>
+              <li><a href="#">Carrito</a></li>
+              <li><a href="#">Compras</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Tienda</h4>
+            <ul>
+              <li><a href="#">Inicio</a></li>
+              <li><a href="#">Novedades</a></li>
+              <li><a href="#">Categorias</a></li>
+            </ul>
+          </div>       
+        </div>
+      </div>
+    </footer>
+</body>
+<script>
+
+</script>
+
+</html>
