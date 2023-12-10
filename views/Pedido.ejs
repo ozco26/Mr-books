@@ -47,38 +47,24 @@
             <thead>
                 <tr>
                     <th>Número de Pedido</th>
-                    <th>Descripción</th>
-                    <th>Fecha del Pedido</th>
+                    <th>Producto</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
                     <th>Estado</th>
-                    <th>Dirección</th>
                     <th>Total</th>
                 </tr>
             </thead>
             <tbody>
+              <% pedidos.forEach((pedidos)=>{ %>
                 <tr>
-                    <td>001</td>
-                    <td>Producto 1</td>
-                    <td>2023-11-09</td>
-                    <td><button >Pendiente</button></td>
-                    <td>Dirección 1</td>
-                    <td>$50.00</td>
+                    <td><%= pedidos.ID_Pedido %></td>
+                    <td><%= pedidos.Producto %></td>
+                    <td><%= pedidos.Cliente %></td>
+                    <td><%= pedidos.Fecha %></td>
+                    <td><%= pedidos.Estado %></td>
+                    <td><%= pedidos.Total %></td>
                 </tr>
-                <tr>
-                    <td>002</td>
-                    <td>Producto 2</td>
-                    <td>2023-11-10</td>
-                    <td><button >En proceso</button></td>
-                    <td>Dirección 2</td>
-                    <td>$30.00</td>
-                </tr>
-                <tr>
-                    <td>003</td>
-                    <td>Producto 3</td>
-                    <td>2023-11-11</td>
-                    <td><button class="">Completo</button></td>
-                    <td>Dirección 3</td>
-                    <td>$25.00</td>
-                </tr>
+                <% }) %>
             </tbody>
         </table>
     </div>

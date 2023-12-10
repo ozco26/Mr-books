@@ -69,6 +69,7 @@ router.get('/bloqueado',(req,res)=>{
 })
 
 //carga lista de usuarios
+
 router.get("/GestionClientes/:id", (req, res) => {
     const id = req.params.id;
     const CargaUsuarios = /*'select * from Usuarios'*/
@@ -117,6 +118,20 @@ router.get('/editar/:id/:idUsuario',(req,res)=>{
 
 //actualiza usuario por administrador
 
+//Gestión de pedidos
+router.get('/Pedido', (req, res)=>{
+    
+    conexion.query('SELECT * FROM pedidos', (err, results)=>{
+        if(err){
+            throw err;
+        } else{
+            res.render('Pedido.ejs', {pedidos:results});
+        }
+
+
+    })
+    
+})
 
 
 
