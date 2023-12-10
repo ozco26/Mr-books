@@ -15,7 +15,9 @@
   <nav>
     <a class="MENUA" href="/" title="Cerrar Sesion">
       <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
-
+    <a class="MENUA" href="Cuenta.html" title="Cuenta de Usuario">
+      <img src="/Recursos/User.png" alt="Cuenta">
+    </a>
 
   </nav>
 </header>
@@ -29,7 +31,7 @@
       <div>
         
 
-        <label for="nombre">Cedula:</label>
+        
         <input class="Barra" type="text" name="cedula"  value="<%= usuario.Cedula %>" style="display: none;" required>
 
         <label for="nombre">Nombre:</label>
@@ -46,9 +48,11 @@
 
         <label for="telefono">Contrasenna:</label>
         <input class="Barra" type="password" name="contrasenna" required placeholder="Ingrese la Contraseña"  >
-        <input class="Barra" type="text" name="IDADminsitrador" value="'<%=idUsuario %>'" style="display: none;" >
-        <input class="Barra" type="text" name="id" value="<%=usuario.ID %>" style="display: none;" >
         
+        <input class="Barra" type="text" name="IDADminsitrador" value="'<%=idUsuario %>'" style="display: none;" >
+        
+        <input class="Barra" type="text" name="id" value="<%=usuario.ID %>" style="display: none;" >
+        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
         <input class="Barra" type="date" name="fecha_nacimiento" value="<%= usuario.Fecha_nacimiento %>" placeholder="Ingrese la fecha de nacimiento">
 
         <div >
