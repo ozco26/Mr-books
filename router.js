@@ -117,7 +117,6 @@ router.get('/editar/:id/:idUsuario',(req,res)=>{
 });
 
 //actualiza usuario por administrador
-<<<<<<< HEAD
 router.get('/editarUsuario/:id',(req,res)=>{
     const id = req.params.id;
     const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
@@ -130,7 +129,7 @@ router.get('/editarUsuario/:id',(req,res)=>{
         }
     })
 });
-=======
+
 
 //Gestión de pedidos
 router.get('/Pedido', (req, res)=>{
@@ -146,7 +145,7 @@ router.get('/Pedido', (req, res)=>{
     })
     
 })
->>>>>>> 34def829186bbbb9220db961425a2492e2ca53ff
+
 
 
 
