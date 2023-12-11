@@ -179,7 +179,13 @@ router.get('/Productos', (req, res)=>{
     
 })
 
+router.get('gestionCategorias',(req,res)=>{
+    
+    conexion.query()
 
+
+
+});
 
 router.post("/saveReg", controller.saveReg);
 router.post('/login', controller.loginUser); 
