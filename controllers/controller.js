@@ -234,9 +234,9 @@ exports.createCategoria = async(req,res)=>{
   const categoriaTO = req.body.txtCategoria;
   const idUsuario = req.body.idUsuario;
 
-  conexion.query("INSERT INTO categorias SET ?",
+  conexion.query("INSERT INTO generos SET ?",
   {
-    descripcion: categoriaTO
+    Genero: categoriaTO
   },(err, results) => {
     if (err) {
         console.log("Error en insert de categoria", err);

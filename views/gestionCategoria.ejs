@@ -47,17 +47,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% Categorias.forEach((categorias)=>{ %>
+                    <% Categorias.forEach((generos)=>{ %>
                         <tr>
                             <td>
-                                <%= categorias.ID %>
+                                <%= generos.ID_Genero  %>
                             </td>
                             <td>
-                                <%= categorias.descripcion %>
+                                <%= generos.Genero %>
                             </td>
 
                             <td>
-                                <a href="#" onclick="borrar('<%= categorias.ID %>', '<%=idUsuario %>')">Borrar</i></a>
+                                <a href="#" onclick="borrar('<%= generos.ID %>', '<%=idUsuario %>')">Borrar</i></a>
                             </td>
                         </tr>
                         <% }) %>

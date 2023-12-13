@@ -132,13 +132,13 @@ router.get('/editarUsuario/:id',(req,res)=>{
 });
 
 //Gestión de pedidos
-router.get('/Pedido', (req, res)=>{
-    
+router.get('/Pedido/:isUsuario', (req, res)=>{
+    const idUsuario = req.params.idUsuario;
     conexion.query('SELECT * FROM pedidos', (err, results)=>{
         if(err){
             throw err;
         } else{
-            res.render('Pedido.ejs', {pedidos:results});
+            res.render('Pedido.ejs', {pedidos:results, idUsuario });
         }
 
 
@@ -178,7 +178,7 @@ router.get('/Productos', (req, res)=>{
 
 router.get('/Categorias/:idUsuario',(req,res)=>{
     const idUsuario = req.params.idUsuario;
-    conexion.query('SELECT * FROM categorias', (err, results)=>{
+    conexion.query('SELECT * FROM generos', (err, results)=>{
         if(err){
             throw err;
         } else{
@@ -190,7 +190,7 @@ router.get('/Categorias/:idUsuario',(req,res)=>{
 router.get('/deleteCategoria/:id/:idUsusario', (req, res) => {
     const id = req.params.id;
     const idUsusario = req.params.idUsusario;
-    conexion.query('DELETE FROM Categorias WHERE ID = ?',[id], (error, results)=>{
+    conexion.query('DELETE FROM generos WHERE ID = ?',[id], (error, results)=>{
         if(error){
             console.log(error);
         }else{           
