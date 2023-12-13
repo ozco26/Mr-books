@@ -6,7 +6,14 @@ const conexion = require('./database/db');
 
 //carga el home
 router.get('/',(req,res)=>{
-    res.render('home');    
+    const productosRecientes = "SELECT * FROM productos ORDER BY ID_Producto DESC LIMIT 5;" ;
+    conexion.query(productosRecientes, (err, infoProducto) => {
+        if (err) {
+            throw err;
+        } else {
+            res.render('home',{productos: infoProducto});    
+        }
+    });
 });
 
 //carga vista de inicio de secion
@@ -33,7 +40,14 @@ router.get('/homecliente/:id',(req,res)=>{
         } else if (infousuario[0].Rol !== 2) {
             res.redirect('/bloqueado');
         } else {
-            res.render("HomeCliente", {usuario: infousuario[0]});
+
+            const productosRecientes = "SELECT * FROM productos ORDER BY ID_Producto DESC LIMIT 5;" ;
+            conexion.query(productosRecientes, (err, infoProducto) => {
+                if (err) {
+                    throw err;
+                } else {res.render('HomeCliente',{productos: infoProducto, usuario: infousuario[0]});
+            }
+        });
         }
     }) 
 });
@@ -57,11 +71,32 @@ router.get('/homeAdmnin/:id',(req,res)=>{
     }) 
 });
  
+//carga pagina de vendedor
+router.get('/homeVendedor/:id',(req,res)=>{
+    const id = req.params.id;
+    const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
+    
+    conexion.query(usuario, [id], (err, infousuario) => {
+        if (err) {
+            throw err;
+        } else if (!infousuario || infousuario.length === 0) {
+            // Si no se encuentra el usuario, redirige a la página bloqueado
+            res.redirect('/bloqueado');
+        } else if (infousuario[0].Rol !== 3) {
+            res.redirect('/bloqueado');
+        } else {
 
-/*router.get('/homeVend/:id',(req,res)=>{
-    res.render('home_vendedor');    
-})
-*/
+            const productosRecientes = "SELECT * FROM productos ORDER BY ID_Producto DESC LIMIT 5;" ;
+            conexion.query(productosRecientes, (err, infoProducto) => {
+                if (err) {
+                    throw err;
+                } else {
+                    res.render('homeVendedor',{productos: infoProducto, usuario: infousuario[0]});
+                }
+            });
+        }
+    }) 
+});    
 
 //carga la vista de pagina bloqueda
 router.get('/bloqueado',(req,res)=>{
@@ -146,25 +181,6 @@ router.get('/Pedido/:isUsuario', (req, res)=>{
     
 })
 
-//Redirige a pantalla de vendedor
-router.get('/homeVendedor/:id',(req,res)=>{
-    const id = req.params.id;
-    const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
-    
-    conexion.query(usuario, [id], (err, infousuario) => {
-        if (err) {
-            throw err;
-        } else if (!infousuario || infousuario.length === 0) {
-            // Si no se encuentra el usuario, redirige a la página bloqueado
-            res.redirect('/bloqueado');
-        } else if (infousuario[0].Rol !== 3) {
-            res.redirect('/bloqueado');
-        } else {
-            res.render("HomeVendedor.ejs", {usuario: infousuario[0]});
-        }
-    }) 
-});
-
 //  CRUD PRODUCTOS
 router.get('/Productos', (req, res)=>{
     conexion.query('SELECT * FROM productos', (err, results)=>{
@@ -197,6 +213,24 @@ router.get('/deleteCategoria/:id/:idUsusario', (req, res) => {
             res.redirect("/Categorias/"+idUsusario);
         }
     })
+});
+
+//carga la pagina de cada liblro
+
+router.get('/libro/:idlibro/:idUsuario?', (req, res) => {
+    const idlibro = req.params.idlibro; 
+    const idUsuario = req.params.idUsuario;
+
+    conexion.query('SELECT * FROM productos WHERE ID_Producto = ?'
+
+    
+    , [idlibro], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.render('libro.ejs', { productos: results[0], idUsuario });
+        }
+    });
 });
 
 router.post("/saveReg", controller.saveReg);
