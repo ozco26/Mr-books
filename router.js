@@ -101,7 +101,7 @@ router.get('/delete/:id/:idUsusario', (req, res) => {
     })
 });
 
-//carga pagina de edicion de clientes adminsitrador
+//carga pagina de edicion de clientes por adminsitrador
 router.get('/editar/:id/:idUsuario',(req,res)=>{
     const id = req.params.id;
     const idUsuario = req.params.idUsuario;
