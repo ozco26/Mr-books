@@ -228,3 +228,23 @@ exports.updateUserbyUser = async(req,res)=>{
     res.redirect("/homecliente/"+id);
   }
 };
+//crea categorias e administrador
+
+exports.createCategoria = async(req,res)=>{
+  const categoriaTO = req.body.txtCategoria;
+  const idUsuario = req.body.idUsuario;
+
+  conexion.query("INSERT INTO categorias SET ?",
+  {
+    descripcion: categoriaTO
+  },(err, results) => {
+    if (err) {
+        console.log("Error en insert de categoria", err);
+        res.redirect("/Categorias/"+idUsuario);
+    } else {
+        console.log("Insert en Categoria exitoso");
+        
+        res.redirect("/Categorias/"+idUsuario);
+    }
+  })
+};

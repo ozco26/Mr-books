@@ -173,22 +173,35 @@ router.get('/Productos', (req, res)=>{
         } else{
             res.render('CRUDProductos.ejs', {productos:results});
         }
-
-
-    })
-    
+    })   
 })
 
-router.get('gestionCategorias',(req,res)=>{
-    
-    conexion.query()
+router.get('/Categorias/:idUsuario',(req,res)=>{
+    const idUsuario = req.params.idUsuario;
+    conexion.query('SELECT * FROM categorias', (err, results)=>{
+        if(err){
+            throw err;
+        } else{
+            res.render('gestionCategoria.ejs', {Categorias:results,idUsuario});}
+    })  
+});
 
-
-
+//borra categoria 
+router.get('/deleteCategoria/:id/:idUsusario', (req, res) => {
+    const id = req.params.id;
+    const idUsusario = req.params.idUsusario;
+    conexion.query('DELETE FROM Categorias WHERE ID = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect("/Categorias/"+idUsusario);
+        }
+    })
 });
 
 router.post("/saveReg", controller.saveReg);
 router.post('/login', controller.loginUser); 
 router.post('/updateUserbyAdmin', controller.updateUserbyAdmin);
 router.post('/updateUserbyUser', controller.updateUserbyUser);
+router.post('/createCategoria',controller.createCategoria);
 module.exports = router;
