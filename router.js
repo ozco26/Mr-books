@@ -3,6 +3,7 @@ const router = express.Router();
 //const conexion = require('./database/db');
 const controller = require('./controllers/controller');
 const conexion = require('./database/db');
+const { render } = require('ejs');
 
 //carga el home
 router.get('/',(req,res)=>{
@@ -231,6 +232,35 @@ router.get('/libro/:idlibro/:idUsuario?', (req, res) => {
             res.render('libro.ejs', { productos: results[0], idUsuario });
         }
     });
+});
+
+
+//Gestion de libros
+router.get('/GestionLibros/:idUsuario',(req,res)=>{
+    const idUsuario = req.params.idUsuario;
+    conexion.query(
+        'select * from productos',
+        (err,results) =>{
+            if (err) {
+                console.log;
+            }else{
+                res.render('gestionLibros.ejs',{productos:results, idUsuario})
+            }
+        }
+    )
+});
+
+//borra usuarios
+router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
+    const id = req.params.id;
+    const idUsusario = req.params.idUsusario;
+    conexion.query('DELETE FROM productos WHERE ID_Producto = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect("/GestionLibros/"+idUsusario);
+        }
+    })
 });
 
 router.post("/saveReg", controller.saveReg);
