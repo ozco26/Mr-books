@@ -105,7 +105,6 @@ router.get('/bloqueado',(req,res)=>{
 })
 
 //carga lista de usuarios
-
 router.get("/GestionClientes/:id", (req, res) => {
     const id = req.params.id;
     const CargaUsuarios = /*'select * from Usuarios'*/

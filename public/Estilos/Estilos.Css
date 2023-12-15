@@ -315,3 +315,13 @@ h1, h2, h3, h4, h5, h6{
     transform: scale(1.05);
     transition: transform 0.3s;
 }
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.oculto {
+    display: none;
+  }
