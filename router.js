@@ -263,6 +263,19 @@ router.get('/deleteP/:id/:idUsusario', (req, res) => {
     })
 });
 
+router.get('/deletePedidos/:id/:idUsusario', (req, res) => {
+    const id = req.params.id;
+    const idUsusario = req.params.idUsusario;
+    conexion.query('DELETE FROM pedidos WHERE ID_Pedido = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect("/Pedido/"+idUsusario);
+        }
+    })
+});
+
+
 router.get('/Categorias/:idUsuario',(req,res)=>{
     const idUsuario = req.params.idUsuario;
     conexion.query('SELECT * FROM generos', (err, results)=>{

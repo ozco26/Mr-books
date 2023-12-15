@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/Estilos/Estilos.Css" />
     <link rel="stylesheet" href="/Estilos/EstiloPedido.css" />
     <script src="/FuncionesBotones/BotónBuscarPedido.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <header class="header">
   <div class="logo">
@@ -108,8 +109,8 @@
                     <td><%= pedidos.Fecha %></td>
                     <td><%= pedidos.Estado %></td>          
                     <td>
-                      <a href="#" onclick="editar('<%= pedidos.ID_Pedido %>', '<%=idUsuario %>')" >Editar</i></a>
-                      <a href="#" onclick="borrar('<%= pedidos.ID_Pedido %>', '<%=idUsuario %>')" >Borrar</i></a>
+                      <a href="#" onclick="editar('<%= pedidos.ID_Pedido %>', '<%=usuario %>')" >Editar</i></a>
+                      <a href="#" onclick="borrar('<%= pedidos.ID_Pedido %>', '<%=usuario %>')" >Borrar</i></a>
                     </td>
               </tr>
                 <% }) %>
@@ -155,7 +156,7 @@
       window.history.back();
   }
 
-  function borrar(id,idUsusario) {
+  function borrar(id,usuario) {
           Swal.fire({
               title: 'Está seguro?',
               text: "Eliminaras el registro permanentemente!",
@@ -166,7 +167,7 @@
               confirmButtonText: 'Si, eliminar!'
           }).then((result) => {
               if (result.isConfirmed) {
-                  window.location = '/delete/' + id+'/'+idUsusario;
+                  window.location = '/deletePedidos/' + id+'/'+usuario;
               }
           })
   }
