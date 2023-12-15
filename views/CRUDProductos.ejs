@@ -111,45 +111,36 @@
           <tr>
               <th >ID</th>
               <th >Libro</th>
+              <th >Autor</th>
+              <th >Editorial</th>
+              <th >Año</th>
+              <th >Genero</th>
+              <th >Descripción</th>
+              <th >Precio</th>
               <th >Estado</th>
               <th >Opciones</th>
           </tr>
       </thead>
       <tbody>
+        <% productos.forEach((productos)=>{ %>
           <tr>
-              <td>001</td>
-              <td>La forma del agua</td>
-              <td>Aprobado</td>
+              <td><%= productos.ID_Producto %></td>
+              <td><%= productos.Nombre %></td>
+              <td><%= productos.Autor %></td>
+              <td><%= productos.Editorial %></td>
+              <td><%= productos.Anno %></td>
+              <td><%= productos.Genero %></td>
+              <td><%= productos.Descripcion %></td>
+              <td><%= productos.Precio %></td>
+              <td><%= productos.Estado %></td>
               <td>
                 <a href="#">
                   <button ><img src="Recursos/edit_modify_icon_149489.png" alt="Modificar" style="height: 24px; width: auto;"></button>
                 </a>
                   <button ><img src="Recursos/seo-social-web-network-internet_262_icon-icons.com_61518.png" alt="Eliminar" style="height: 24px; width: auto;"></button>
               </td>
-                
           </tr>
-          <tr>
-            <td>002</td>
-            <td>Alicia en el país de las maravillas</td>
-            <td>Aprobado</td>
-            <td>
-              <a href="#">
-                <button ><img src="Recursos/edit_modify_icon_149489.png" alt="Modificar" style="height: 24px; width: auto;"></button>
-              </a>
-                <button ><img src="Recursos/seo-social-web-network-internet_262_icon-icons.com_61518.png" alt="Eliminar" style="height: 24px; width: auto;"></button>
-            </td>
-          </tr>
-          <tr>
-            <td>003</td>
-            <td>Harry Potter</td>
-            <td>Pendiente</td>
-            <td>
-              <a href="#">
-                <button ><img src="Recursos/edit_modify_icon_149489.png" alt="Modificar" style="height: 24px; width: auto;"></button>
-              </a>
-                <button ><img src="Recursos/seo-social-web-network-internet_262_icon-icons.com_61518.png" alt="Eliminar" style="height: 24px; width: auto;"></button>
-            </td>
-          </tr>
+          <% }) %>
       </tbody>
   </table>
 </div>

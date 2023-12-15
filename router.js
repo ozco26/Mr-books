@@ -3,10 +3,18 @@ const router = express.Router();
 //const conexion = require('./database/db');
 const controller = require('./controllers/controller');
 const conexion = require('./database/db');
+const { render } = require('ejs');
 
 //carga el home
 router.get('/',(req,res)=>{
-    res.render('home');    
+    const productosRecientes = "SELECT * FROM productos ORDER BY ID_Producto DESC LIMIT 5;" ;
+    conexion.query(productosRecientes, (err, infoProducto) => {
+        if (err) {
+            throw err;
+        } else {
+            res.render('home',{productos: infoProducto});    
+        }
+    });
 });
 
 //carga vista de inicio de secion
@@ -33,7 +41,14 @@ router.get('/homecliente/:id',(req,res)=>{
         } else if (infousuario[0].Rol !== 2) {
             res.redirect('/bloqueado');
         } else {
-            res.render("HomeCliente", {usuario: infousuario[0]});
+
+            const productosRecientes = "SELECT * FROM productos ORDER BY ID_Producto DESC LIMIT 5;" ;
+            conexion.query(productosRecientes, (err, infoProducto) => {
+                if (err) {
+                    throw err;
+                } else {res.render('HomeCliente',{productos: infoProducto, usuario: infousuario[0]});
+            }
+        });
         }
     }) 
 });
@@ -57,11 +72,32 @@ router.get('/homeAdmnin/:id',(req,res)=>{
     }) 
 });
  
+//carga pagina de vendedor
+router.get('/homeVendedor/:id',(req,res)=>{
+    const id = req.params.id;
+    const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
+    
+    conexion.query(usuario, [id], (err, infousuario) => {
+        if (err) {
+            throw err;
+        } else if (!infousuario || infousuario.length === 0) {
+            // Si no se encuentra el usuario, redirige a la página bloqueado
+            res.redirect('/bloqueado');
+        } else if (infousuario[0].Rol !== 3) {
+            res.redirect('/bloqueado');
+        } else {
 
-/*router.get('/homeVend/:id',(req,res)=>{
-    res.render('home_vendedor');    
-})
-*/
+            const productosRecientes = "SELECT * FROM productos ORDER BY ID_Producto DESC LIMIT 5;" ;
+            conexion.query(productosRecientes, (err, infoProducto) => {
+                if (err) {
+                    throw err;
+                } else {
+                    res.render('homeVendedor',{productos: infoProducto, usuario: infousuario[0]});
+                }
+            });
+        }
+    }) 
+});    
 
 //carga la vista de pagina bloqueda
 router.get('/bloqueado',(req,res)=>{
@@ -100,7 +136,7 @@ router.get('/delete/:id/:idUsusario', (req, res) => {
     })
 });
 
-//carga pagina de edicion de clientes adminsitrador
+//carga pagina de edicion de clientes por adminsitrador
 router.get('/editar/:id/:idUsuario',(req,res)=>{
     const id = req.params.id;
     const idUsuario = req.params.idUsuario;
@@ -115,8 +151,23 @@ router.get('/editar/:id/:idUsuario',(req,res)=>{
     })
 });
 
+//actualiza usuario por administrador
+
+router.get('/editarUsuario/:id',(req,res)=>{
+    const id = req.params.id;
+    const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
+    
+    conexion.query(usuario, [id], (err, infousuario) => {
+        if (err) {
+            throw err;
+        } else {
+            res.render("editarCuentaCliente", {usuario: infousuario[0]});
+        }
+    })
+});
+
 //Gestión de pedidos
-router.get('/Pedido/:idUsuario', (req, res)=>{
+router.get('/Pedido/:isUsuario', (req, res)=>{
     const idUsuario = req.params.idUsuario;
     conexion.query('SELECT * FROM pedidos', (err, results)=>{
         if(err){
@@ -124,13 +175,96 @@ router.get('/Pedido/:idUsuario', (req, res)=>{
         } else{
             res.render('Pedido.ejs', {pedidos:results, idUsuario });
         }
+
+
+    })
+    
+})
+
+//  CRUD PRODUCTOS
+router.get('/Productos', (req, res)=>{
+    conexion.query('SELECT * FROM productos', (err, results)=>{
+        if(err){
+            throw err;
+        } else{
+            res.render('CRUDProductos.ejs', {productos:results});
+        }
+    })   
+})
+
+router.get('/Categorias/:idUsuario',(req,res)=>{
+    const idUsuario = req.params.idUsuario;
+    conexion.query('SELECT * FROM generos', (err, results)=>{
+        if(err){
+            throw err;
+        } else{
+            res.render('gestionCategoria.ejs', {Categorias:results,idUsuario});}
+    })  
+});
+
+//borra categoria 
+router.get('/deleteCategoria/:id/:idUsusario', (req, res) => {
+    const id = req.params.id;
+    const idUsusario = req.params.idUsusario;
+    conexion.query('DELETE FROM generos WHERE ID = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect("/Categorias/"+idUsusario);
+        }
+    })
+});
+
+//carga la pagina de cada liblro
+
+router.get('/libro/:idlibro/:idUsuario?', (req, res) => {
+    const idlibro = req.params.idlibro; 
+    const idUsuario = req.params.idUsuario;
+
+    conexion.query('SELECT * FROM productos WHERE ID_Producto = ?'
+
+    
+    , [idlibro], (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.render('libro.ejs', { productos: results[0], idUsuario });
+        }
     });
 });
 
 
+//Gestion de libros
+router.get('/GestionLibros/:idUsuario',(req,res)=>{
+    const idUsuario = req.params.idUsuario;
+    conexion.query(
+        'select * from productos',
+        (err,results) =>{
+            if (err) {
+                console.log;
+            }else{
+                res.render('gestionLibros.ejs',{productos:results, idUsuario})
+            }
+        }
+    )
+});
 
+//borra usuarios
+router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
+    const id = req.params.id;
+    const idUsusario = req.params.idUsusario;
+    conexion.query('DELETE FROM productos WHERE ID_Producto = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect("/GestionLibros/"+idUsusario);
+        }
+    })
+});
 
 router.post("/saveReg", controller.saveReg);
 router.post('/login', controller.loginUser); 
 router.post('/updateUserbyAdmin', controller.updateUserbyAdmin);
+router.post('/updateUserbyUser', controller.updateUserbyUser);
+router.post('/createCategoria',controller.createCategoria);
 module.exports = router;

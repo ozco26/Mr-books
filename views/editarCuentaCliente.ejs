@@ -8,16 +8,13 @@
 </head>
 <header class="header">
   <div class="logo">
-    <a href="/">
+    <a href='/homecliente/<%=usuario.ID%>'>
       <img src="/Recursos/Logo.png" alt="Logo" />
     </a>
   </div>
   <nav>
     <a class="MENUA" href="/" title="Cerrar Sesion">
       <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
-    <a class="MENUA" href="Cuenta.html" title="Cuenta de Usuario">
-      <img src="/Recursos/User.png" alt="Cuenta">
-    </a>
     <a class="MENUA" href="Carrito.html" title="Carrito de Compras">
       <img src="/Recursos/Carrito.png" alt="Carrito de Compras">
     </a>
@@ -25,40 +22,40 @@
 </header>
 <body>
     <br>
-    <h1>¿Quieres Modificar del usuario <%= usuario.ID %> </h1>
+    <h1>¿Quieres Modificar tus datos <%= usuario.Nombre %> </h1>
     <br>
     <h5>Es este espacio podrás modificar datos personales y selecciona el rol.</h5>
     <br>
-    <form>
+    <form id="formUsrEd" action="/updateUserbyUser" method="POST">
+<div>
+        <input class="Barra" type="text" id="id" name="id"  value="<%= usuario.ID %>" style="display: none;" >
 
-        <input class="Barra" type="text" id="ID" name="nombre"  value="<%= usuario.ID %>" hidden >
 
-        <label for="nombre">Cedula:</label>
-        <input class="Barra" type="text" id="cedula" name="cedula" value="<%= usuario.Cedula %>" hidden >
+        <input class="Barra" type="text" id="cedula" name="cedula" value="<%= usuario.Cedula %>" style="display: none;"  required>
 
         <label for="nombre">Nombre:</label>
-        <input class="Barra" type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<%= usuario.Nombre %>" >
+        <input class="Barra" type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<%= usuario.Nombre %>" required>
 
         <label for="apellido">Apellidos:</label>
-        <input class="Barra" type="text" id="apellido" name="apellido" placeholder="Ingrese sus apellidos" value="<%= usuario.Apellidos %>">
+        <input class="Barra" type="text" id="apellidos" name="apellidos" placeholder="Ingrese sus apellidos" value="<%= usuario.Apellidos %>">
 
         <label for="telefono">Teléfono:</label>
         <input class="Barra" type="text" id="telefono" name="telefono" placeholder="Ingrese su número de teléfono" value="<%= usuario.Telefono %>">
 
-        <label for="telefono">Correo:</label>
-        <input class="Barra" type="text" id="coreo" name="correo" value="<%= usuario.Correo %>" placeholder="Ingrese el correo" hidden >
+   
+        <input class="Barra" type="text" id="correo" name="correo" value="<%= usuario.Correo %>" placeholder="Ingrese el correo" style="display: none;" required>
 
-        <label for="telefono">Contrasenna:</label>
-        <input class="Barra" type="text" id="contrasenna" name="Contrasenna" value="<%= usuario.Contrasenna %>" placeholder="Ingrese la Contraseña" hidden >
+        <label for="contrasenna">Contrasenna:</label>
+        <input class="Barra" type="password" id="contrasenna" name="contrasenna" placeholder="Ingrese la Contraseña" required >
 
-        <label for="telefono">Fecha_nacimiento:</label>
-        <input class="Barra" type="text" id="fecha_nacimiento" name="Fecha_nacimiento" value="<%= usuario.Fecha_nacimiento %>" placeholder="Ingrese la fecha de nacimiento" hidden >
+        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+        <input class="Barra" type="date" id="fecha_nacimiento" name="Fecha_nacimiento" value="<%= usuario.Fecha_nacimiento %>" placeholder="Ingrese la fecha de nacimiento" required >
 
-        <input class="Barra" type="text" id="Fecha_ingreso" name="Fecha_ingreso" value="<%= usuario.Fecha_ingreso  %>" hidden >
+        <input class="Barra" type="date" id="Fecha_ingreso" name="Fecha_ingreso" value="<%= usuario.Fecha_ingreso  %>" style="display: none;" >
 
         <div >
-          <label for="rol" class="form-label">Rol</label>
-          <select id="rol" name="rol" class="form-select" aria-label="Default select example">
+          
+          <select id="rol" name="rol" class="form-select" aria-label="Default select example" style="display: none;">
               <option <%= usuario.Rol=='1' ? "selected" : '' %> value="1">Admin</option>
               <option <%= usuario.Rol=='2' ? "selected" : '' %> value="2">Cliente</option>
               <option <%= usuario.Rol=='3' ? "selected" : '' %> value="3">Vendedor</option>
@@ -66,11 +63,12 @@
             </select>
           </div>
         
-        <input class="Barra" type="text" id="Fecha_ingreso" name="Fecha_ingreso" value="<%= usuario.Fecha_ingreso %>" hidden >
+        
 
-        <label for="contraseña">Contraseña:</label>
-        <input class="Barra" type="contra" id="contrasenna" name="contrasenna" placeholder="Ingrese su nueva contraseña">
-        <button type="button" onclick="guardarDatos()">Guardar</button>
+        <button type="submit">Guardar</button>
+        <a href='/homecliente/<%=usuario.ID%>'><button type="button">Cancelar</button> </a>
+
+      </div>
     </form>
     <footer class="Pie">
       <div class="contenedor">

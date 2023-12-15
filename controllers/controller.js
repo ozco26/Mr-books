@@ -102,7 +102,7 @@ exports.loginUser = async(req, res) =>{
               res.redirect('/homecliente/'+result[0].ID)
 
             } else if (result[0].Rol === 3) {
-              console.log("cargar pagina de vendedor")
+              res.redirect('/homeVendedor/'+result[0].ID)
               
             } else if (result[0].Rol === 4) {
               res.redirect('/bloqueado')
@@ -183,3 +183,68 @@ exports.updateUserbyAdmin = async(req,res)=>{
   }
 };
 
+exports.updateUserbyUser = async(req,res)=>{
+  console.log(req.body);
+  const id = req.body.id;
+  const Cedula = req.body.cedula;
+  const Nombre = req.body.nombre;
+  const Apellidos = req.body.apellidos;
+  const telefono = req.body.telefono;
+  const Correo = req.body.correo;
+  const Contrasena = req.body.contrasenna;
+  const FechaNacimiento = new Date(req.body.fecha_nacimiento);
+  const rol = req.body.rol;
+  const algoritmo = "sha256";
+  const hash = generarHash(algoritmo, Contrasena);
+   const fecha_creacion = new Date();
+
+  try{
+    conexion.query(
+      "UPDATE usuarios SET ? WHERE id = ?",
+      [{
+      ID: id,
+      Cedula: Cedula,
+      Nombre: Nombre,
+      Apellidos: Apellidos,
+      Telefono: telefono,
+      Correo: Correo,
+      Contrasenna: hash,
+      Fecha_nacimiento: FechaNacimiento,
+      Rol: rol,
+      Fecha_ingreso : fecha_creacion,
+      
+      },id,],
+      (err, results) => {
+      if (err) {
+          console.log("Error en update de usuario:", err);
+          res.redirect("/homecliente/"+id);
+      } else {
+          console.log("Edit en usuario exitoso");          
+          res.redirect("/homecliente/"+id);
+      }
+      });
+  }catch (err) {
+    console.log(err);
+    res.redirect("/homecliente/"+id);
+  }
+};
+//crea categorias e administrador
+
+exports.createCategoria = async(req,res)=>{
+  const categoriaTO = req.body.txtCategoria;
+  const idUsuario = req.body.idUsuario;
+
+  conexion.query("INSERT INTO generos SET ?",
+  {
+    Genero: categoriaTO
+  },(err, results) => {
+    if (err) {
+        console.log("Error en insert de categoria", err);
+        res.redirect("/Categorias/"+idUsuario);
+    } else {
+        console.log("Insert en Categoria exitoso");
+        
+        res.redirect("/Categorias/"+idUsuario);
+    }
+  })
+};
