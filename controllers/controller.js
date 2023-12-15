@@ -196,7 +196,7 @@ exports.updateUserbyUser = async(req,res)=>{
   const rol = req.body.rol;
   const algoritmo = "sha256";
   const hash = generarHash(algoritmo, Contrasena);
-   const fecha_creacion = new Date();
+  const fecha_creacion = new Date();
 
   try{
     conexion.query(
@@ -226,5 +226,90 @@ exports.updateUserbyUser = async(req,res)=>{
   }catch (err) {
     console.log(err);
     res.redirect("/homecliente/"+id);
+  }
+};
+
+/*PARA CRUD PRODUCTOS */
+exports.saveProduct = async (req, res) => {
+  const id = req.body.userId;
+  const titulo = req.body.TxtTitulo;
+  const autor = req.body.TxtAutor;
+  const editorial = req.body.TxtEditorial;
+  const añoPublicacion = req.body.TxtAño;
+  const idioma = req.body.Idiomas;
+  const categoria = req.body.Generos;
+  const precio = req.body.TxtPrecio;
+  const descripcion = req.body.Descripción;
+  
+  conexion.query(
+    "INSERT INTO productos SET ?",
+    {
+      Nombre: titulo,
+      Autor: autor,
+      Editorial: editorial,
+      Anno: añoPublicacion,
+      Idioma: idioma,
+      Genero: categoria,
+      Idioma: idioma,
+      Precio: precio,
+      Descripcion: descripcion,
+      Estado: 4,
+      Vendedor: id
+      
+    },
+    (err, results) => {
+      if (err) {
+        console.log("Error en la inserción del producto:", err);
+        res.redirect("/Productos/"+id);
+        console.log(req.body);
+      } else {
+        console.log("Inserción del producto exitosa");
+        res.redirect("/Productos/"+id);
+      }
+    }
+  );
+};
+
+//Editar libro
+exports.updateLibros = async(req,res)=>{
+  console.log(req.body);
+  const IDADminsitrador =req.body.userId
+  const id = req.body.id;
+  const titulo = req.body.TxtTitulo;
+  const autor = req.body.TxtAutor;
+  const editorial = req.body.TxtEditorial;
+  const añoPublicacion = req.body.TxtAño;
+  const idioma = req.body.Idiomas;
+  const categoria = req.body.Generos;
+  const precio = req.body.TxtPrecio;
+  const descripcion = req.body.Descripción;
+  
+  try{
+    conexion.query(
+      "UPDATE productos SET ? WHERE ID_Producto = ?",
+      [{
+        Nombre: titulo,
+        Autor: autor,
+        Editorial: editorial,
+        Anno: añoPublicacion,
+        Idioma: idioma,
+        Genero: categoria,
+        Idioma: idioma,
+        Precio: precio,
+        Descripcion: descripcion,
+      
+      },id,],
+      (err, results) => {
+      if (err) {
+          console.log("Error en update de libros:", err);
+          res.redirect("/Productos/"+IDADminsitrador);
+      } else {
+          console.log("Edit en libro exitoso");          
+          res.redirect("/Productos/"+IDADminsitrador);
+      }
+      });
+  }catch (err) {
+    console.log(err);
+    res.redirect("/Productos/"+IDADminsitrador);
   }
 };

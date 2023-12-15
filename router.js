@@ -132,17 +132,25 @@ router.get('/editarUsuario/:id',(req,res)=>{
 });
 
 //Gestión de pedidos
-router.get('/Pedido', (req, res)=>{
-    
-    conexion.query('SELECT * FROM pedidos', (err, results)=>{
-        if(err){
+router.get('/Pedido/:id', (req, res)=>{
+    const id = req.params.id;
+    const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
+    conexion.query(usuario, [id], (err, infousuario) => {
+        if (err) {
             throw err;
-        } else{
-            res.render('Pedido.ejs', {pedidos:results});
+        } else {
+            conexion.query('SELECT * FROM pedidos', (err, results)=>{
+                if(err){
+                    throw err;
+                } else{
+                    res.render('Pedido.ejs', {pedidos:results, usuario: infousuario[0]});
+                }
+        
+        
+            })
         }
-
-
     })
+    
     
 })
 
@@ -166,21 +174,84 @@ router.get('/homeVendedor/:id',(req,res)=>{
 });
 
 //  CRUD PRODUCTOS
-router.get('/Productos', (req, res)=>{
-    conexion.query('SELECT * FROM productos', (err, results)=>{
-        if(err){
+router.get('/Productos/:id', (req, res) => {
+    const id = req.params.id;
+    const usuarioQuery = "SELECT * FROM usuarios WHERE ID=?";
+    conexion.query(usuarioQuery, [id], (err, infousuario) => {
+        if (err) {
             throw err;
-        } else{
-            res.render('CRUDProductos.ejs', {productos:results});
+        } else if (!infousuario || infousuario.length === 0) {
+            // Si no se encuentra el usuario, redirige a la página bloqueado
+            res.redirect('/bloqueado');
+        } else if (infousuario[0].Rol !== 3) {
+            res.redirect('/bloqueado');
+        } else {
+            // Modificamos la consulta de productos para buscar por el ID
+            const productosQuery = 'SELECT * FROM productos WHERE Vendedor=?';
+            conexion.query(productosQuery, [id], (errProductos, results) => {
+                if (errProductos) {
+                    throw errProductos;
+                } else {
+                    // Consulta para llenar Generos
+                    conexion.query('SELECT * FROM generos', (errGeneros, Generos) => {
+                        if (errGeneros) {
+                            throw errGeneros;
+                        } else {
+                            res.render('CRUDProductos.ejs', {
+                                usuario: infousuario[0],
+                                productos: results,
+                                Generos: Generos
+                            });
+                        }
+                    });
+                }
+            });
         }
+    });
+});
 
+//PAGINA EDITAR LIBROS
 
+//EDITAR LIBROS
+
+router.get('/EditarP/:id/:idUsusario', (req, res) => {
+    const id = req.params.id;
+    const idUsusario = req.params.idUsusario;
+    conexion.query('SELECT * FROM productos WHERE ID_Producto = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{  
+            conexion.query('SELECT * FROM generos', (errGeneros, Generos) => {
+                if (errGeneros) {
+                    throw errGeneros;
+                } else {
+                    res.render("EditarProducto.ejs",{
+                        producto:results[0],idUsusario, Generos: Generos
+                }         
+            )};
+            });
+        }
     })
-    
-})
+});
+
+//BORRAR LIBROS
+router.get('/deleteP/:id/:idUsusario', (req, res) => {
+    const id = req.params.id;
+    const idUsusario = req.params.idUsusario;
+    conexion.query('DELETE FROM productos WHERE ID_Producto = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect("/Productos/"+idUsusario);
+        }
+    })
+});
 
 
 
+
+router.post("/updateLibros", controller.updateLibros);
+router.post("/saveProduct", controller.saveProduct);
 router.post("/saveReg", controller.saveReg);
 router.post('/login', controller.loginUser); 
 router.post('/updateUserbyAdmin', controller.updateUserbyAdmin);
