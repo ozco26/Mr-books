@@ -9,7 +9,14 @@ app.use(express(JSON));
 app.use('/',require('./router.js'));
 
 app.use(express.static('public'));
-
+/* 
+*****************************************************************************************************
+---- liberar hasta que el proyecto se termine para poder ver mensajes de error!!!!!!!!!!!!! ------
+*****************************************************************************************************
+app.use((req, res) => {
+    res.status(404).render('pagNoEncontrada');
+});
+*/
 app.listen(5000,()=>
     console.log('SERVER corriendo en http://localhost:5000')
 )

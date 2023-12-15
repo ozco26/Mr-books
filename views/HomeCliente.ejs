@@ -24,28 +24,29 @@
 <br> 
 <h4 style="text-align: center;">Hola <%= usuario?.Nombre %>, es un gusto tenerte de vuelta! </h4>
 <h5 style="text-align: center;">Como podemos ayudarte?</h5>
+<br>
   <div class="slider-frame">
     <ul>
         <li>
           <a href="#">
-            <img src="Recursos/Ofertas especiales.png" alt="">
+            <img src="/Recursos/Ofertas especiales.png" alt="">
           </a>
         </li>
           <li>
             <a href="#">
-              <img src="Recursos/Educativo.png" alt="">
+              <img src="/Recursos/Educativo.png" alt="">
             </a>
           </li>
 
           <li>
             <a href="#">
-              <img src="Recursos/Infantil.png" alt="">
+              <img src="/Recursos/Infantil.png" alt="">
             </a>
           </li>
 
           <li>
             <a href="#">
-              <img src="Recursos/Terror.png" alt="">
+              <img src="/Recursos/Terror.png" alt="">
             </a>
           </li>
     </ul>
@@ -69,33 +70,30 @@
     </tr>
   </table>
   <div class="Catalogo">
-    <a class="CatalogoA" href="libro.html">
-      <img src="Recursos/libro.png" alt="Holly" title="Holly" height="300"
+    <a class="CatalogoA" href="/libro/<%= productos[0]?.ID_Producto %>/<%= usuario.ID%>">
+      <img src="" alt="<%= productos[0]?.Nombre %>" title="<%= productos[0]?.Nombre %>" height="300"
           width="auto">
-      <p>Holly</p>
-  </a>
-    <a class="CatalogoA" href="">
-        <img src="Recursos/Carrie(libro).jpg" alt="Carrie" title="Carrie" height="300" width="auto">
-        <p>Carrie</p>
+      <p><%= productos[0]?.Nombre %></p>
     </a>
-    <a class="CatalogoA" href="#">
-        <img src="Recursos/No sé como demostrar donde me duele.jpg" alt="No sé como demostrar donde me duele" title="No sé como demostrar donde me duele" height="300" width="auto">
-        <p>No sé cómo demostrar donde me duele</p>
+    <a class="CatalogoA" href="/libro/<%= productos[1]?.ID_Producto %>/<%=  usuario.ID%>">
+      <img src="" alt="<%= productos[1]?.Nombre %>" title="<%= productos[1]?.Nombre %>" height="300"
+          width="auto">
+      <p><%= productos[1]?.Nombre %></p>
     </a>
-    <a class="CatalogoA" href="#">
-        <img src="Recursos/13RW.jpg" alt="13 reasons why" title="13 reasons why" height="300"
-            width="auto">
-        <p>13 reasons why</p>
+    <a class="CatalogoA" href="/libro/<%= productos[2]?.ID_Producto %>/<%=  usuario.ID%>">
+      <img src="" alt="<%= productos[2]?.Nombre %>" title="<%= productos[2]?.Nombre %>" height="300"
+          width="auto">
+      <p><%= productos[2]?.Nombre %></p>
     </a>
-    <a class="CatalogoA" href="#">
-        <img src="Recursos/No te olvidaré.jpg" alt="No te olvidaré" title="No te olvidaré" height="300"
-            width="auto">
-        <p>No te olvidaré</p>
+    <a class="CatalogoA" href="/libro/<%= productos[3]?.ID_Producto %>/<%=  usuario.ID%>">
+      <img src="" alt="<%= productos[3]?.Nombre %>" title="<%= productos[3]?.Nombre %>" height="300"
+          width="auto">
+      <p><%= productos[3]?.Nombre %></p>
     </a>
-    <a class="CatalogoA" href="#">
-        <img src="Recursos/Alpaca's Maracas.jpg" alt="Alpaca's Maracas" title="Alpaca's Maracas" height="300"
-            width="auto">
-        <p>Alpaca's Maracas</p>
+    <a class="CatalogoA" href="/libro/<%= productos[4]?.ID_Producto %>/<%=  usuario.ID%>">
+      <img src="" alt="<%= productos[4]?.Nombre %>" title="<%= productos[4]?.Nombre %>" height="300"
+          width="auto">
+      <p><%= productos[4]?.Nombre %></p>
     </a>
 </div>
 

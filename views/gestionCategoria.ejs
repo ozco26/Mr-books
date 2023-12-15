@@ -1,99 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Mr. Books Gestión de Categorias</title>
-    <link rel="stylesheet" href="Estilos/Estilos.Css" />
+    <link rel="stylesheet" href="/Estilos/Estilos.Css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <header class="header">
     <div class="logo">
-      <a href="Home.html"> 
-        <img src="Recursos/Logo.png" alt="Logo Mr. Books" />
-      </a>
+        <a href="/homeAdmnin/<%=idUsuario %>" title="Home" >
+            <img src="/Recursos/Logo.png" alt="Home" />
+          </a>
     </div>
     <nav>
-      <a class="MENUA" href="Home.html"> 
-        <img src="Recursos/Home.png" alt="Home">
-      </a>
-      <a class="MENUA" href="#">  <!--Referencia al perfil del usuario-->
-        <img src="Recursos/User.png" alt="Perfil">
-      </a>
-      <a class="MENUA" href="Carrito.html"> 
-        <img src="Recursos/Carrito.png" alt="Carrito">
-      </a>
+        <a class="MENUA" href="/" title="Cerrar Sesion">
+            <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
+          </a>
     </nav>
-  </header>
-
-
+</header>
 <body>
     <h1 style="text-align: center;">Gestión de Categorías - Admin</h1>
-    <br>
-    <br>
-
-    <div style="text-align: right;"> <!--poner estilos de botones en el CSS-->
-        <button>Modificar</button>
-        <button>Guardar</button>
-        <button>Actualizar</button>
     </div>
-
-    <table style="width: 100%;"> <!--La tabla va alimentada de la base de datos-->
-        <thead style="background-color: lightgray;">
-            <tr>
-                <th>ID de Producto</th>
-                <th>Nombre</th>
-                <th>Autor</th>
-                <th>Editorial</th>
-                <th>Año</th>
-                <th>Género</th>
-                <th>Precio</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-            </tr>
-            <tr>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-            </tr>
-            <tr>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-            </tr>
-            <tr>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-                <td>Datos</td>
-            </tr>
-        </tbody>
-    </table>
+    <h1 class="text-primary mt-2">Categorias</h1>
+    <hr>
     <br>
+    <div class="container" style="display: flex; align-items: flex-start;">
+        <div class="row" style="width: 50%; padding: 20px; ">
+            <form id="frmCategoria" action="/createCategoria" method="POST" >
+                <div class="form-group">
+                    <input class="Barra" type="text" name="txtCategoria" placeholder="Escriba la categoria nueva a agregar">
+                    <input class="Barra" type="text" name="idUsuario" value="<%= idUsuario %>"  style="display: none;">
+                </div>
+                <br>
+                <button id="btnGuadarCategoria">Guardar</button>
 
+            </form>
+        </div>
+        <div class="row" style="width: 50%; padding: 20px; ">
+            <table table id="crud"> <!--La tabla va alimentada de la base de datos-->
+                <thead style="background-color: lightgray;">
+                    <tr>
+                        <th>ID de Categoria</th>
+                        <th>Categoria</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% Categorias.forEach((generos)=>{ %>
+                        <tr>
+                            <td>
+                                <%= generos.ID_Genero  %>
+                            </td>
+                            <td>
+                                <%= generos.Genero %>
+                            </td>
+
+                            <td>
+                                <a href="#" onclick="borrar('<%= generos.ID %>', '<%=idUsuario %>')">Borrar</i></a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+            <br>
+        </div>
+    </div>
+    </div>
 
     <footer class="Pie">
         <div class="contenedor">
@@ -101,30 +74,36 @@
                 <div class="pie-links">
                     <h4>Quienes somos</h4>
                     <ul>
-                    <li><a href="#">Nosotros</a></li>
-                    <li><a href="#">Nuestros servicios</a></li>
-                    <li><a href="#">Politica de privacidad</a></li>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="#">Nuestros servicios</a></li>
+                        <li><a href="#">Politica de privacidad</a></li>
                     </ul>
                 </div>
-                <div class="pie-links">
-                    <h4>Cuenta</h4>
-                    <ul>
-                    <li><a href="#">Cuenta</a></li>
-                    <li><a href="#">Carrito</a></li>
-                    <li><a href="#">Compras</a></li>
-                    </ul>
-                </div>
-                <div class="pie-links">
-                    <h4>Tienda</h4>
-                    <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Novedades</a></li>
-                    <li><a href="#">Categorias</a></li>
-                    </ul>
-                </div>
+
+
             </div>
         </div>
     </footer>
 </body>
+<script>
+var editStatus = false;
+var idSElec = "";
 
+
+    function borrar(id,idUsusario) {
+        Swal.fire({
+            title: 'Esta seguro?',
+            text: "Eliminaras el registro permanentemente!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = '/deleteCategoria/' + id+'/'+idUsusario;
+    }
+})
+}
+</script>
 </html>

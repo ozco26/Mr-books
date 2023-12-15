@@ -35,13 +35,13 @@ table {
     padding: 15px;
   }
 
-  th, td {
+  #crud th, #crud td {
     border: 1px solid #ddd;
     padding: 4px;
     text-align: left;
   }
 
-  td {
+  #crud td {
     max-width: 60px; /* Establece el ancho máximo que deseas */
     overflow: hidden;
     text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más contenido */

@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Pedidos - Admin</title>
-    <link rel="stylesheet" href="Estilos/Estilos.Css" />
-    <link rel="stylesheet" href="Estilos/EstiloPedido.css" />
+    <link rel="stylesheet" href="/Estilos/Estilos.Css" />
+    <link rel="stylesheet" href="/Estilos/EstiloPedido.css" />
+    <script src="/FuncionesBotones/BotónBuscarPedido.js"></script>
 </head>
 <header class="header">
   <div class="logo">
     <a href="Home.html">
-      <img src="Recursos/Logo.png" alt="Logo" />
+      <img src="/Recursos/Logo.png" alt="Logo" />
     </a>
   </div>
   <nav>
     <a class="MENUA" href="Home.html">
-      <img src="Recursos/Home.png" alt="Home">
+      <img src="/Recursos/Home.png" alt="Home">
     </a>
     <a class="MENUA" href="Cuenta.html">
-      <img src="Recursos/User.png" alt="Cuenta">
+      <img src="/Recursos/User.png" alt="Cuenta">
     </a>
     <a class="MENUA" href="Carrito.html">
-      <img src="Recursos/Carrito.png" alt="">
+      <img src="/Recursos/Carrito.png" alt="">
     </a>
   </nav>
 </header>
 <body>
-    <div class="pedido">
+  <div class="pedido">
         <br>
         <h1>Gestión de Pedidos - Admin</h1>
         <br>
@@ -33,16 +34,60 @@
             <label for="filtroPedido">Buscar por Número de Pedido:</label>
             <input type="text" id="filtroPedido" name="filtroPedido" placeholder="Número de Pedido">
             <button id="btnBuscar" onclick="buscarPedido()">Buscar</button>
+            <button id="btnVolver" onclick="Volver()">Volver</button>
         </div>
-        <div class="estados">
-            <span>Todos (5)</span>
-            <span>Pendiente (2)</span>
-            <span>En Proceso (2)</span>
-            <span>Completo (1)</span>
-        </div>
-    </div>
 
-    <div class="content">
+        <!--Función para el botón Buscar pedido-->
+        <script>
+          function buscarPedido() {
+              var numeroPedido = document.getElementById('filtroPedido').value;
+              var filas = document.querySelectorAll('.content tbody tr');
+              filas.forEach(function(fila) {
+                  fila.style.display = 'none';
+              });
+      
+              if (!numeroPedido) {
+                  filas.forEach(function(fila) {
+                      fila.style.display = '';
+                  });
+                  return;
+              }
+              filas.forEach(function(fila) {
+                  var numeroPedidoFila = fila.cells[0].textContent;
+                  if (numeroPedidoFila === numeroPedido) {
+                      fila.style.display = '';
+                  }
+              });
+          }
+       </script> 
+<!--Función para el botón Volver en Pedido-->
+    <script>
+      function Volver() {
+        var filas = document.querySelectorAll('.content tbody tr');
+        filas.forEach(function(fila) {
+            fila.style.display = '';
+        });
+        document.getElementById('filtroPedido').value = '';
+    }
+    </script>
+
+  <div class="estados">
+    <h2>Estado de Pedidos</h2>
+    <br>
+        <tr>
+            <span>Todos (<%= pedidos.length %>)</span>
+        </tr>
+        <tr>
+            <span> 1. Pendiente (<%= pedidos.filter(pedido => pedido.Estado === 1).length %>)</span>
+        </tr>
+        <tr>
+          <span> 2. En Proceso (<%= pedidos.filter(pedido => pedido.Estado === 2).length %>)</span>
+      </tr>
+      <tr>
+        <span>3. Completado (<%= pedidos.filter(pedido => pedido.Estado === 3).length %>)</span>
+      </tr>
+  </div>
+  <div class="content">
         <table>
             <thead>
                 <tr>
@@ -51,7 +96,7 @@
                     <th>Cliente</th>
                     <th>Fecha</th>
                     <th>Estado</th>
-                    <th>Total</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -61,12 +106,15 @@
                     <td><%= pedidos.Producto %></td>
                     <td><%= pedidos.Cliente %></td>
                     <td><%= pedidos.Fecha %></td>
-                    <td><%= pedidos.Estado %></td>
-                    <td><%= pedidos.Total %></td>
-                </tr>
+                    <td><%= pedidos.Estado %></td>          
+                    <td>
+                      <a href="#" onclick="editar('<%= pedidos.ID_Pedido %>', '<%=idUsuario %>')" >Editar</i></a>
+                      <a href="#" onclick="borrar('<%= pedidos.ID_Pedido %>', '<%=idUsuario %>')" >Borrar</i></a>
+                    </td>
+              </tr>
                 <% }) %>
-            </tbody>
-        </table>
+            </tbody>          
+        </table>  
     </div>
 
     <footer class="Pie">
@@ -100,6 +148,39 @@
         </div>
       </div>
     </footer>
-
 </body>
+
+<script>
+  function goBack() {
+      window.history.back();
+  }
+
+  function borrar(id,idUsusario) {
+          Swal.fire({
+              title: 'Está seguro?',
+              text: "Eliminaras el registro permanentemente!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  window.location = '/delete/' + id+'/'+idUsusario;
+              }
+          })
+  }
+
+  function editar (id,idUsusario){
+      console.log("ID:", id);
+      console.log("ID Usuario:", idUsusario);
+      window.location = '/editar/' + id + '/' + idUsusario;
+  }
+ 
+   function obtenerIdDeUsuario(){
+      return id;
+  }
+  const userId = obtenerIdDeUsuario(); 
+</script>
+
 </html>

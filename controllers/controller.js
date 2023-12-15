@@ -313,3 +313,23 @@ exports.updateLibros = async(req,res)=>{
     res.redirect("/Productos/"+IDADminsitrador);
   }
 };
+//crea categorias e administrador
+
+exports.createCategoria = async(req,res)=>{
+  const categoriaTO = req.body.txtCategoria;
+  const idUsuario = req.body.idUsuario;
+
+  conexion.query("INSERT INTO generos SET ?",
+  {
+    Genero: categoriaTO
+  },(err, results) => {
+    if (err) {
+        console.log("Error en insert de categoria", err);
+        res.redirect("/Categorias/"+idUsuario);
+    } else {
+        console.log("Insert en Categoria exitoso");
+        
+        res.redirect("/Categorias/"+idUsuario);
+    }
+  })
+};
