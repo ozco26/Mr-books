@@ -62,8 +62,36 @@
       <input type="text" placeholder="Buscar...">
       <a href="#">
         <img src="Recursos/Lupa.png" alt="Buscar">
-      </a>
+      </a>      
     </div>
+    <div style="padding: 10px;">
+      <button style="padding: 10px;" id="mostrarFormulario" class="boton-efecto" onclick="mostrarFormulario()"> Búsqueda Avanzada</button>
+  </div>
+  </div>
+  <div class="oculto" id="contenedorFormulario" style="padding: 20px;">
+    <h4 style="text-align: center;">Coloque la información que necesita filtrar</h4>
+    <br>
+
+    <form id="formularioBusqueda"  >
+      <!-- Contenido del formulario de búsqueda avanzada -->
+      <div class="row" style="justify-content: center;">
+        <input class="Barra" type="text" id="txtNombre" name="txtNombre" placeholder="Ingrese el nombre del libro">
+        <input class="Barra" type="text" id="txtAutor" name="txtAutor" placeholder="Ingrese el nombre del autor">
+        <input class="Barra" type="text" id="txtEditorial" name="txtEditorial" placeholder="Ingrese la editorial">
+      </div>
+      <br>
+      <div class="row" style="justify-content: center;">
+        <input class="Barra" type="text" id="txtAnno" name="txtAnno" placeholder="Ingrese el anno de publicacion">
+        <input class="Barra" type="text" id="txtGenero" name="txtGenero" placeholder="Ingrese el nombre del libro">
+        
+      </div>
+      <br>
+      
+      <!-- Otros campos de formulario... -->
+      <div style="padding: 10px; text-align: center;">
+        <button class="boton-efecto" type="submit">Buscar</button>
+    </div>
+    </form>
   </div>
   <br>
 
@@ -139,11 +167,11 @@
 
 </body>
 
-<script>
-  // Redirigir a la misma página cuando se hace clic en el enlace
-  document.getElementById("irhome").addEventListener("click", function(event) {
-      event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-      window.location.href = window.location.href;
-  });
+
+  <script>
+    function mostrarFormulario() {
+      var contenedorFormulario = document.getElementById('contenedorFormulario');
+      contenedorFormulario.style.display = 'block'; // O 'flex', o cualquier valor deseado
+    }
 </script>
 </html>
