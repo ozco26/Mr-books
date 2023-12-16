@@ -10,7 +10,7 @@
 </head>
 <header class="header">
   <div class="logo">
-    <a href="/homeAdmnin/<%=usuario%>" title="Home">
+    <a href="/homeAdmnin/<%= usuario.ID %>" title="Home">
       <img src="/Recursos/Logo.png" alt="Logo" />
     </a>
   </div>
@@ -79,7 +79,10 @@
           <span> 2. En Proceso (<%= pedidos.filter(pedido => pedido.Estado === 2).length %>)</span>
       </tr>
       <tr>
-        <span>3. Completado (<%= pedidos.filter(pedido => pedido.Estado === 3).length %>)</span>
+        <span>3. Enviado(<%= pedidos.filter(pedido => pedido.Estado === 3).length %>)</span>
+      </tr>
+      <tr>
+        <span>4. Entregado (<%= pedidos.filter(pedido => pedido.Estado === 4).length %>)</span>
       </tr>
   </div>
   <div class="content">
@@ -94,7 +97,6 @@
                     <th></th>
                 </tr>
             </thead>
-            <form action="">  
               <tbody>
               <% pedidos.forEach((pedidos)=>{ %>
                 <tr>
@@ -110,8 +112,6 @@
               </tr>
                 <% }) %>
             </tbody>     
-           </form>
-                 
         </table>  
     </div>
 
@@ -188,6 +188,8 @@ function obtenerNuevoEstado() {
     var nuevoEstado = document.getElementById('nuevoEstado').innerText;
     return nuevoEstado;
   }
+
+
 </script>
 
 </html>
