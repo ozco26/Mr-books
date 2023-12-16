@@ -152,7 +152,6 @@ router.get('/editar/:id/:idUsuario',(req,res)=>{
 });
 
 //actualiza usuario por administrador
-
 router.get('/editarUsuario/:id',(req,res)=>{
     const id = req.params.id;
     const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
@@ -179,14 +178,10 @@ router.get('/Pedido/:id', (req, res)=>{
                     throw err;
                 } else{
                     res.render('Pedido.ejs', {pedidos:results, usuario: infousuario[0]});
-                }
-        
-        
+                }     
             })
         }
-    })
-    
-    
+    })    
 })
 
 //  CRUD PRODUCTOS
@@ -263,18 +258,6 @@ router.get('/deleteP/:id/:idUsusario', (req, res) => {
     })
 });
 
-router.get('/deletePedidos/:id/:idUsusario', (req, res) => {
-    const id = req.params.id;
-    const idUsusario = req.params.idUsusario;
-    conexion.query('DELETE FROM pedidos WHERE ID_Pedido = ?',[id], (error, results)=>{
-        if(error){
-            console.log(error);
-        }else{           
-            res.redirect("/Pedido/"+idUsusario);
-        }
-    })
-});
-
 
 router.get('/Categorias/:idUsuario',(req,res)=>{
     const idUsuario = req.params.idUsuario;
@@ -307,7 +290,6 @@ router.get('/libro/:idlibro/:idUsuario?', (req, res) => {
 
     conexion.query('SELECT * FROM productos WHERE ID_Producto = ?'
 
-    
     , [idlibro], (error, results) => {
         if (error) {
             console.log(error);
@@ -333,6 +315,37 @@ router.get('/GestionLibros/:idUsuario',(req,res)=>{
     )
 });
 
+//Eliminar Pedido
+router.get('/deletePedidos/:id/:idUsusario', (req, res) => {
+    const id = req.params.id;
+    const idUsusario = req.params.idUsusario;
+    conexion.query('DELETE FROM pedidos WHERE ID_Pedido = ?',[id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect("/Pedido/"+idUsusario);
+        }
+    })
+});
+
+//Actualizar Pedido
+router.get('/actualizarPedido/:id/:idUsuario/:nuevoEstado', (req, res) => {
+    const idPedido = req.params.id;
+    const nuevoEstado = req.params.nuevoEstado;
+    const idUsuario = req.params.idUsuario;
+    conexion.query(
+      'UPDATE pedidos SET Estado = ? WHERE ID_Pedido = ?',
+      [nuevoEstado, idPedido],
+      (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+          res.redirect('/Pedido/' +idUsuario);
+        }
+      }
+    );
+  });
+
 //borra usuarios
 router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
     const id = req.params.id;
@@ -345,6 +358,8 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
         }
     })
 });
+
+
 
 
 router.post("/updateLibros", controller.updateLibros);

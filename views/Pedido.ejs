@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Pedidos - Admin</title>
@@ -10,19 +10,13 @@
 </head>
 <header class="header">
   <div class="logo">
-    <a href="Home.html">
+    <a href="/homeAdmnin/<%=usuario%>" title="Home">
       <img src="/Recursos/Logo.png" alt="Logo" />
     </a>
   </div>
   <nav>
-    <a class="MENUA" href="Home.html">
-      <img src="/Recursos/Home.png" alt="Home">
-    </a>
-    <a class="MENUA" href="Cuenta.html">
-      <img src="/Recursos/User.png" alt="Cuenta">
-    </a>
-    <a class="MENUA" href="Carrito.html">
-      <img src="/Recursos/Carrito.png" alt="">
+    <a class="MENUA" href="/" title="Cerrar Sesion">
+      <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
     </a>
   </nav>
 </header>
@@ -100,21 +94,24 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <form action="">  
+              <tbody>
               <% pedidos.forEach((pedidos)=>{ %>
                 <tr>
                     <td><%= pedidos.ID_Pedido %></td>
                     <td><%= pedidos.Producto %></td>
                     <td><%= pedidos.Cliente %></td>
                     <td><%= pedidos.Fecha %></td>
-                    <td><%= pedidos.Estado %></td>          
+                    <td id= "nuevoEstado" contenteditable="true"><%= pedidos.Estado %></td>       
                     <td>
-                      <a href="#" onclick="editar('<%= pedidos.ID_Pedido %>', '<%=usuario %>')" >Editar</i></a>
+                      <a href="#" onclick="editar('<%= pedidos.ID_Pedido %>', '<%=usuario%>', obtenerNuevoEstado())">Actualizar</a>
                       <a href="#" onclick="borrar('<%= pedidos.ID_Pedido %>', '<%=usuario %>')" >Borrar</i></a>
                     </td>
               </tr>
                 <% }) %>
-            </tbody>          
+            </tbody>     
+           </form>
+                 
         </table>  
     </div>
 
@@ -172,16 +169,25 @@
           })
   }
 
-  function editar (id,idUsusario){
-      console.log("ID:", id);
-      console.log("ID Usuario:", idUsusario);
-      window.location = '/editar/' + id + '/' + idUsusario;
+  function editar(id, usuario, nuevoEstado) {
+    Swal.fire({
+        title: 'Está seguro?',
+        text: "Editarás el registro permanentemente!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Editar!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location = `/actualizarPedido/${id}/${usuario}/${nuevoEstado}`;
+        }       
+    });
+}
+function obtenerNuevoEstado() {
+    var nuevoEstado = document.getElementById('nuevoEstado').innerText;
+    return nuevoEstado;
   }
- 
-   function obtenerIdDeUsuario(){
-      return id;
-  }
-  const userId = obtenerIdDeUsuario(); 
 </script>
 
 </html>
