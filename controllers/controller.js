@@ -334,3 +334,24 @@ exports.createCategoria = async(req,res)=>{
   })
 };
 
+exports.formularioBusquedaAvanzada = async(req,res)=>{
+  const nombre = req.body.txtNombre;
+  const autor = req.body.txtAutor;
+  const editorial = req.body.txtEditorial;
+  const anno = req.body.txtAnno;
+  const genero = req.body.txtGenero;
+  const idUsuario = req.body.txtIdUsuario;
+  const busquedaAvanzada = 'SELECT * FROM productos WHERE (Nombre LIKE ? and Autor LIKE ? and Editorial LIKE ? and Anno LIKE ? and Genero LIKE ?)';
+  console.log("busquedaAvanzada :" +busquedaAvanzada )
+  conexion.query(busquedaAvanzada, [`%${nombre}%`, `%${autor}%`, `%${editorial}%`, `%${anno}%`, `%${genero}%`] ,(err, results) => {
+    if (err) {
+      console.log("Error en Busqueda Avanzada", err);
+      res.redirect("/Categorias/"+idUsuario);
+  } else {
+      console.log("Insert en Categoria exitoso");
+      
+      res.render("Busqueda.ejs",{results:results, idUsuario});
+  }
+  })
+
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Busqueda</title>
+  <link rel="stylesheet" href="/Estilos/Estilos.Css" />
+</head>
+<header class="header">
+  <div class="logo">
+    <a href="javascript:history.back()" id="irhome" title="Home">
+      <img src="/Recursos/Logo.png" alt="Home" />
+    </a>
+  </div>
+  <nav>
+    <a class="MENUA" href="inicioSesion" title="Login">
+      <img src="/Recursos/User.png" alt="Cuenta">
+    </a>
+    <a class="MENUA" href="registro" title="Registro">
+      <img src="/Recursos/UserRegistro.png" alt="Registro">
+    </a>
+  </nav>
+</header>
+
+<body>
+  <br>
+ 
+  <div class="Catalogo">
+    <% results.forEach((productos)=>{ %>
+    <a class="CatalogoA" href="/libro/<%= productos.ID_Producto %>">
+      <img src="" alt="<%= productos.Nombre %>" title="<%= productos.Nombre %>" height="300" width="auto">
+      <p>
+        <%= productos[0]?.Nombre %>
+      </p>
+      <% }) %>
+  </div>
+
+
+  <footer class="Pie">
+    <div class="contenedor">
+      <div class="pie-row">
+        <div class="pie-links">
+          <h4>Quienes somos</h4>
+          <ul>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="#">Nuestros servicios</a></li>
+            <li><a href="#">Politica de privacidad</a></li>
+          </ul>
+        </div>
+        <div class="pie-links">
+          <h4>Cuenta</h4>
+          <ul>
+            <li><a href="#">Cuenta</a></li>
+            <li><a href="#">Carrito</a></li>
+            <li><a href="#">Compras</a></li>
+          </ul>
+        </div>
+        <div class="pie-links">
+          <h4>Tienda</h4>
+          <ul>
+            <li><a href="Home.html">Inicio</a></li>
+            <li><a href="#">Novedades</a></li>
+            <li><a href="#">Categorias</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+
+<script>
+  function mostrarFormulario() {
+    var contenedorFormulario = document.getElementById('contenedorFormulario');
+    contenedorFormulario.style.display = 'block'; // O 'flex', o cualquier valor deseado
+  }
+
+  function goBack() {
+        window.history.back();
+    }
+</script>
+
+</html>

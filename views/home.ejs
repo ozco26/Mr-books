@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Página principal</title>
@@ -16,83 +17,85 @@
       <img src="Recursos/User.png" alt="Cuenta">
     </a>
     <a class="MENUA" href="registro" title="Registro">
-      <img  src="Recursos/UserRegistro.png" alt="Registro">
+      <img src="Recursos/UserRegistro.png" alt="Registro">
     </a>
   </nav>
 </header>
 
 <body>
-<br>
+  <br>
   <!--
 <div style="border: 20px solid white;">
     <img style="width: 100%; " src="Recursos/antique-books-vector-banners-vintage-bookshop_8071-32276.jpg" alt="banner">
   </div>
     
   -->
-  
+
   <div class="slider-frame">
     <ul>
-        <li>
-          <a href="#">
-            <img src="Recursos/Ofertas especiales.png" alt="">
-          </a>
-        </li>
-          <li>
-            <a href="#">
-              <img src="Recursos/Educativo.png" alt="">
-            </a>
-          </li>
+      <li>
+        <a href="#">
+          <img src="Recursos/Ofertas especiales.png" alt="">
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="Recursos/Educativo.png" alt="">
+        </a>
+      </li>
 
-          <li>
-            <a href="#">
-              <img src="Recursos/Infantil.png" alt="">
-            </a>
-          </li>
+      <li>
+        <a href="#">
+          <img src="Recursos/Infantil.png" alt="">
+        </a>
+      </li>
 
-          <li>
-            <a href="#">
-              <img src="Recursos/Terror.png" alt="">
-            </a>
-          </li>
+      <li>
+        <a href="#">
+          <img src="Recursos/Terror.png" alt="">
+        </a>
+      </li>
     </ul>
-</div>
-<br>
+  </div>
+  <br>
   <div style="display: flex; justify-content: center">
     <div class="Barra">
       <input type="text" placeholder="Buscar...">
       <a href="#">
         <img src="Recursos/Lupa.png" alt="Buscar">
-      </a>      
+      </a>
     </div>
     <div style="padding: 10px;">
-      <button style="padding: 10px;" id="mostrarFormulario" class="boton-efecto" onclick="mostrarFormulario()"> Búsqueda Avanzada</button>
-  </div>
+      <button style="padding: 10px;" id="mostrarFormulario" class="boton-efecto" onclick="mostrarFormulario()"> Búsqueda
+        Avanzada</button>
+    </div>
   </div>
   <div class="oculto" id="contenedorFormulario" style="padding: 20px;">
-    <h4 style="text-align: center;">Coloque la información que necesita filtrar</h4>
-    <br>
+    <fieldset>
+      <legend>Busqueda Avanzada</legend>
 
-    <form id="formularioBusqueda"  >
-      <!-- Contenido del formulario de búsqueda avanzada -->
-      <div class="row" style="justify-content: center;">
-        <input class="Barra" type="text" id="txtNombre" name="txtNombre" placeholder="Ingrese el nombre del libro">
-        <input class="Barra" type="text" id="txtAutor" name="txtAutor" placeholder="Ingrese el nombre del autor">
-        <input class="Barra" type="text" id="txtEditorial" name="txtEditorial" placeholder="Ingrese la editorial">
-      </div>
+      <h4 style="text-align: center;">Coloque la información que necesita filtrar</h4>
       <br>
-      <div class="row" style="justify-content: center;">
-        <input class="Barra" type="text" id="txtAnno" name="txtAnno" placeholder="Ingrese el anno de publicacion">
-        <input class="Barra" type="text" id="txtGenero" name="txtGenero" placeholder="Ingrese el nombre del libro">
-        
-      </div>
-      <br>
-      
-      <!-- Otros campos de formulario... -->
-      <div style="padding: 10px; text-align: center;">
-        <button class="boton-efecto" type="submit">Buscar</button>
-    </div>
-    </form>
+      <form id="formularioBusquedaAvanzada" action="/formularioBusquedaAvanzada" method="POST">
+        <!-- Contenido del formulario de búsqueda avanzada -->
+        <div class="row" style="justify-content: center;">
+          <input class="Barra" type="text" id="txtNombre" name="txtNombre" placeholder="Ingrese el nombre del libro">
+          <input class="Barra" type="text" id="txtAutor" name="txtAutor" placeholder="Ingrese el nombre del autor">
+          <input class="Barra" type="text" id="txtEditorial" name="txtEditorial" placeholder="Ingrese la editorial">
+          <input class="Barra" type="text" id="txtAnno" name="txtAnno" placeholder="Ingrese el anno de publicacion">
+          <input class="Barra" type="text" id="txtGenero" name="txtGenero" placeholder="Ingrese el genero">
+          <input class="Barra" type="text" id="txtIdUsuario" name="txtIdUsuario" value="<%= idUsuario='' %>"
+            style="display: none;">
+        </div>
+        <br>
+
+        <!-- Otros campos de formulario... -->
+        <div style="padding: 10px; text-align: center;">
+          <button class="boton-efecto" type="submit">Buscar</button>
+        </div>
+      </form>
   </div>
+  </fieldset>
   <br>
 
   <table style="width: 100%; ">
@@ -105,31 +108,36 @@
 
   <div class="Catalogo">
     <a class="CatalogoA" href="/libro/<%= productos[0]?.ID_Producto %>">
-      <img src="" alt="<%= productos[0]?.Nombre %>" title="<%= productos[0]?.Nombre %>" height="300"
-          width="auto">
-      <p><%= productos[0]?.Nombre %></p>
+      <img src="" alt="<%= productos[0]?.Nombre %>" title="<%= productos[0]?.Nombre %>" height="300" width="auto">
+      <p>
+        <%= productos[0]?.Nombre %>
+      </p>
     </a>
     <a class="CatalogoA" href="/libro/<%= productos[1]?.ID_Producto %>">
-      <img src="" alt="<%= productos[1]?.Nombre %>" title="<%= productos[1]?.Nombre %>" height="300"
-          width="auto">
-      <p><%= productos[1]?.Nombre %></p>
+      <img src="" alt="<%= productos[1]?.Nombre %>" title="<%= productos[1]?.Nombre %>" height="300" width="auto">
+      <p>
+        <%= productos[1]?.Nombre %>
+      </p>
     </a>
     <a class="CatalogoA" href="/libro/<%= productos[2]?.ID_Producto %>">
-      <img src="" alt="<%= productos[2]?.Nombre %>" title="<%= productos[2]?.Nombre %>" height="300"
-          width="auto">
-      <p><%= productos[2]?.Nombre %></p>
+      <img src="" alt="<%= productos[2]?.Nombre %>" title="<%= productos[2]?.Nombre %>" height="300" width="auto">
+      <p>
+        <%= productos[2]?.Nombre %>
+      </p>
     </a>
     <a class="CatalogoA" href="/libro/<%= productos[3]?.ID_Producto %>">
-      <img src="" alt="<%= productos[3]?.Nombre %>" title="<%= productos[3]?.Nombre %>" height="300"
-          width="auto">
-      <p><%= productos[3]?.Nombre %></p>
+      <img src="" alt="<%= productos[3]?.Nombre %>" title="<%= productos[3]?.Nombre %>" height="300" width="auto">
+      <p>
+        <%= productos[3]?.Nombre %>
+      </p>
     </a>
     <a class="CatalogoA" href="/libro/<%= productos[4]?.ID_Producto %>">
-      <img src="" alt="<%= productos[4]?.Nombre %>" title="<%= productos[4]?.Nombre %>" height="300"
-          width="auto">
-      <p><%= productos[4]?.Nombre %></p>
+      <img src="" alt="<%= productos[4]?.Nombre %>" title="<%= productos[4]?.Nombre %>" height="300" width="auto">
+      <p>
+        <%= productos[4]?.Nombre %>
+      </p>
     </a>
-   
+
   </div>
 
 
@@ -160,7 +168,7 @@
             <li><a href="#">Categorias</a></li>
           </ul>
         </div>
-  
+
       </div>
     </div>
   </footer>
@@ -168,10 +176,11 @@
 </body>
 
 
-  <script>
-    function mostrarFormulario() {
-      var contenedorFormulario = document.getElementById('contenedorFormulario');
-      contenedorFormulario.style.display = 'block'; // O 'flex', o cualquier valor deseado
-    }
+<script>
+  function mostrarFormulario() {
+    var contenedorFormulario = document.getElementById('contenedorFormulario');
+    contenedorFormulario.style.display = 'block'; // O 'flex', o cualquier valor deseado
+  }
 </script>
+
 </html>

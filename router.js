@@ -287,8 +287,7 @@ router.get('/deleteCategoria/:id/:idUsusario', (req, res) => {
 router.get('/libro/:idlibro/:idUsuario?', (req, res) => {
     const idlibro = req.params.idlibro; 
     const idUsuario = req.params.idUsuario;
-
-    conexion.query('SELECT * FROM productos WHERE ID_Producto = ?'
+    conexion.query('SELECT productos.*, generos.Genero FROM productos INNER JOIN generos ON productos.Genero = generos.ID_Genero WHERE ID_Producto = ?'
 
     , [idlibro], (error, results) => {
         if (error) {
@@ -369,4 +368,5 @@ router.post('/login', controller.loginUser);
 router.post('/updateUserbyAdmin', controller.updateUserbyAdmin);
 router.post('/updateUserbyUser', controller.updateUserbyUser);
 router.post('/createCategoria',controller.createCategoria);
+router.post('/formularioBusquedaAvanzada',controller.formularioBusquedaAvanzada)
 module.exports = router;
