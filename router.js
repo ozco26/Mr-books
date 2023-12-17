@@ -369,4 +369,5 @@ router.post('/updateUserbyAdmin', controller.updateUserbyAdmin);
 router.post('/updateUserbyUser', controller.updateUserbyUser);
 router.post('/createCategoria',controller.createCategoria);
 router.post('/formularioBusquedaAvanzada',controller.formularioBusquedaAvanzada)
+router.post('/formularioBusqueda',controller.formularioBusqueda)
 module.exports = router;

@@ -36,6 +36,7 @@
                 <th>Correo</th>
                 <th>Contraseña</th>
                 <th>Fecha Nacimiento</th>
+                <th>Fecha Registro</th>
                 <th>Rol</th>
                 <th>Acciones</th>
             </tr>
@@ -51,6 +52,7 @@
                     <td><%= USUARIOS.Correo%></td>
                     <td><%= USUARIOS.Contrasenna %></td>
                     <td><%= USUARIOS.Fecha_nacimiento instanceof Date ? USUARIOS.Fecha_nacimiento.toISOString().substring(0, 10) : '' %></td>
+                    <td><%= USUARIOS.Fecha_ingreso instanceof Date ? USUARIOS.Fecha_nacimiento.toISOString().substring(0, 10) : '' %></td>
                     <td><%= USUARIOS.Rol  %></td>
                     
                     <td>

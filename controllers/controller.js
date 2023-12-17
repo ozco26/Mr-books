@@ -140,17 +140,14 @@ exports.updateUserbyAdmin = async(req,res)=>{
   const id = req.body.id;
   const Cedula = req.body.cedula;
   const Nombre = req.body.nombre;
-  const Apellidos = req.body.apellidos;
-  
+  const Apellidos = req.body.apellidos; 
   const telefono = req.body.telefono;
   const Correo = req.body.correo;
   const Contrasena = req.body.contrasenna;
-
-  const FechaNacimiento = req.body.fecha_nacimiento;
   const rol = req.body.rol;
   const algoritmo = "sha256";
   const hash = generarHash(algoritmo, Contrasena);
-  const fecha_creacion = req.body.Fecha_ingreso;
+
   
   try{
     conexion.query(
@@ -163,10 +160,7 @@ exports.updateUserbyAdmin = async(req,res)=>{
       Telefono: telefono,
       Correo: Correo,
       Contrasenna: hash,
-      Fecha_nacimiento: FechaNacimiento,
       Rol: rol,
-      Fecha_ingreso : fecha_creacion,
-      
       },id,],
       (err, results) => {
       if (err) {
@@ -192,11 +186,11 @@ exports.updateUserbyUser = async(req,res)=>{
   const telefono = req.body.telefono;
   const Correo = req.body.correo;
   const Contrasena = req.body.contrasenna;
-  const FechaNacimiento = new Date(req.body.fecha_nacimiento);
+
   const rol = req.body.rol;
   const algoritmo = "sha256";
   const hash = generarHash(algoritmo, Contrasena);
-  const fecha_creacion = new Date();
+
 
   try{
     conexion.query(
@@ -209,10 +203,9 @@ exports.updateUserbyUser = async(req,res)=>{
       Telefono: telefono,
       Correo: Correo,
       Contrasenna: hash,
-      Fecha_nacimiento: FechaNacimiento,
-      Rol: rol,
-      Fecha_ingreso : fecha_creacion,
       
+      Rol: rol
+          
       },id,],
       (err, results) => {
       if (err) {
@@ -345,13 +338,26 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
   console.log("busquedaAvanzada :" +busquedaAvanzada )
   conexion.query(busquedaAvanzada, [`%${nombre}%`, `%${autor}%`, `%${editorial}%`, `%${anno}%`, `%${genero}%`] ,(err, results) => {
     if (err) {
-      console.log("Error en Busqueda Avanzada", err);
-      res.redirect("/Categorias/"+idUsuario);
+      console.log("Error en Busqueda Avanzada", err); 
   } else {
-      console.log("Insert en Categoria exitoso");
-      
+      console.log("Busqueda exitosa");      
       res.render("Busqueda.ejs",{results:results, idUsuario});
   }
   })
+}
+
+  exports.formularioBusqueda = async(req,res)=>{
+    const nombre = req.body.txtBusqueda;
+    const idUsuario = req.body.txtIdUsuario1;
+    const busqueda = 'SELECT * FROM productos WHERE (Nombre LIKE ?)';
+    console.log("busqueda :" +idUsuario )
+    conexion.query(busqueda, [`%${nombre}%`] ,(err, results) => {
+      if (err) {
+        console.log("Error en Busqueda", err);
+    } else {
+        console.log("Busqueda exitosa"+ results);        
+        res.render("Busqueda.ejs",{results:results, idUsuario});
+    }
+    })
 
 }

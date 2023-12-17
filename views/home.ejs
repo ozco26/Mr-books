@@ -59,12 +59,20 @@
   </div>
   <br>
   <div style="display: flex; justify-content: center">
-    <div class="Barra">
-      <input type="text" placeholder="Buscar...">
-      <a href="#">
-        <img src="Recursos/Lupa.png" alt="Buscar">
-      </a>
-    </div>
+    <form id="formularioBusqueda" action="/formularioBusqueda" method="POST">
+      <div class="Barra">
+        
+        <input type="text" name="txtBusqueda" placeholder="Buscar...">
+
+          <button style="border: 0ch;"  type="submit" >
+            <img style="background-color: #E1C2A1;" src="/Recursos/Lupa.png" alt="Buscar" width="30px" ; >
+          </button>
+          <input class="Barra" type="text" id="txtIdUsuario1" name="txtIdUsuario" value="<%= idUsuario='' %>"
+          style="display: none;">
+      </div>
+    </form>  
+
+    
     <div style="padding: 10px;">
       <button style="padding: 10px;" id="mostrarFormulario" class="boton-efecto" onclick="mostrarFormulario()"> Búsqueda
         Avanzada</button>
@@ -77,7 +85,7 @@
       <h4 style="text-align: center;">Coloque la información que necesita filtrar</h4>
       <br>
       <form id="formularioBusquedaAvanzada" action="/formularioBusquedaAvanzada" method="POST">
-        <!-- Contenido del formulario de búsqueda avanzada -->
+
         <div class="row" style="justify-content: center;">
           <input class="Barra" type="text" id="txtNombre" name="txtNombre" placeholder="Ingrese el nombre del libro">
           <input class="Barra" type="text" id="txtAutor" name="txtAutor" placeholder="Ingrese el nombre del autor">
@@ -88,8 +96,6 @@
             style="display: none;">
         </div>
         <br>
-
-        <!-- Otros campos de formulario... -->
         <div style="padding: 10px; text-align: center;">
           <button class="boton-efecto" type="submit">Buscar</button>
         </div>

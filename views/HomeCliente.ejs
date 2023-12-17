@@ -52,13 +52,19 @@
     </ul>
 </div>
 <br>
-  <div style="display: flex; justify-content: center">
+<div style="display: flex; justify-content: center">
+  <form id="formularioBusqueda" action="/formularioBusqueda" method="POST">
     <div class="Barra">
-      <input type="text" placeholder="Buscar...">
-      <a href="#">
-        <img src="/Recursos/Lupa.png" alt="Buscar">
-      </a>
+      
+      <input type="text" name="txtBusqueda" placeholder="Buscar...">
+
+        <button style="border: 0ch;"  type="submit" >
+          <img style="background-color: #E1C2A1;" src="/Recursos/Lupa.png" alt="Buscar" width="30px" ; >
+        </button>
+        <input class="Barra" type="text" id="txtIdUsuario1" name="txtIdUsuario1" value="<%= usuario.ID  %>"
+        style="display: none;">
     </div>
+  </form>  
     <div style="padding: 10px;">
       <button style="padding: 10px;" id="mostrarFormulario" class="boton-efecto" onclick="mostrarFormulario()"> Búsqueda
         Avanzada</button>
