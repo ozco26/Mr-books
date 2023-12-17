@@ -1,6 +1,15 @@
 const express =require('express');
 const app = express();
+const multer = require('multer');
 const path = require('path');
+
+const upload = multer({dest: 'uploads/'})
+
+app.post('/images/single', upload.single('imagen'), (req,res)=>{
+saveImage(req.file);
+
+});
+
 
 app.set('view engine','ejs');
 app.use(express.urlencoded({extended:false}));
