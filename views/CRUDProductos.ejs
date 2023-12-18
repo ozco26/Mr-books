@@ -156,39 +156,39 @@ button {
 </style>
 <body>
     <h1 style="text-align: center; text-decoration:underline;">Mis libros</h1>
-    <form id="formProductCreate" action="/saveProduct" method="POST">
+    <form id="formProductCreate" action="/saveProduct" method="POST" enctype="multipart/form-data">
       <div style="display: flex; justify-content: center; border-radius: 0%;">
         <table style="padding-top:1cm;">
           <tr>
             <td rowspan="7">
                 <img id="imagenLibro" src="#" alt="imagen"> <hr>
-                <form action="/ruta/de/controlador" method="post" enctype="multipart/form-data">
+                <!--<form action="/ruta/de/controlador" method="post" enctype="multipart/form-data">-->
                   <label for="imagen">Selecciona una imagen</label>
                   <input type="file" id="imagen" name="imagen" accept="image/*" onchange="cargarImagen()">
-              </form>
+             <!-- </form>-->
             </td>
             <td>
               <h3>Titulo del libro</h3>
               <input type="hidden" name="userId" value="<%= usuario.ID %>">
-              <input id="TxtTitulo" name="TxtTitulo" class="Barra" type="text" placeholder="Ingrese el titulo del libro...">
+              <input id="TxtTitulo" name="TxtTitulo" class="Barra" type="text" placeholder="Ingrese el titulo del libro..." required>
             </td>
           </tr>
           <tr>
             <td>
               <h3>Autor:</h3>
-              <input id="TxtAutor" name="TxtAutor" class="Barra" type="text" placeholder="Ingrese el autor del libro..." >
+              <input id="TxtAutor" name="TxtAutor" class="Barra" type="text" placeholder="Ingrese el autor del libro..." required>
             </td>
           </tr>
           <tr>
             <td>
               <h3>Editorial:</h3>
-              <input id="TxtEditorial" name="TxtEditorial"  class="Barra" type="text" placeholder="Ingrese la editorial del libro..." >
+              <input id="TxtEditorial" name="TxtEditorial"  class="Barra" type="text" placeholder="Ingrese la editorial del libro..." required>
             </td>
           </tr>
           <tr>
             <td>
               <h3>Año de Publicación:</h3>
-              <input id="TxtAño" name="TxtAño" class="Barra" type="text" placeholder="Ingrese el año de publicación...">
+              <input id="TxtAnno" name="TxtAnno" class="Barra" type="text" placeholder="Ingrese el año de publicación..." required>
             </td>
           </tr>
           <tr>
@@ -214,7 +214,7 @@ button {
           <tr>
             <td>
               <h3>Precio:</h3>
-              <input id="TxtPrecio" name="TxtPrecio" class="Barra" type="number" placeholder="Ingrese un monto...">
+              <input id="TxtPrecio" name="TxtPrecio" class="Barra" type="number" placeholder="Ingrese un monto..." required>
             </td>
           </tr>
         </table>
@@ -226,7 +226,7 @@ button {
                 <tr>
                     <td>
                         <H3 style="padding-bottom: 5px; text-align: center;">DETALLES</H3>        
-                        <textarea class="Barra" style="height: 100px; text-align: center; align-content: center;" class="Texto" name="Descripción" id="Descripción" cols="30" rows="10" placeholder="Añada una breve descripción del libro, su estado, etc."></textarea> 
+                        <textarea class="Barra" style="height: 100px; text-align: center; align-content: center;" class="Texto" name="Descripcion" id="Descripcion" cols="30" rows="10" placeholder="Añada una breve descripción del libro, su estado, etc." required></textarea> 
                     </td>
                 </tr>
             </table>
@@ -350,11 +350,11 @@ function validateForm() {
   const titulo = document.getElementById('TxtTitulo').value;
   const autor = document.getElementById('TxtAutor').value;
   const editorial = document.getElementById('TxtEditorial').value;
-  const añoPublicacion = document.getElementById('TxtAño').value;
+  const añoPublicacion = document.getElementById('TxtAnno').value;
   const idioma = document.getElementById('Idiomas').value;
   const categoria = document.getElementById('Generos').value;
   const precio = document.getElementById('TxtPrecio').value;
-  const descripcion = document.getElementById('Descripción').value;
+  const descripcion = document.getElementById('Descripcion').value;
 
   // Verificar que ninguno de los campos esté vacío
   if (

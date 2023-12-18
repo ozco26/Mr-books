@@ -1,6 +1,20 @@
 const { log } = require("console");
 const conexion = require("../database/db");
 const crypto = require("crypto");
+const multer = require('multer'); //gestion de archivos
+const path = require('path');
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/'); // Ruta donde se guardarán las imágenes
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
 
 function contarSimilitudes(query, params) {
   return new Promise((resolve, reject) => {
@@ -224,6 +238,65 @@ exports.updateUserbyUser = async(req,res)=>{
 
 /*PARA CRUD PRODUCTOS */
 exports.saveProduct = async (req, res) => {
+  // Configura multer para el campo 'imagen'
+  upload.single('imagen')(req, res, async function (err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err);
+    } else if (err) {
+      return res.status(500).json(err);
+    }
+    let imagenPath = '/uploads/sinimagen.png';
+
+
+
+    if (req.file != undefined) {
+      imagenPath = req.file ? '/uploads/' + req.file.filename : null;
+    }
+    const id = req.body.userId;
+    const titulo = req.body.TxtTitulo;
+    const autor = req.body.TxtAutor;
+    const editorial = req.body.TxtEditorial;
+    const añoPublicacion = req.body.TxtAnno;
+    const idioma = req.body.Idiomas;
+    const categoria = req.body.Generos;
+    const precio = req.body.TxtPrecio;
+    const descripcion = req.body.Descripcion;
+
+    conexion.query(
+      "INSERT INTO productos SET ?",
+      {
+        Nombre: titulo,
+        Autor: autor,
+        Editorial: editorial,
+        Anno: añoPublicacion,
+        Idioma: idioma,
+        Genero: categoria,
+        Idioma: idioma,
+        Precio: precio,
+        Descripcion: descripcion,
+        Estado: 4,
+        Vendedor: id,
+        direccionImg: imagenPath, // Guardar la ruta de la imagen en la base de datos
+      },
+      (err, results) => {
+        if (err) {
+          console.log("Error en la inserción del producto:", err);
+          res.redirect("/Productos/" + id);
+          console.log(req.body);
+        } else {
+          console.log("Inserción del producto exitosa");
+          res.redirect("/Productos/" + id);
+        }
+      }
+    );
+  });
+};
+
+/*exports.saveProduct = async (req, res) => {
+
+  const imagenPath = req.file ? req.file.path : null;  // Obtener la ruta de la imagen
+
+
   const id = req.body.userId;
   const titulo = req.body.TxtTitulo;
   const autor = req.body.TxtAutor;
@@ -247,8 +320,8 @@ exports.saveProduct = async (req, res) => {
       Precio: precio,
       Descripcion: descripcion,
       Estado: 4,
-      Vendedor: id
-      
+      Vendedor: id,
+      direccionImg: imagenPath  // Guardar la ruta de la imagen en la base de datos
     },
     (err, results) => {
       if (err) {
@@ -261,7 +334,7 @@ exports.saveProduct = async (req, res) => {
       }
     }
   );
-};
+};*/
 
 //Editar libro
 exports.updateLibros = async(req,res)=>{
