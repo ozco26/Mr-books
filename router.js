@@ -221,7 +221,6 @@ router.get('/Productos/:id', (req, res) => {
     });
 });
 
-//PAGINA EDITAR LIBROS
 
 //EDITAR LIBROS
 
@@ -358,6 +357,61 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
     })
 });
 
+//Aprobación de libros
+router.get('/Aprobacion/:id', (req, res)=>{
+    const id = req.params.id;
+    const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
+    conexion.query(usuario, [id], (err, infousuario) => {
+        if (err) {
+            throw err;
+        } else {
+            conexion.query('SELECT * FROM productos WHERE Estado= 4', (err, results)=>{
+                if(err){
+                    throw err;
+                } else{
+                    res.render('AprobacionLibros.ejs', {productos:results, usuario: infousuario[0]});
+                }     
+            })
+        }
+    })    
+})
+
+
+//APROBAR LIBRO PARA VENTA
+router.get('/AprobarLibrosAdmin/:id/:idUsuario', (req, res) => {
+    const idPedido = req.params.id;
+    const nuevoEstado = 5;
+    const idUsuario = req.params.idUsuario;
+    conexion.query(
+      'UPDATE productos SET Estado = ? WHERE ID_Producto = ?',
+      [nuevoEstado, idPedido],
+      (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+          res.redirect('/Aprobacion/' +idUsuario);
+        }
+      }
+    );
+  });
+
+//APROBAR LIBRO
+router.get('/RechazarLibroAdmin/:id/:idUsuario', (req, res) => {
+    const idPedido = req.params.id;
+    const nuevoEstado = 6;
+    const idUsuario = req.params.idUsuario;
+    conexion.query(
+      'UPDATE productos SET Estado = ? WHERE ID_Producto = ?',
+      [nuevoEstado, idPedido],
+      (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+          res.redirect('/Aprobacion/' +idUsuario);
+        }
+      }
+    );
+  });
 
 
 

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Aprobación de libros - Admin</title>
+    <link rel="stylesheet" href="/Estilos/Estilos.Css" />
+    <link rel="stylesheet" href="/Estilos/EstiloPedido.css" />
+    <script src="/FuncionesBotones/BotónBuscarPedido.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<header class="header">
+  <div class="logo">
+    <a href="/homeAdmnin/<%= usuario.ID %>" title="Home">
+      <img src="/Recursos/Logo.png" alt="Logo" />
+    </a>
+  </div>
+  <nav>
+    <a class="MENUA" href="/" title="Cerrar Sesion">
+      <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
+    </a>
+  </nav>
+</header>
+<body>
+  <div class="pedido">
+        <br>
+        <h1>Aprobación de libros - Admin</h1>
+        <br>
+        <div class="filters">
+            <label for="filtroPedido">Buscar por Número de Pedido:</label>
+            <input type="text" id="filtroPedido" name="filtroPedido" placeholder="Número de Pedido">
+            <button id="btnBuscar" onclick="buscarPedido()">Buscar</button>
+            <button id="btnVolver" onclick="Volver()">Volver</button>
+        </div>
+
+        <!--Función para el botón Buscar pedido-->
+        <script>
+          function buscarPedido() {
+              var numeroPedido = document.getElementById('filtroPedido').value;
+              var filas = document.querySelectorAll('.content tbody tr');
+              filas.forEach(function(fila) {
+                  fila.style.display = 'none';
+              });
+      
+              if (!numeroPedido) {
+                  filas.forEach(function(fila) {
+                      fila.style.display = '';
+                  });
+                  return;
+              }
+              filas.forEach(function(fila) {
+                  var numeroPedidoFila = fila.cells[0].textContent;
+                  if (numeroPedidoFila === numeroPedido) {
+                      fila.style.display = '';
+                  }
+              });
+          }
+       </script> 
+<!--Función para el botón Volver en Pedido-->
+    <script>
+      function Volver() {
+        var filas = document.querySelectorAll('.content tbody tr');
+        filas.forEach(function(fila) {
+            fila.style.display = '';
+        });
+        document.getElementById('filtroPedido').value = '';
+    }
+    </script>
+
+  <div class="estados">
+    <h2>Aprobación de libros</h2>
+  </div>
+  <div class="content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Codigo libro</th>
+                    <th>Libro</th>
+                    <th>Autor</th>
+                    <th>Editorial</th>
+                    <th>Año</th>
+                    <th>Idioma</th>
+                    <th>Genero</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th></th>
+                </tr>
+            </thead>
+              <tbody>
+              <% productos.forEach((productos)=>{ %>
+                <tr>
+                    <td><%= productos.ID_Producto %></td>
+                    <td><%= productos.Nombre %></td>
+                    <td><%= productos.Autor %></td>
+                    <td><%= productos.Editorial %></td>
+                    <td><%= productos.Anno %></td>
+                    <td><%= productos.Idioma %></td>
+                    <td><%= productos.Genero %></td>
+                    <td><%= productos.Descripcion %></td>
+                    <td><%= productos.Precio %></td>    
+                    <td>
+                      <a href="#" onclick="Aprobar('<%= productos.ID_Producto %>', '<%=usuario.ID%>')">Aprobar</a>
+                      <a href="#" onclick="Rechazar('<%= productos.ID_Producto %>', '<%=usuario.ID %>')" >Denegar</i></a>
+                    </td>
+              </tr>
+                <% }) %>
+            </tbody>     
+        </table>  
+    </div>
+
+    <footer class="Pie">
+      <div class="contenedor">
+        <div class="pie-row">
+          <div class="pie-links">
+            <h4>Quienes somos</h4>
+            <ul>
+              <li><a href="#">Nosotros</a></li>
+              <li><a href="#">Nuestros servicios</a></li>
+              <li><a href="#">Politica de privacidad</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Cuenta</h4>
+            <ul>
+              <li><a href="#">Cuenta</a></li>
+              <li><a href="#">Carrito</a></li>
+              <li><a href="#">Compras</a></li>
+            </ul>
+          </div>
+          <div class="pie-links">
+            <h4>Tienda</h4>
+            <ul>
+              <li><a href="#">Inicio</a></li>
+              <li><a href="#">Novedades</a></li>
+              <li><a href="#">Categorias</a></li>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+</body>
+
+<script>
+  function goBack() {
+      window.history.back();
+  }
+
+  function Rechazar (id,usuario){
+        console.log("ID:", id);
+        console.log("ID Usuario:", usuario);
+        window.location.href = '/RechazarLibroAdmin/' + id + '/' + usuario;
+                }
+
+
+  function Aprobar (id,usuario){
+        console.log("ID:", id);
+        console.log("ID Usuario:", usuario);
+        window.location.href = '/AprobarLibrosAdmin/' + id + '/' + usuario;
+                }
+
+
+function obtenerNuevoEstado() {
+    var nuevoEstado = document.getElementById('nuevoEstado').innerText;
+    return nuevoEstado;
+  }
+
+
+</script>
+
+</html>
