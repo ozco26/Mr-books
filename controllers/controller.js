@@ -407,7 +407,7 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
   const anno = req.body.txtAnno;
   const genero = req.body.txtGenero;
   const idUsuario = req.body.txtIdUsuario;
-  const busquedaAvanzada = 'SELECT * FROM productos WHERE (Nombre LIKE ? and Autor LIKE ? and Editorial LIKE ? and Anno LIKE ? and Genero LIKE ?)';
+  const busquedaAvanzada = 'SELECT * FROM productos WHERE (Nombre LIKE ? and Autor LIKE ? and Editorial LIKE ? and Anno LIKE ? and Genero LIKE ?) and  Estado = 5';
   console.log("busquedaAvanzada :" +busquedaAvanzada )
   conexion.query(busquedaAvanzada, [`%${nombre}%`, `%${autor}%`, `%${editorial}%`, `%${anno}%`, `%${genero}%`] ,(err, results) => {
     if (err) {
@@ -422,7 +422,7 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
   exports.formularioBusqueda = async(req,res)=>{
     const nombre = req.body.txtBusqueda;
     const idUsuario = req.body.txtIdUsuario1;
-    const busqueda = 'SELECT * FROM productos WHERE (Nombre LIKE ?)';
+    const busqueda = 'SELECT * FROM productos WHERE (Nombre LIKE ?) and Estado = 5';
     console.log("busqueda :" +idUsuario )
     conexion.query(busqueda, [`%${nombre}%`] ,(err, results) => {
       if (err) {
