@@ -7,7 +7,7 @@ const { render } = require('ejs');
 
 //carga el home
 router.get('/',(req,res)=>{
-    const productosRecientes = "SELECT * FROM productos ORDER BY ID_Producto DESC LIMIT 5;" ;
+    const productosRecientes = "SELECT * FROM productos where Estado = 5 ORDER BY ID_Producto DESC LIMIT 5;" ;
     conexion.query(productosRecientes, (err, infoProducto) => {
         if (err) {
             throw err;
@@ -42,7 +42,7 @@ router.get('/homecliente/:id',(req,res)=>{
             res.redirect('/bloqueado');
         } else {
 
-            const productosRecientes = "SELECT * FROM productos ORDER BY ID_Producto DESC LIMIT 5;" ;
+            const productosRecientes = "SELECT * FROM productos where Estado = 5 ORDER BY ID_Producto DESC LIMIT 5;" ;
             conexion.query(productosRecientes, (err, infoProducto) => {
                 if (err) {
                     throw err;
@@ -87,7 +87,7 @@ router.get('/homeVendedor/:id',(req,res)=>{
             res.redirect('/bloqueado');
         } else {
 
-            const productosRecientes = "SELECT * FROM productos ORDER BY ID_Producto DESC LIMIT 5;" ;
+            const productosRecientes = "SELECT * FROM productos where Estado = 5 ORDER BY ID_Producto DESC LIMIT 5;" ;
             conexion.query(productosRecientes, (err, infoProducto) => {
                 if (err) {
                     throw err;
