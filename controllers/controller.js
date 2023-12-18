@@ -1,4 +1,4 @@
-const { log } = require("console");
+const { log, error } = require("console");
 const conexion = require("../database/db");
 const crypto = require("crypto");
 const multer = require('multer'); //gestion de archivos
@@ -433,4 +433,21 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
     }
     })
 
+}
+
+const conexion = require ('../database/mr_books');
+const res = require("express/lib/response");
+
+exports.save = (req, res)=>{
+
+  const nombre = req.body.nombre; 
+  const reseña = req.body.reseña;
+  console.log(nombre +" - "+rol);
+  conexion.query('INSERT INTO nombre SET ?',{nombre:nombre, reseña:reseña}, (error,reseña)=>{
+    if(error){
+      console.log(error);
+    }else{
+      res.redirect('/');
+    }
+  })
 }

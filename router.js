@@ -4,6 +4,7 @@ const router = express.Router();
 const controller = require('./controllers/controller');
 const conexion = require('./database/db');
 const { render } = require('ejs');
+const res = require('express/lib/response');
 
 //carga el home
 router.get('/',(req,res)=>{
@@ -358,9 +359,17 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
     })
 });
 
+//Guardar Reseña 
+router.get('/create',(req,res)=>{
+    res.render('create');
+})
+
+const crud = require('./controller/crud');
 
 
 
+
+router.post('save', crud.save);
 router.post("/updateLibros", controller.updateLibros);
 router.post("/saveProduct", controller.saveProduct);
 router.post("/saveReg", controller.saveReg);
