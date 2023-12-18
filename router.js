@@ -400,7 +400,7 @@ router.get("/carrito/:idUsuario", (req, res) => {
 router.get("/deleteItemCarrito/:idProducto/:idUsuario", (req, res) => {
     const idProducto = req.params.idProducto;
     const idUsuario = req.params.idUsuario;
-    const actualizarEstado = "UPDATE productos SET Estado = 4 WHERE ID_Producto = ?";
+    const actualizarEstado = "UPDATE productos SET Estado = 5 WHERE ID_Producto = ?";
     conexion.query(actualizarEstado, [idProducto], (err, result) => {
         if (err) {
           console.error("Error al actualizar el estado del producto:", err);
@@ -420,7 +420,54 @@ router.get("/deleteItemCarrito/:idProducto/:idUsuario", (req, res) => {
     });   
 });
 
-
+//metodo añadir al carrito
+router.get("/addCarrito/:idUsuario/:ID_Producto", (req, res) => {
+  const idUsuario = req.params.idUsuario;
+  const ID_Producto = parseInt(req.params.ID_Producto);
+  conexion.query(
+    'select * from carrito where Usuario = ? and Activo = "Si"',
+    [idUsuario],
+    (error, carrito) => {
+      if (error) {
+        console.log(error);
+      } else {
+        const setItem = `insert into items_carrito set ?`;
+        conexion.query(
+          setItem,
+          [
+            {
+              ID_Producto: ID_Producto,
+              ID_Carrito: carrito[0].ID_Carrito,
+              Descuento: 0,
+            },
+          ],
+          (error, result) => {
+            if (error) {
+              console.log(error);
+            } else {
+                console.log("inser  items_carrito exitosa");
+              const updItem = `UPDATE productos SET Estado = '7' WHERE ID_Producto = ?`;
+              conexion.query(
+                updItem,
+                [
+                 ID_Producto
+                ],
+                (error, result) => {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log("Update producto exitosa");
+                    res.redirect("/carrito/" + idUsuario);
+                  }
+                }
+              );
+            }
+          }
+        );
+      }
+    }
+  );
+});
 
 
 
