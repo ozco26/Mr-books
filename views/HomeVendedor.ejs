@@ -18,6 +18,9 @@
       <a class="MENUA" href='/Productos/<%=usuario.ID%>' title="Publicar">
         <img src="/Recursos/Mas.png" alt="Publicar">
       </a>
+      <a class="MENUA" href="/carrito/<%=usuario.ID%>" title="Carrito de Compras">
+        <img src="/Recursos/Carrito.png" alt="Carrito de Compras">
+      </a>
     </nav>
   </header>
   <body>
@@ -51,13 +54,19 @@
       </ul>
   </div>
   <br>
-    <div style="display: flex; justify-content: center">
+  <div style="display: flex; justify-content: center">
+    <form id="formularioBusqueda" action="/formularioBusqueda" method="POST">
       <div class="Barra">
-        <input type="text" placeholder="Buscar...">
-        <a href="#">
-          <img src="/Recursos/Lupa.png" alt="Buscar">
-        </a>
+        
+        <input type="text" name="txtBusqueda" placeholder="Buscar...">
+  
+          <button style="border: 0ch;"  type="submit" >
+            <img style="background-color: #E1C2A1;" src="/Recursos/Lupa.png" alt="Buscar" width="30px" ; >
+          </button>
+          <input class="Barra" type="text" id="txtIdUsuario1" name="txtIdUsuario1" value="<%= usuario.ID  %>"
+          style="display: none;">
       </div>
+    </form>  
       <div style="padding: 10px;">
         <button style="padding: 10px;" id="mostrarFormulario" class="boton-efecto" onclick="mostrarFormulario()"> Búsqueda
           Avanzada</button>
@@ -99,29 +108,29 @@
       </tr>
     </table>
     <div class="Catalogo">
-      <a class="CatalogoA" href="/libro/<%= productos[0]?.ID_Producto %>">
-        <img src="" alt="<%= productos[0]?.Nombre %>" title="<%= productos[0]?.Nombre %>" height="300"
-            width="auto">
+      <a class="CatalogoA" href="/libro/<%= productos[0]?.ID_Producto %>/<%= usuario.ID%>">
+        <img src="<%= productos[0]?.direccionImg %>" alt="<%= productos[0]?.Nombre %>" title="<%= productos[0]?.Nombre %>" height="300"
+            width="300">
         <p><%= productos[0]?.Nombre %></p>
       </a>
-      <a class="CatalogoA" href="/libro/<%= productos[1]?.ID_Producto %>">
-        <img src="" alt="<%= productos[1]?.Nombre %>" title="<%= productos[1]?.Nombre %>" height="300"
-            width="auto">
+      <a class="CatalogoA" href="/libro/<%= productos[1]?.ID_Producto %>/<%=  usuario.ID%>">
+        <img src="<%= productos[1]?.direccionImg %>" alt="<%= productos[1]?.Nombre %>" title="<%= productos[1]?.Nombre %>" height="300"
+            width="300">
         <p><%= productos[1]?.Nombre %></p>
       </a>
-      <a class="CatalogoA" href="/libro/<%= productos[2]?.ID_Producto %>">
-        <img src="" alt="<%= productos[2]?.Nombre %>" title="<%= productos[2]?.Nombre %>" height="300"
-            width="auto">
+      <a class="CatalogoA" href="/libro/<%= productos[2]?.ID_Producto %>/<%=  usuario.ID%>">
+        <img src="<%= productos[2]?.direccionImg %>" alt="<%= productos[2]?.Nombre %>" title="<%= productos[2]?.Nombre %>" height="300"
+            width="300">
         <p><%= productos[2]?.Nombre %></p>
       </a>
-      <a class="CatalogoA" href="/libro/<%= productos[3]?.ID_Producto %>">
-        <img src="" alt="<%= productos[3]?.Nombre %>" title="<%= productos[3]?.Nombre %>" height="300"
-            width="auto">
+      <a class="CatalogoA" href="/libro/<%= productos[3]?.ID_Producto %>/<%=  usuario.ID%>">
+        <img src="<%= productos[3]?.direccionImg %>" alt="<%= productos[3]?.Nombre %>" title="<%= productos[3]?.Nombre %>" height="300"
+            width="300">
         <p><%= productos[3]?.Nombre %></p>
       </a>
-      <a class="CatalogoA" href="/libro/<%= productos[4]?.ID_Producto %>">
-        <img src="" alt="<%= productos[4]?.Nombre %>" title="<%= productos[4]?.Nombre %>" height="300"
-            width="auto">
+      <a class="CatalogoA" href="/libro/<%= productos[4]?.ID_Producto %>/<%=  usuario.ID%>">
+        <img src="<%= productos[4]?.direccionImg %>" alt="<%= productos[4]?.Nombre %>" title="<%= productos[4]?.Nombre %>" height="300"
+            width="300">
         <p><%= productos[4]?.Nombre %></p>
       </a>
   </div>

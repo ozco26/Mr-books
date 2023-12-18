@@ -1,13 +1,24 @@
 table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-th, td {
+th{
+    background-color: gray;
     border: 1px solid #dddddd;
-    text-align: left;
+    text-align: center;
     padding: 8px;
+}
+
+td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+    max-width: 60px; /* Establece el ancho máximo que deseas */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que hay más contenido */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
 }
 
 th {
@@ -36,7 +47,7 @@ th {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: white;
+    
 }
 body {
     font-family: 'Space Grotesk', sans-serif;
@@ -164,3 +175,4 @@ header{
 .resumen span{
     color: black;
 }
+

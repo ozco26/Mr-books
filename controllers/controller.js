@@ -1,6 +1,20 @@
 const { log } = require("console");
 const conexion = require("../database/db");
 const crypto = require("crypto");
+const multer = require('multer'); //gestion de archivos
+const path = require('path');
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/'); // Ruta donde se guardarán las imágenes
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
 
 function contarSimilitudes(query, params) {
   return new Promise((resolve, reject) => {
@@ -21,60 +35,83 @@ function generarHash(algoritmo, datos) {
 }
 
 exports.saveReg = async (req, res) => {
-    const Cedula = req.body.cedula;
-    const Nombre = req.body.nombre;
-    const Apellidos = req.body.apellidos;
-    const telefono = req.body.telefono;
-    const Correo = req.body.email;
-    const Contrasena = req.body.password;
-    const FechaNacimiento = req.body.nacimiento;
-    const rol = req.body.rol;
-    const algoritmo = "sha256";
-    const hash = generarHash(algoritmo, Contrasena);
-    const fecha_creacion = new Date();
+  const Cedula = req.body.cedula;
+  const Nombre = req.body.nombre;
+  const Apellidos = req.body.apellidos;
+  const telefono = req.body.telefono;
+  const Correo = req.body.email;
+  const Contrasena = req.body.password;
+  const FechaNacimiento = req.body.nacimiento;
+  const rol = req.body.rol;
+  const algoritmo = "sha256";
+  const hash = generarHash(algoritmo, Contrasena);
+  const fecha_creacion = new Date();
 
-    const check1 = "SELECT COUNT(*) as count FROM usuarios WHERE Cedula = ?";
-    const check2 = "SELECT COUNT(*) as count FROM usuarios WHERE Correo = ?";
+  const check1 = "SELECT COUNT(*) as count FROM usuarios WHERE Cedula = ?";
+  const check2 = "SELECT COUNT(*) as count FROM usuarios WHERE Correo = ?";
 
-    try {
-        const cedulacheck = await contarSimilitudes(check1, [Cedula]);
-        const checkcorreo = await contarSimilitudes(check2, [Correo]);
+  try {
+    const cedulacheck = await contarSimilitudes(check1, [Cedula]);
+    const checkcorreo = await contarSimilitudes(check2, [Correo]);
 
-        if (cedulacheck > 0) {
-        console.log("Las cedulas similares fueron: " + cedulacheck);
-        } else if (checkcorreo > 0) {
-        console.log("Los correos similares fueron: " + checkcorreo);
-        } else {
-        conexion.query(
-            "INSERT INTO usuarios SET ?",
-            {
-            Cedula: Cedula,
-            Nombre: Nombre,
-            Apellidos: Apellidos,
-            Telefono: telefono,
-            Correo: Correo,
-            Contrasenna: hash,
-            Fecha_nacimiento: FechaNacimiento,
-            Rol: rol,
-            Fecha_ingreso : fecha_creacion,
-            
-            },
-            (err, results) => {
-            if (err) {
-                console.log("Error en insert de usuario:", err);
-                res.redirect("/AdministradorViewCreateUS");
-            } else {
-                console.log("Insert en usuario exitoso");
-                
-                res.redirect("/");
-            }
-            }
-        );
+    if (cedulacheck > 0) {
+      console.log("Las cedulas similares fueron: " + cedulacheck);
+    } else if (checkcorreo > 0) {
+      console.log("Los correos similares fueron: " + checkcorreo);
+    } else {
+      conexion.query(
+        "INSERT INTO usuarios SET ?",
+        {
+          Cedula: Cedula,
+          Nombre: Nombre,
+          Apellidos: Apellidos,
+          Telefono: telefono,
+          Correo: Correo,
+          Contrasenna: hash,
+          Fecha_nacimiento: FechaNacimiento,
+          Rol: rol,
+          Fecha_ingreso: fecha_creacion,
+        },
+        (err, results) => {
+          if (err) {
+            console.log("Error en insert de usuario:", err);
+            res.redirect("/");
+          } else {
+            conexion.query(
+              "SELECT * FROM usuarios WHERE Correo  = ?",
+              [Correo],
+              (err, usuario) => {
+                if (err) {
+                  throw err;
+                } else {
+                  const UsuarioTO = usuario[0].ID;
+                  console.log( "id de usaurio:"+ UsuarioTO)
+                  conexion.query(
+                    "INSERT INTO carrito SET ?",
+                    {
+                      Usuario: UsuarioTO,
+                    },
+                    (err, results) => {
+                      if (err) {
+                        console.log("Error en insert de carrito:", err);
+                        res.redirect("/");
+                      } else {
+                        console.log("Insert en usuario exitoso");
+                        res.redirect("/");
+                      }
+                    }
+                  );
+                }
+              }
+            );
+          }
         }
-    } catch (err) {
-        console.log(err);
-        res.redirect("/AdministradorViewCreateUS");
+      );
     }
+  } catch (err) {
+    console.log(err);
+    res.redirect("/AdministradorViewCreateUS");
+  }
 };
 
 exports.loginUser = async(req, res) =>{
@@ -224,6 +261,65 @@ exports.updateUserbyUser = async(req,res)=>{
 
 /*PARA CRUD PRODUCTOS */
 exports.saveProduct = async (req, res) => {
+  // Configura multer para el campo 'imagen'
+  upload.single('imagen')(req, res, async function (err) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err);
+    } else if (err) {
+      return res.status(500).json(err);
+    }
+    let imagenPath = '/uploads/sinimagen.png';
+
+
+
+    if (req.file != undefined) {
+      imagenPath = req.file ? '/uploads/' + req.file.filename : null;
+    }
+    const id = req.body.userId;
+    const titulo = req.body.TxtTitulo;
+    const autor = req.body.TxtAutor;
+    const editorial = req.body.TxtEditorial;
+    const añoPublicacion = req.body.TxtAnno;
+    const idioma = req.body.Idiomas;
+    const categoria = req.body.Generos;
+    const precio = req.body.TxtPrecio;
+    const descripcion = req.body.Descripcion;
+
+    conexion.query(
+      "INSERT INTO productos SET ?",
+      {
+        Nombre: titulo,
+        Autor: autor,
+        Editorial: editorial,
+        Anno: añoPublicacion,
+        Idioma: idioma,
+        Genero: categoria,
+        Idioma: idioma,
+        Precio: precio,
+        Descripcion: descripcion,
+        Estado: 4,
+        Vendedor: id,
+        direccionImg: imagenPath, // Guardar la ruta de la imagen en la base de datos
+      },
+      (err, results) => {
+        if (err) {
+          console.log("Error en la inserción del producto:", err);
+          res.redirect("/Productos/" + id);
+          console.log(req.body);
+        } else {
+          console.log("Inserción del producto exitosa");
+          res.redirect("/Productos/" + id);
+        }
+      }
+    );
+  });
+};
+
+/*exports.saveProduct = async (req, res) => {
+
+  const imagenPath = req.file ? req.file.path : null;  // Obtener la ruta de la imagen
+
+
   const id = req.body.userId;
   const titulo = req.body.TxtTitulo;
   const autor = req.body.TxtAutor;
@@ -247,8 +343,8 @@ exports.saveProduct = async (req, res) => {
       Precio: precio,
       Descripcion: descripcion,
       Estado: 4,
-      Vendedor: id
-      
+      Vendedor: id,
+      direccionImg: imagenPath  // Guardar la ruta de la imagen en la base de datos
     },
     (err, results) => {
       if (err) {
@@ -261,7 +357,7 @@ exports.saveProduct = async (req, res) => {
       }
     }
   );
-};
+};*/
 
 //Editar libro
 exports.updateLibros = async(req,res)=>{
@@ -334,7 +430,7 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
   const anno = req.body.txtAnno;
   const genero = req.body.txtGenero;
   const idUsuario = req.body.txtIdUsuario;
-  const busquedaAvanzada = 'SELECT * FROM productos WHERE (Nombre LIKE ? and Autor LIKE ? and Editorial LIKE ? and Anno LIKE ? and Genero LIKE ?)';
+  const busquedaAvanzada = 'SELECT * FROM productos WHERE (Nombre LIKE ? and Autor LIKE ? and Editorial LIKE ? and Anno LIKE ? and Genero LIKE ?) and  Estado = 5';
   console.log("busquedaAvanzada :" +busquedaAvanzada )
   conexion.query(busquedaAvanzada, [`%${nombre}%`, `%${autor}%`, `%${editorial}%`, `%${anno}%`, `%${genero}%`] ,(err, results) => {
     if (err) {
@@ -349,7 +445,7 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
   exports.formularioBusqueda = async(req,res)=>{
     const nombre = req.body.txtBusqueda;
     const idUsuario = req.body.txtIdUsuario1;
-    const busqueda = 'SELECT * FROM productos WHERE (Nombre LIKE ?)';
+    const busqueda = 'SELECT * FROM productos WHERE (Nombre LIKE ?) and Estado = 5';
     console.log("busqueda :" +idUsuario )
     conexion.query(busqueda, [`%${nombre}%`] ,(err, results) => {
       if (err) {

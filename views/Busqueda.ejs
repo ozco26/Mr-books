@@ -32,7 +32,7 @@
   <div class="Catalogo">
     <% results.forEach((productos)=>{ %>
     <a class="CatalogoA" href="/libro/<%= productos.ID_Producto %>/<%= idUsuario %>">
-      <img src="" alt="<%= productos.Nombre %>" title="<%= productos.Nombre %>" height="300" width="auto">
+      <img src="<%= productos.direccionImg %>" alt="<%= productos.Nombre %>" title="<%= productos.Nombre %>" height="300" width="300">
       <p>
         <%= productos.Nombre %>
       </p>
