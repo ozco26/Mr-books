@@ -5,8 +5,8 @@
     <title>Página principal</title>
     <link rel="stylesheet" href="/Estilos/Estilos.Css" />
     <link rel="stylesheet" href="/Estilos/EstilosCarrito.css" />
-    
-    <link rel="stylesheet" href="/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </head>
 <header class="header">
@@ -57,7 +57,7 @@
 
                 <td>
               
-                  <a href="#" onclick="borrar()">
+                  <a href="" onclick="borrar('<%= items.ID_Producto %>', '<%=idUsuario %>') ; return false;">
                     <button type="button" >
                       B
                     </button>
@@ -124,7 +124,24 @@
         </div>
       </footer>
       
-      <script src="Javascript/Carrito.js"></script>
+      <script>
+        function borrar(idProducto,idUsuario) {
+
+            Swal.fire({
+                title: 'Esta seguro?',
+                text: "Eliminaras el libro de tu carrito dejando libre el mismo!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = '/deleteItemCarrito/' + idProducto+'/'+idUsuario;
+                }
+            })
+        }
+      </script>
     
 </body>
 

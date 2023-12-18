@@ -345,7 +345,7 @@ router.get('/actualizarPedido/:id/:idUsuario/:nuevoEstado', (req, res) => {
     );
   });
 
-//borra usuarios
+//borra productos por admin
 router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
     const id = req.params.id;
     const idUsusario = req.params.idUsusario;
@@ -358,6 +358,7 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
     })
 });
 
+// carga pagina de carrito
 router.get("/carrito/:idUsuario", (req, res) => {
   const idUsuario = req.params.idUsuario;
   conexion.query(
@@ -386,7 +387,7 @@ router.get("/carrito/:idUsuario", (req, res) => {
                 let IVA = subtotal*.13;
                 let total =IVA + subtotal;
 
-              res.render("Carrito.ejs", { idUsuario, items:items, subtotal, IVA, total });
+              res.render("Carrito.ejs", { idUsuario, items:items, subtotal, IVA, total, carrito:carrito[0] });
             }
           }
         );
@@ -394,6 +395,32 @@ router.get("/carrito/:idUsuario", (req, res) => {
     }
   );
 });
+
+// eliminar producto del carrito y devolver estado de disponible
+router.get("/deleteItemCarrito/:idProducto/:idUsuario", (req, res) => {
+    const idProducto = req.params.idProducto;
+    const idUsuario = req.params.idUsuario;
+    const actualizarEstado = "UPDATE productos SET Estado = 4 WHERE ID_Producto = ?";
+    conexion.query(actualizarEstado, [idProducto], (err, result) => {
+        if (err) {
+          console.error("Error al actualizar el estado del producto:", err);
+        }else{
+            console.log("Exito en actualizar el estado del producto");
+            
+            const eliminarItemCarrito = "DELETE FROM items_carrito WHERE ID_Producto = ?";
+            conexion.query(eliminarItemCarrito, [idProducto], (err, result) => {
+                if (err) {
+                  console.error("Error al eliminar el registro de item_carrito:", err);
+                } else{
+                    console.log("Exito en eliminar el regitro de Item_carrito");
+                    res.redirect("/carrito/"+idUsuario)
+                }
+            });
+        }
+    });   
+});
+
+
 
 
 
