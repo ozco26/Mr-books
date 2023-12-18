@@ -73,12 +73,12 @@
       <tr>
         <td>
           <h5>Precio:</h5>
-          <h3>₡ <%=productos.Precio%></h3>
+          <h3>₡ <%=productos.Precio%> + IVA </h3>
         </td>
       </tr>
       <tr>
         <td colspan="2">
-          <a style="width: 100%; text-align: center;" href="#" class="boton-efecto">AÑADIR AL CARRITO</a></th>
+          <a style="width: 100%; text-align: center;" href="/addCarrito/<%=idUsuario%>/<%=productos.ID_Producto%>" class="boton-efecto">AÑADIR AL CARRITO</a></th>
         </td>
       </tr>
     </table>

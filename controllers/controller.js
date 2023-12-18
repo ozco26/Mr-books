@@ -35,60 +35,83 @@ function generarHash(algoritmo, datos) {
 }
 
 exports.saveReg = async (req, res) => {
-    const Cedula = req.body.cedula;
-    const Nombre = req.body.nombre;
-    const Apellidos = req.body.apellidos;
-    const telefono = req.body.telefono;
-    const Correo = req.body.email;
-    const Contrasena = req.body.password;
-    const FechaNacimiento = req.body.nacimiento;
-    const rol = req.body.rol;
-    const algoritmo = "sha256";
-    const hash = generarHash(algoritmo, Contrasena);
-    const fecha_creacion = new Date();
+  const Cedula = req.body.cedula;
+  const Nombre = req.body.nombre;
+  const Apellidos = req.body.apellidos;
+  const telefono = req.body.telefono;
+  const Correo = req.body.email;
+  const Contrasena = req.body.password;
+  const FechaNacimiento = req.body.nacimiento;
+  const rol = req.body.rol;
+  const algoritmo = "sha256";
+  const hash = generarHash(algoritmo, Contrasena);
+  const fecha_creacion = new Date();
 
-    const check1 = "SELECT COUNT(*) as count FROM usuarios WHERE Cedula = ?";
-    const check2 = "SELECT COUNT(*) as count FROM usuarios WHERE Correo = ?";
+  const check1 = "SELECT COUNT(*) as count FROM usuarios WHERE Cedula = ?";
+  const check2 = "SELECT COUNT(*) as count FROM usuarios WHERE Correo = ?";
 
-    try {
-        const cedulacheck = await contarSimilitudes(check1, [Cedula]);
-        const checkcorreo = await contarSimilitudes(check2, [Correo]);
+  try {
+    const cedulacheck = await contarSimilitudes(check1, [Cedula]);
+    const checkcorreo = await contarSimilitudes(check2, [Correo]);
 
-        if (cedulacheck > 0) {
-        console.log("Las cedulas similares fueron: " + cedulacheck);
-        } else if (checkcorreo > 0) {
-        console.log("Los correos similares fueron: " + checkcorreo);
-        } else {
-        conexion.query(
-            "INSERT INTO usuarios SET ?",
-            {
-            Cedula: Cedula,
-            Nombre: Nombre,
-            Apellidos: Apellidos,
-            Telefono: telefono,
-            Correo: Correo,
-            Contrasenna: hash,
-            Fecha_nacimiento: FechaNacimiento,
-            Rol: rol,
-            Fecha_ingreso : fecha_creacion,
-            
-            },
-            (err, results) => {
-            if (err) {
-                console.log("Error en insert de usuario:", err);
-                res.redirect("/AdministradorViewCreateUS");
-            } else {
-                console.log("Insert en usuario exitoso");
-                
-                res.redirect("/");
-            }
-            }
-        );
+    if (cedulacheck > 0) {
+      console.log("Las cedulas similares fueron: " + cedulacheck);
+    } else if (checkcorreo > 0) {
+      console.log("Los correos similares fueron: " + checkcorreo);
+    } else {
+      conexion.query(
+        "INSERT INTO usuarios SET ?",
+        {
+          Cedula: Cedula,
+          Nombre: Nombre,
+          Apellidos: Apellidos,
+          Telefono: telefono,
+          Correo: Correo,
+          Contrasenna: hash,
+          Fecha_nacimiento: FechaNacimiento,
+          Rol: rol,
+          Fecha_ingreso: fecha_creacion,
+        },
+        (err, results) => {
+          if (err) {
+            console.log("Error en insert de usuario:", err);
+            res.redirect("/");
+          } else {
+            conexion.query(
+              "SELECT * FROM usuarios WHERE Correo  = ?",
+              [Correo],
+              (err, usuario) => {
+                if (err) {
+                  throw err;
+                } else {
+                  const UsuarioTO = usuario[0].ID;
+                  console.log( "id de usaurio:"+ UsuarioTO)
+                  conexion.query(
+                    "INSERT INTO carrito SET ?",
+                    {
+                      Usuario: UsuarioTO,
+                    },
+                    (err, results) => {
+                      if (err) {
+                        console.log("Error en insert de carrito:", err);
+                        res.redirect("/");
+                      } else {
+                        console.log("Insert en usuario exitoso");
+                        res.redirect("/");
+                      }
+                    }
+                  );
+                }
+              }
+            );
+          }
         }
-    } catch (err) {
-        console.log(err);
-        res.redirect("/AdministradorViewCreateUS");
+      );
     }
+  } catch (err) {
+    console.log(err);
+    res.redirect("/AdministradorViewCreateUS");
+  }
 };
 
 exports.loginUser = async(req, res) =>{

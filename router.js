@@ -345,7 +345,7 @@ router.get('/actualizarPedido/:id/:idUsuario/:nuevoEstado', (req, res) => {
     );
   });
 
-//borra usuarios
+//borra productos por admin
 router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
     const id = req.params.id;
     const idUsusario = req.params.idUsusario;
@@ -356,6 +356,117 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
             res.redirect("/GestionLibros/"+idUsusario);
         }
     })
+});
+
+// carga pagina de carrito
+router.get("/carrito/:idUsuario", (req, res) => {
+  const idUsuario = req.params.idUsuario;
+  conexion.query(
+    'select * from carrito where Usuario = ? and Activo = "Si"',
+    [idUsuario],
+    (error, carrito) => {
+      if (error) {
+        console.log(error);
+      } else {
+        const consulta = `SELECT ic.ID_Producto, p.Nombre, p.Autor, p.Editorial, p.Anno, p.Idioma, p.Genero, p.Precio
+            FROM items_carrito ic
+            JOIN productos p ON ic.ID_Producto = p.ID_Producto
+            WHERE ic.ID_Carrito = ?`;
+
+        conexion.query(consulta,
+          [carrito[0].ID_Carrito],
+          (error, items) => {
+            if (error) {
+              console.log(error);
+            } else {
+
+                let subtotal = 0;
+                items.forEach((item) => {
+                    subtotal += item.Precio;
+                });
+                let IVA = subtotal*.13;
+                let total =IVA + subtotal;
+
+              res.render("Carrito.ejs", { idUsuario, items:items, subtotal, IVA, total, carrito:carrito[0] });
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+// eliminar producto del carrito y devolver estado de disponible
+router.get("/deleteItemCarrito/:idProducto/:idUsuario", (req, res) => {
+    const idProducto = req.params.idProducto;
+    const idUsuario = req.params.idUsuario;
+    const actualizarEstado = "UPDATE productos SET Estado = 5 WHERE ID_Producto = ?";
+    conexion.query(actualizarEstado, [idProducto], (err, result) => {
+        if (err) {
+          console.error("Error al actualizar el estado del producto:", err);
+        }else{
+            console.log("Exito en actualizar el estado del producto");
+            
+            const eliminarItemCarrito = "DELETE FROM items_carrito WHERE ID_Producto = ?";
+            conexion.query(eliminarItemCarrito, [idProducto], (err, result) => {
+                if (err) {
+                  console.error("Error al eliminar el registro de item_carrito:", err);
+                } else{
+                    console.log("Exito en eliminar el regitro de Item_carrito");
+                    res.redirect("/carrito/"+idUsuario)
+                }
+            });
+        }
+    });   
+});
+
+//metodo añadir al carrito
+router.get("/addCarrito/:idUsuario/:ID_Producto", (req, res) => {
+  const idUsuario = req.params.idUsuario;
+  const ID_Producto = parseInt(req.params.ID_Producto);
+  conexion.query(
+    'select * from carrito where Usuario = ? and Activo = "Si"',
+    [idUsuario],
+    (error, carrito) => {
+      if (error) {
+        console.log(error);
+      } else {
+        const setItem = `insert into items_carrito set ?`;
+        conexion.query(
+          setItem,
+          [
+            {
+              ID_Producto: ID_Producto,
+              ID_Carrito: carrito[0].ID_Carrito,
+              Descuento: 0,
+            },
+          ],
+          (error, result) => {
+            if (error) {
+              console.log(error);
+            } else {
+                console.log("inser  items_carrito exitosa");
+              const updItem = `UPDATE productos SET Estado = '7' WHERE ID_Producto = ?`;
+              conexion.query(
+                updItem,
+                [
+                 ID_Producto
+                ],
+                (error, result) => {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log("Update producto exitosa");
+                    res.redirect("/carrito/" + idUsuario);
+                  }
+                }
+              );
+            }
+          }
+        );
+      }
+    }
+  );
 });
 
 
