@@ -358,6 +358,43 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
     })
 });
 
+router.get("/carrito/:idUsuario", (req, res) => {
+  const idUsuario = req.params.idUsuario;
+  conexion.query(
+    'select * from carrito where Usuario = ? and Activo = "Si"',
+    [idUsuario],
+    (error, carrito) => {
+      if (error) {
+        console.log(error);
+      } else {
+        const consulta = `SELECT ic.ID_Producto, p.Nombre, p.Autor, p.Editorial, p.Anno, p.Idioma, p.Genero, p.Precio
+            FROM items_carrito ic
+            JOIN productos p ON ic.ID_Producto = p.ID_Producto
+            WHERE ic.ID_Carrito = ?`;
+
+        conexion.query(consulta,
+          [carrito[0].ID_Carrito],
+          (error, items) => {
+            if (error) {
+              console.log(error);
+            } else {
+
+                let subtotal = 0;
+                items.forEach((item) => {
+                    subtotal += item.Precio;
+                });
+                let IVA = subtotal*.13;
+                let total =IVA + subtotal;
+
+              res.render("Carrito.ejs", { idUsuario, items:items, subtotal, IVA, total });
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
 
 
 

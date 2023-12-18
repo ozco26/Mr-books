@@ -3,91 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Página principal</title>
-    <link rel="stylesheet" href="Estilos/Estilos.Css" />
-    <link rel="stylesheet" href="Estilos/EstilosCarrito.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="/Estilos/Estilos.Css" />
+    <link rel="stylesheet" href="/Estilos/EstilosCarrito.css" />
+    
+    <link rel="stylesheet" href="/https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 </head>
 <header class="header">
   <div class="logo">
-    <a href="Home.html">
-      <img src="Recursos/Logo.png" alt="Logo" />
+    <a href="/">
+      <img src="/Recursos/Logo.png" alt="Logo" />
     </a>
   </div>
   <nav>
-    <a class="MENUA" href="Home.html">
-      <img src="Recursos/Home.png" alt="Home">
+    <a class="MENUA" href="/">
+      <img src="/Recursos/Home.png" alt="Home">
     </a>
     <a class="MENUA" href="#">
-      <img src="Recursos/User.png" alt="">
+      <img src="/Recursos/User.png" alt="">
     </a>
     <a class="MENUA" href="Carrito.html">
-      <img src="Recursos/Carrito.png" alt="">
+      <img src="/Recursos/Carrito.png" alt="">
     </a>
   </nav>
 </header>
 
 <body>
   <h1>Mi carrito</h1>
-  <div id="contenedorc" class="contenedorc">
-    <div>
-        <img src="Recursos/Carrie(libro).jpg">
-        <div class="informacion">
-            <p>Carrie</p>
-            <p class="precio">4500<span>.00</span></p>
-            <button onclick="eliminarProducto('producto1')">
-              <i class="fas fa-times"></i>
-          </button>
-        </div>
-    </div>
-    <div>
-        <img src="Recursos/No te olvidaré.jpg" alt="producto 2">
-        <div class="informacion">
-            <p>No te olvidaré</p>                   
-            <p class="precio">5600<span>.00</span></p>
-            <button class="eliminar-btn" onclick="eliminarProducto('producto1')">
-              <i class="fas fa-times"></i>
-          </button>
-        </div>
-    </div>
-    <div>
-        <img src="Recursos/13RW.jpg" alt="producto 3">
-        <div class="informacion">
-            <p>13 reasons why</p>                   
-            <p class="precio">3900<span>.00</span></p>
-            <button class="eliminar-btn" onclick="eliminarProducto('producto1')">
-              <i class="fas fa-times"></i>
-          </button>
-        </div>
-    </div>
-    <div>
-      <img src="Recursos/libro.png" alt="producto 3">
-      <div class="informacion">
-          <p>HOLLY</p>                   
-          <p class="precio">5200<span>.00</span></p>
-          <button class="eliminar-btn" onclick="eliminarProducto('producto1')">
-            <i class="fas fa-times"></i>
-        </button>
-      </div>
+  <div style="display: flex;   justify-content: center; align-items: center;" >
+    <table class="tabla" >
+        <thead style="background-color: lightgray;">
+            <tr>
+                
+                <th >Libro</th>
+                <th >Autor</th>
+                <th >Editorial</th>
+                <th >Año</th>
+                <th>Idioma</th>
+                <th >Precio</th>
+                <th >Eliminar</th>
+
+            </tr>
+        </thead>
+        <tbody>
+          <% items.forEach((items)=>{ %>
+            <tr>
+                <td><%=  items.Nombre %></td>
+                <td><%= items.Autor %></td>
+                <td><%= items.Editorial %></td>
+                <td><%= items.Anno %></td>
+                <td><%= items.Idioma %></td>
+                <td><%= items.Precio %> + IVA</td>
+
+                <td>
+              
+                  <a href="#" onclick="borrar()">
+                    <button type="button" >
+                      B
+                    </button>
+                  </a>
+                </td>
+                
+            </tr>
+          <% }) %>
+        </tbody>
+    </table>
   </div>
-</div>
+
+
 
 <div class="resumen">
   <div class="fila">
-      <span class="etiqueta">Subtotal:</span>
-      <span class="valor" id="subtotal">0.00</span>
+      <span class="etiqueta">Subtotal: ₡  </span>
+      <span class="valor" id="subtotal"><%= subtotal %> </span>
   </div>
   <div class="fila">
-      <span class="etiqueta">IVA:</span>
-      <span class="valor" id="iva">0.00</span>
+      <span class="etiqueta">IVA: ₡</span>
+      <span class="valor" id="iva"><%= IVA %></span>
   </div>
   <div class="fila">
-      <span class="etiqueta">Descuento:</span>
-      <span class="valor" id="descuento">0.00</span>
-  </div>
-  <div class="fila">
-      <span class="etiqueta">TOTAL:</span>
-      <span class="valor" id="total">0.00</span>
+      <span class="etiqueta">TOTAL: ₡</span>
+      <span class="valor" id="total"><%= total %></span>
   </div>
 </div>
 
