@@ -2,6 +2,7 @@ const express =require('express');
 const app = express();
 const multer = require('multer');
 const path = require('path');
+const { save } = require('./controllers/controller.js');
 
 const upload = multer({dest: 'uploads/'})
 
@@ -9,6 +10,10 @@ app.post('/images/single', upload.single('imagen'), (req,res)=>{
 saveImage(req.file);
 
 });
+app.post('/submit-review', (req, res) => {
+    save
+});
+
 
 
 app.set('view engine','ejs');
