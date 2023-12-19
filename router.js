@@ -312,7 +312,7 @@ router.post('/Reseña', (req, res) => {
             res.render('libro.ejs');
         }
     });
-    conexion.query('INSERT INTO Nombre SET ?', { Nombree}, (error, results) => {
+    conexion.query('INSERT INTO Nombree SET ?', { Nombree}, (error, results) => {
         if(error){
             console.log(error);
             res.status(500).send('Error al guardar tu Nombre');

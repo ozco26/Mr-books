@@ -437,10 +437,10 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
 
 
 
-exports.save = (req,res)=>{
-  const Nombre = req.body.Nombree;
+exports.save = (req,)=>{
+  const Nombree = req.body.Nombree;
   const Reseña = req.body.Reseña;
-  console.log(Nombre + " - " + Reseña);
+  console.log(Nombree + " - " + Reseña);
 
 }
 
