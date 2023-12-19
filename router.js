@@ -357,11 +357,22 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
         }
     })
 });
+ router.get('/resena/:nombrer/:resena',(req, res) => {
+    const nombrer = req.params.nombrer;
+    const resena = req.params.resena;
+    conexion.query('INSERT INTO reseña (nombrer, resena) VALUES (?, ?)', [nombrer, resena], (error, results) => {
+        if(error){
+            console.log("Error al guardar Reseña", error);
+        } else {
+            
+        }
+        })
+ });
 
 
 
-
-router.post("/updateLibros", controller.updateLibros);
+router.post("/submit-review",controller.resena);
+router.post("/updateLibros",controller.updateLibros);
 router.post("/saveProduct", controller.saveProduct);
 router.post("/saveReg", controller.saveReg);
 router.post('/login', controller.loginUser); 

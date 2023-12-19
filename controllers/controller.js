@@ -444,7 +444,7 @@ exports.resena = async(req,res)=> {
     if(error){
         console.log("Error al guardar Reseña", error);
     } else {
-        res.render("libro.ejs");
+       
     }
     })
   }
