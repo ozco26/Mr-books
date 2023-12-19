@@ -434,9 +434,8 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
     })
 
 }
-
-const conexion = require ('../database/mr_books');
-const res = require("express/lib/response");
+const conexion = require ('../database/db');
+const res = require('express/lib/');
 
 exports.save = (req, res)=>{
 
