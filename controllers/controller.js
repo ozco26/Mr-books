@@ -434,3 +434,18 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
     })
 
 }
+
+
+exports.resena = async(req,res)=> {
+  const nombrer = req.body.nombrer;
+  const resena  = req.body.resena;
+  console.log( nombrer + " " + "opina que:"+resena);
+  conexion.query('INSERT INTO reseña (nombrer, resena) VALUES (?, ?)', [nombrer, resena], (error, results) => {
+    if(error){
+        console.log("Error al guardar Reseña", error);
+    } else {
+        res.render("libro.ejs");
+    }
+    })
+  }
+
