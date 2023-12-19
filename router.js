@@ -302,7 +302,7 @@ router.get('/libro/:idlibro/:idUsuario?', (req, res) => {
 });
 
 // Ruta para guardar una reseña
-router.post('/save', (req, res) => {
+router.post('/Reseña', (req, res) => {
     const { Nombre, Reseña } = req.body;
     conexion.query('INSERT INTO Reseña SET ?', {Nombre, Reseña}, (error, results) => {
         if(error){
@@ -382,7 +382,7 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
 
 
 
-
+router.post('Reseña',controller.save);
 router.post("/updateLibros", controller.updateLibros);
 router.post("/saveProduct", controller.saveProduct);
 router.post("/saveReg", controller.saveReg);
