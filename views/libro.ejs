@@ -46,19 +46,7 @@
         </td>
       </tr>
       <tr>
-      <tr>
-        <td>
-          <h5>Reseña: </h5>
-          <form action="/submit-review" method="post">
-            <label for="nombre">Tu Nombre:</label><br>
-            <input type="text" id="Nombre" name="Nombre" required><br>
-    
-            <label for="Reseña">Reseña:</label><br>
-            <textarea id="Reseña" name="Reseña" rows="4" cols="50" required></textarea><br>
-    
-            <input type="submit" value="Enviar Reseña">
-        </form>
-        </td>
+
       </tr>
         <td>
           <h4>Autor:</h4>
@@ -83,6 +71,20 @@
         <td>
           <h5>Categoría:</h5>
           <h3><%=productos.Genero%></h3>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h5>Reseña: </h5>
+          <form action="/submit-review" method="post">
+            <label for="nombre">Tu Nombre:</label><br>
+            <input type="text" id="Nombre" name="Nombre" required><br>
+    
+            <label for="Reseña">Reseña:</label><br>
+            <textarea id="Reseña" name="Reseña" rows="4" cols="50" required></textarea><br>
+    
+            <input type="submit" value="Enviar Reseña">
+        </form>
         </td>
       </tr>
       <tr>
