@@ -11,7 +11,7 @@ saveImage(req.file);
 
 });
 app.post('/submit-review', (req, res) => {
-    save
+    save(req.params);
 });
 
 

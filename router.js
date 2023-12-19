@@ -303,11 +303,19 @@ router.get('/libro/:idlibro/:idUsuario?', (req, res) => {
 
 // Ruta para guardar una reseña
 router.post('/Reseña', (req, res) => {
-    const { Nombre, Reseña } = req.body;
-    conexion.query('INSERT INTO Reseña SET ?', {Nombre, Reseña}, (error, results) => {
+    const { Nombree, Reseña } = req.body;
+    conexion.query('INSERT INTO Reseña SET ?', { Reseña}, (error, results) => {
         if(error){
             console.log(error);
             res.status(500).send('Error al guardar la reseña');
+        } else {
+            res.render('libro.ejs');
+        }
+    });
+    conexion.query('INSERT INTO Nombre SET ?', { Nombree}, (error, results) => {
+        if(error){
+            console.log(error);
+            res.status(500).send('Error al guardar tu Nombre');
         } else {
             res.render('libro.ejs');
         }
@@ -381,8 +389,8 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
 
 
 
-
-router.post('Reseña',controller.save);
+router.post('/Nombree',controller.save);
+router.post('/Reseña',controller.save);
 router.post("/updateLibros", controller.updateLibros);
 router.post("/saveProduct", controller.saveProduct);
 router.post("/saveReg", controller.saveReg);
