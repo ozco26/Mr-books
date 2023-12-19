@@ -257,7 +257,7 @@ router.get('/deleteP/:id/:idUsusario', (req, res) => {
     })
 });
 
-
+//carga pagina de Crear generos
 router.get('/Categorias/:idUsuario',(req,res)=>{
     const idUsuario = req.params.idUsuario;
     conexion.query('SELECT * FROM generos', (err, results)=>{
@@ -281,7 +281,7 @@ router.get('/deleteCategoria/:id/:idUsusario', (req, res) => {
     })
 });
 
-//carga la pagina de cada liblro
+//carga la pagina de cada libro
 
 router.get('/libro/:idlibro/:idUsuario?', (req, res) => {
     const idlibro = req.params.idlibro; 
@@ -357,7 +357,7 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
     })
 });
 
-//Aprobación de libros
+//Carga pagina de Aprobación de libros
 router.get('/Aprobacion/:id', (req, res)=>{
     const id = req.params.id;
     const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
@@ -523,6 +523,18 @@ router.get("/addCarrito/:idUsuario/:ID_Producto", (req, res) => {
   );
 });
 
+router.get("/Novedades/:idUsuario?",(req,res)=>{
+
+    const idUsuario = req.body.txtIdUsuario1;
+    const busqueda = 'SELECT * FROM productos WHERE Estado = 5 ORDER BY ID_Producto DESC ';
+    conexion.query(busqueda ,(err, results) => {
+      if (err) {
+        console.log("Error en Busqueda", err);
+    } else {       
+        res.render("Busqueda.ejs",{results:results, idUsuario});
+    }
+    })
+})
 
 
 
