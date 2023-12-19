@@ -3,22 +3,27 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Página principal</title>
+  <title><%=productos.Nombre%></title>
   <link rel="stylesheet" href="/Estilos/Estilos.Css" />
 </head>
 <header class="header">
-  <div class="logo">
+  <div class="logo" id="authContent3" >
+    <a href="/" title="Home">
+      <img src="/Recursos/Logo.png" alt="Home" />
+    </a>
+  </div>
+  <div class="logo" id="authContent4" style="display: none;">
     <a href="javascript:history.back()" title="Home">
       <img src="/Recursos/Logo.png" alt="Home" />
     </a>
   </div>
-  <nav>
+  <nav id="authContent2" style="display: none;">
 
-    <a class="MENUA" href="" title="Cuenta de Usuario">
+    <a class="MENUA" href="" title="Cuenta de Usuario" >
       <img src="/Recursos/User.png" alt="Cuenta">
     </a>
-    <a class="MENUA" href="" title="Carrito de Compras">
-      <img src="/Recursos/Carrito.png" alt="Carrito de Compras">
+    <a class="MENUA" href="" title="Carrito de Compras" >
+      <img src="/Recursos/Carrito.png" alt="Carrito de Compras" >
     </a>
   </nav>
 </header>
@@ -77,9 +82,11 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2">
+        
+        <td colspan="2" id="authContent" class="content" style="display: none;">
           <a style="width: 100%; text-align: center;" href="/addCarrito/<%=idUsuario%>/<%=productos.ID_Producto%>" class="boton-efecto">AÑADIR AL CARRITO</a></th>
         </td>
+      
       </tr>
     </table>
   </div>
@@ -128,6 +135,19 @@
       function goBack() {
         window.history.back();
     }
+  try{
+    const pathParts = window.location.pathname.split('/')[3];
+    console.log(pathParts);
+    const usr = <%=idUsuario%>;
+  // Verifica si hay un ID de usuario en la URL y muestra/oculta el div en consecuencia
+      if( usr >=1){
+        authContent.style.display = 'block';
+        authContent2.style.display = 'block';
+        authContent3.style.display = 'none';
+        authContent4.style.display = 'block';
+      }
+  }catch{console.log("usuario no registrado");}
+
 </script>
 
 </html>
