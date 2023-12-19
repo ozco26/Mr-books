@@ -434,19 +434,16 @@ exports.formularioBusquedaAvanzada = async(req,res)=>{
     })
 
 }
-const conexion = require ('../database/db');
-const res = require('express/lib/');
 
-exports.save = (req, res)=>{
 
-  const nombre = req.body.nombre; 
-  const reseña = req.body.reseña;
-  console.log(nombre +" - "+rol);
-  conexion.query('INSERT INTO nombre SET ?',{nombre:nombre, reseña:reseña}, (error,reseña)=>{
-    if(error){
-      console.log(error);
-    }else{
-      res.redirect('/');
-    }
-  })
+
+exports.save = (req,res)=>{
+  const Nombre = req.body.Nombre;
+  const Reseña = req.body.Reseña;
+  console.log(Nombre + " - " + Reseña);
+
 }
+
+
+
+

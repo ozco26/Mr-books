@@ -283,18 +283,33 @@ router.get('/deleteCategoria/:id/:idUsusario', (req, res) => {
     })
 });
 
-//carga la pagina de cada liblro
 
+
+
+//carga la pagina de cada liblro
 router.get('/libro/:idlibro/:idUsuario?', (req, res) => {
     const idlibro = req.params.idlibro; 
     const idUsuario = req.params.idUsuario;
-    conexion.query('SELECT productos.*, generos.Genero FROM productos INNER JOIN generos ON productos.Genero = generos.ID_Genero WHERE ID_Producto = ?'
 
-    , [idlibro], (error, results) => {
+    conexion.query('SELECT productos.*, generos.Genero FROM productos INNER JOIN generos ON productos.Genero = generos.ID_Genero WHERE ID_Producto = ?', [idlibro], (error, results) => {
         if (error) {
             console.log(error);
+            res.status(500).send('Error en el servidor');
         } else {
             res.render('libro.ejs', { productos: results[0], idUsuario });
+        }
+    });
+});
+
+// Ruta para guardar una reseña
+router.post('/save', (req, res) => {
+    const { Nombre, Reseña } = req.body;
+    conexion.query('INSERT INTO Reseña SET ?', {Nombre, Reseña}, (error, results) => {
+        if(error){
+            console.log(error);
+            res.status(500).send('Error al guardar la reseña');
+        } else {
+            res.render('libro.ejs');
         }
     });
 });
@@ -359,17 +374,15 @@ router.get('/deleteProducto/:id/:idUsusario', (req, res) => {
     })
 });
 
-//Guardar Reseña 
-router.get('/create',(req,res)=>{
-    res.render('create');
-})
-
-const crud = require('./controller/crud');
 
 
 
 
-router.post('save', crud.save);
+
+
+
+
+
 router.post("/updateLibros", controller.updateLibros);
 router.post("/saveProduct", controller.saveProduct);
 router.post("/saveReg", controller.saveReg);
