@@ -14,13 +14,13 @@
     </a>
   </div>
   <nav>
-    <a class="MENUA" href="Home.html" title="Home">
+    <a class="MENUA" href="/homeVendedor/<%= idUsusario  %>" title="Home">
       <img src="/Recursos/Home.png" alt="Home">
     </a>
-    <a class="MENUA" href="Cuenta.html" title="Cuenta de Usuario">
+    <a class="MENUA" href="/editarUsuario/<%=idUsusario%>" title="Cuenta de Usuario">
       <img src="/Recursos/User.png" alt="Cuenta">
     </a>
-    <a class="MENUA" href="Carrito.html" title="Carrito de Compras">
+    <a class="MENUA" href="/carrito/<%=idUsusario%>" title="Carrito de Compras">
       <img src="/Recursos/Carrito.png" alt="Carrito de Compras">
     </a>
   </nav>
@@ -132,16 +132,16 @@
       <div class="pie-links">
         <h4>Cuenta</h4>
         <ul>
-          <li><a href="#">Cuenta</a></li>
-          <li><a href="#">Carrito</a></li>
+          <li><a href="/editarUsuario/<%=idUsusario%>">Cuenta</a></li>
+          <li><a href="/carrito/<%=idUsusario%>">Carrito</a></li>
           <li><a href="#">Compras</a></li>
         </ul>
       </div>
       <div class="pie-links">
         <h4>Tienda</h4>
         <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Novedades</a></li>
+          <li><a href="/homeVendedor/<%= idUsusario  %>">Inicio</a></li>
+          <li><a href="/Novedades/<%=idUsusario%>">Novedades</a></li>
           <li><a href="#">Categorias</a></li>
         </ul>
       </div>

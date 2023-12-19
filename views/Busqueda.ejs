@@ -36,9 +36,10 @@
     <% results.forEach((productos)=>{ %>
     <a class="CatalogoA" href="/libro/<%= productos.ID_Producto %>/<%= idUsuario %>">
       <img src="<%= productos.direccionImg %>" alt="<%= productos.Nombre %>" title="<%= productos.Nombre %>" height="300" width="300">
+    
       <p>
         <%= productos.Nombre %>
-      </p>
+      </p></a>
       <% }) %>
   </div>
 
@@ -55,22 +56,7 @@
           </ul>
         </div>
         <div class="pie-links">
-          <h4>Cuenta</h4>
-          <ul>
-            <li><a href="#">Cuenta</a></li>
-            <li><a href="#">Carrito</a></li>
-            <li><a href="#">Compras</a></li>
-          </ul>
-        </div>
-        <div class="pie-links">
-          <h4>Tienda</h4>
-          <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="#">Novedades</a></li>
-            <li><a href="#">Categorias</a></li>
-          </ul>
-        </div>
-
+         
       </div>
     </div>
   </footer>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Página principal</title>
+    <title>Carrito</title>
     <link rel="stylesheet" href="/Estilos/Estilos.Css" />
     <link rel="stylesheet" href="/Estilos/EstilosCarrito.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -16,12 +16,14 @@
     </a>
   </div>
   <nav>
-
-    <a class="MENUA" href="#">
-      <img src="/Recursos/User.png" alt="">
+    <a class="MENUA" href="/" title="Cerrar Sesion">
+      <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
     </a>
-    <a class="MENUA" href="Carrito.html">
-      <img src="/Recursos/Carrito.png" alt="">
+    <a class="MENUA" href="/editarUsuario/<%=idUsuario %>">
+      <img src="/Recursos/User.png" alt="Editar Cuenta">
+    </a>
+    <a class="MENUA" href="/carrito/<%=idUsuario %>">
+      <img src="/Recursos/Carrito.png" alt="Carrito">
     </a>
   </nav>
 </header>
@@ -104,16 +106,16 @@
             <div class="pie-links">
               <h4>Cuenta</h4>
               <ul>
-                <li><a href="#">Cuenta</a></li>
-                <li><a href="#">Carrito</a></li>
+                <li><a href="/editarUsuario/<%=idUsuario%>">Cuenta</a></li>
+                <li><a href="/carrito/<%=idUsuario%>">Carrito</a></li>
                 <li><a href="#">Compras</a></li>
               </ul>
             </div>
             <div class="pie-links">
               <h4>Tienda</h4>
               <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Novedades</a></li>
+                <li><a href="/homecliente/<%=idUsuario%>">Inicio</a></li>
+                <li><a href="/Novedades/<%=idUsuario%>">Novedades</a></li>
                 <li><a href="#">Categorias</a></li>
               </ul>
             </div>
