@@ -53,6 +53,29 @@ router.get('/homecliente/:id',(req,res)=>{
     }) 
 });
 
+//redirije usuario al pago 
+router.get('/Pago/:id/:ID_Carrito',(req,res)=>{
+    const id = req.params.id;
+    const idCarrito= req.params.ID_Carrito
+    const usuario = "SELECT * FROM usuarios WHERE ID=?" ;
+    
+    conexion.query(usuario, [id], (err, infousuario) => {
+        if (err) {
+            throw err;
+        }else{
+            const Productos = "SELECT ID_Producto FROM items_carrito WHERE ID_Carrito=?" ;
+            conexion.query(Productos, [idCarrito], (err, infocarrito) => {
+                if (err) {
+                    throw err;
+                } else {
+                    res.render("Pago.ejs", {
+                        usuario: infousuario[0], Productos:infocarrito, idCarrito});
+                }
+            }) 
+        }
+    }) 
+});
+
 //carga vista de adminsitrador y lleva el numero de usuario
 router.get('/homeAdmnin/:id',(req,res)=>{
     const id = req.params.id;
