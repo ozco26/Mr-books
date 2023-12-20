@@ -545,9 +545,74 @@ router.get("/addCarrito/:idUsuario/:ID_Producto", (req, res) => {
     }
   );
 });
+//carga busqueda por novedades
+router.get("/Novedades/:idUsuario?", (req, res) => {
+    const idUsuario = req.params.idUsuario;
+    const busqueda = 'SELECT * FROM productos where Estado = 5 ORDER BY ID_Producto DESC';
+    conexion.query(busqueda ,(err, results) => {
+      if (err) {
+        console.log("Error en Busqueda", err);
+    } else {
+        console.log("Busqueda exitosa"+ results);        
+        res.render("Busqueda.ejs",{results:results, idUsuario});
+    }
+    })
+})
+//carga busqueda genero terror
+router.get("/Terror/:idUsuario?", (req, res) => {
+    const idUsuario = req.params.idUsuario;
+    const busqueda = 'SELECT * FROM productos where Genero = 1 and Estado = 5 ORDER BY ID_Producto DESC';
+    conexion.query(busqueda ,(err, results) => {
+      if (err) {
+        console.log("Error en Busqueda", err);
+    } else {
+        console.log("Busqueda exitosa"+ results);        
+        res.render("Busqueda.ejs",{results:results, idUsuario});
+    }
+    })
+})
 
+//carga busqueda genero Escolar
+router.get("/Escolar/:idUsuario?", (req, res) => {
+    const idUsuario = req.params.idUsuario;
+    const busqueda = 'SELECT * FROM productos where Genero = 2 and Estado = 5 ORDER BY ID_Producto DESC';
+    conexion.query(busqueda ,(err, results) => {
+      if (err) {
+        console.log("Error en Busqueda", err);
+    } else {
+        console.log("Busqueda exitosa"+ results);        
+        res.render("Busqueda.ejs",{results:results, idUsuario});
+    }
+    })
+})
 
+//carga busqueda genero Infantil
+router.get("/Infantil/:idUsuario?", (req, res) => {
+    const idUsuario = req.params.idUsuario;
+    const busqueda = 'SELECT * FROM productos where Genero = 2 and Estado = 5 ORDER BY ID_Producto DESC';
+    conexion.query(busqueda ,(err, results) => {
+      if (err) {
+        console.log("Error en Busqueda", err);
+    } else {
+        console.log("Busqueda exitosa"+ results);        
+        res.render("Busqueda.ejs",{results:results, idUsuario});
+    }
+    })
+})
 
+//carga busqueda genero Historia
+router.get("/Historia/:idUsuario?", (req, res) => {
+    const idUsuario = req.params.idUsuario;
+    const busqueda = 'SELECT * FROM productos where Genero = 5 and Estado = 5 ORDER BY ID_Producto DESC';
+    conexion.query(busqueda ,(err, results) => {
+      if (err) {
+        console.log("Error en Busqueda", err);
+    } else {
+        console.log("Busqueda exitosa"+ results);        
+        res.render("Busqueda.ejs",{results:results, idUsuario});
+    }
+    })
+})
 
 router.post("/updateLibros", controller.updateLibros);
 router.post("/saveProduct", controller.saveProduct);

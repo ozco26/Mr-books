@@ -28,31 +28,31 @@
   <br> 
   <h4 style="text-align: center;">Hola <%= usuario?.Nombre %>, es un gusto tenerte de vuelta! </h4>
   <h5 style="text-align: center;">Como podemos ayudarte?</h5>
-    <div class="slider-frame">
-      <ul>
-          <li>
-            <a href="#">
-              <img src="/Recursos/Ofertas especiales.png" alt="">
-            </a>
-          </li>
-            <li>
-              <a href="#">
-                <img src="/Recursos/Educativo.png" alt="">
-              </a>
-            </li>
+  <div class="slider-frame">
+    <ul>
+      <li>
+        <a href="/Historia/<%=usuario.ID%>">
+          <img src="Recursos/Ofertas especiales.png" alt="">
+        </a>
+      </li>
+      <li>
+        <a href="/Escolar/<%=usuario.ID%>">
+          <img src="Recursos/Educativo.png" alt="">
+        </a>
+      </li>
   
-            <li>
-              <a href="#">
-                <img src="/Recursos/Infantil.png" alt="">
-              </a>
-            </li>
+      <li>
+        <a href="/Infantil/<%=usuario.ID%>">
+          <img src="Recursos/Infantil.png" alt="">
+        </a>
+      </li>
   
-            <li>
-              <a href="#">
-                <img src="/Recursos/Terror.png" alt="">
-              </a>
-            </li>
-      </ul>
+      <li>
+        <a href="/Terror/<%=usuario.ID%>">
+          <img src="Recursos/Terror.png" alt="">
+        </a>
+      </li>
+    </ul>
   </div>
   <br>
   <div style="display: flex; justify-content: center">
@@ -152,7 +152,7 @@
             <div class="pie-links">
               <h4>Tienda</h4>
               <ul>
-                <li><a href="/homecliente/<%=idUsuario%>">Inicio</a></li>
+                <li><a href="/homeVendedor/<%=idUsuario%>">Inicio</a></li>
                 <li><a href="/Novedades/<%=idUsuario%>">Novedades</a></li>
                 <li><a href="#">Categorias</a></li>
             </ul>
