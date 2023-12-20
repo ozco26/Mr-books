@@ -523,8 +523,139 @@ router.get("/addCarrito/:idUsuario/:ID_Producto", (req, res) => {
   );
 });
 
+//dirige al cliente a proceso de pago
+router.get('/pago/:id/:ID_Carrito', (req, res) => {
+    const id = req.params.id;
+    const ID_Carrito = req.params.ID_Carrito;
+
+    const usuario = "SELECT * FROM usuarios WHERE ID=?";
+    
+    conexion.query(usuario, [id], (err, infousuario) => {
+        if (err) {
+            throw err;
+        } else {
+            res.render("Pago", { usuario: infousuario[0], idUsuario: ID_Carrito });
+        }
+    });
+});
 
 
+router.get('/Ppago/:id/:ID_Carrito',(req,res)=>{
+    const id = req.params.id;
+    const ID_Carrito = req.params.ID_Carrito;
+    const productos = "SELECT * FROM items_carrito WHERE ID_Carrito=?" ;
+    conexion.query(productos, [ID_Carrito], (err, infocarrito) => {
+        if (err) {
+            throw err;
+        } else {
+            res.render("Pago", {productos:  infocarrito ,ID_Carrito});
+        }
+    })
+});
+
+router.get("/realizarCompra/:idUsuario", (req, res) => {
+    try {
+      const idUsuario = req.params.idUsuario;
+      const total = req.body.total;
+      
+          // Obtener el ID_Carrito del usuario desde la tabla items_carrito
+    const obtenerIdCarritoQuery = "SELECT ID_Carrito FROM items_carrito WHERE ID = ?";
+
+    conexion.query(obtenerIdCarritoQuery, [idUsuario], (error, results) => {
+        if (error) {
+          console.log("Error al obtener ID_Carrito:", error);
+          res.status(500).json({ error: 'Error al realizar la compra' });
+        } else {
+          const idCarrito = results[0].ID_Carrito;
+  
+          // Insertar en la nueva tabla
+          const insertCompraQuery = "INSERT INTO tabla_compra (ID_usuario, ID_Carrito, Total) VALUES (?, ?, ?)";
+  
+          conexion.query(insertCompraQuery, [idUsuario, idCarrito, total], (error, result) => {
+            if (error) {
+              console.log("Error en la inserción de la compra:", error);
+              res.status(500).json({ error: 'Error al realizar la compra' });
+            } else {
+              console.log("Compra realizada con éxito");
+              res.json({ message: 'Compra realizada con éxito', idCompra: result.insertId });
+            }
+          });
+        }
+      });
+    } catch (error) {
+      console.error('Error al realizar la compra:', error);
+      res.status(500).json({ error: 'Error al realizar la compra' });
+    }
+  });
+
+  router.get('/estadoLibro/:id/:idUsuario', (req, res) => {
+    const idPedido = req.params.id;
+    const nuevoEstado = 8;
+    const idUsuario = req.params.idUsuario;
+    conexion.query(
+      'UPDATE productos SET Estado = ? WHERE ID_Producto = ?',
+      [nuevoEstado, idPedido],
+      (error, results) => {
+        if (error) {
+            console.log(error);
+        } else {
+          res.redirect('/Pago/' +idUsuario);
+        }
+      }
+    );
+  });
+
+  
+  //dirige al cliente a proceso de pago
+  router.get('/pago/:id/:ID_Carrito', (req, res) => {
+      const id = req.params.id;
+      const ID_Carrito = req.params.ID_Carrito;
+  
+      const usuario = "SELECT * FROM usuarios WHERE ID=?";
+      
+      conexion.query(usuario, [id], (err, infousuario) => {
+          if (err) {
+              throw err;
+          } else {
+                const productos = "select * from items_Carrito where ID_Carrito =?";
+                conexion.query(productos, [ID_Carrito], (err, infocarrito) => {
+                    if (err) {
+                        throw err;
+                    } else {
+                        res.render("Pago", { usuario: infousuario[0], idUsuario: ID_Carrito, producto: infocarrito });
+                    }
+                }
+      )}
+      });
+  });
+
+  router.get('/EstadoVendido/:idUsuario/:ID_Carrito', (req, res) => {
+    const ID_Carrito = req.body.ID_Carrito; 
+    const nuevoEstado = 8;
+    const idUsuario = req.params.idUsuario;
+  
+    const ProductosC = "SELECT ID_Producto FROM items_carrito WHERE ID_Carrito = ?";
+    conexion.query(ProductosC, [ID_Carrito], (err, result) => {
+      if (err) {
+        console.error("Error al actualizar el estado del producto:", err);
+      }else{
+          console.log("Exito en actualizar el estado del producto");
+          result.forEach((row) => {
+              const idProducto = row.ID_Producto;
+              conexion.query(
+                'UPDATE productos SET Estado = ? WHERE ID_Producto = ?',
+                [nuevoEstado, idProducto],
+                (error, results) => {
+                  if (error) {
+                    console.log(error);
+                  }
+                }
+              );
+            });
+            res.redirect('/Pago/' + idUsuario+ID_Carrito);
+      }
+  }); 
+  });
 
 router.post("/updateLibros", controller.updateLibros);
 router.post("/saveProduct", controller.saveProduct);
@@ -534,5 +665,5 @@ router.post('/updateUserbyAdmin', controller.updateUserbyAdmin);
 router.post('/updateUserbyUser', controller.updateUserbyUser);
 router.post('/createCategoria',controller.createCategoria);
 router.post('/formularioBusquedaAvanzada',controller.formularioBusquedaAvanzada)
-router.post('/formularioBusqueda',controller.formularioBusqueda)
+router.post('/formularioBusqueda',controller.formularioBusqueda);
 module.exports = router;
