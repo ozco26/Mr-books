@@ -1,18 +1,19 @@
 <head>
     <meta charset="UTF-8">
-    <title>Página principal - Cliente</title>
+    <title>Página principal - Vendedor</title>
     <link rel="stylesheet" href="/Estilos/Estilos.Css" />
   </head>
   <header class="header">
     <div class="logo">
-      <a href='/homecliente/<%=usuario.ID%>' title="Home" >
+      <a href='/homeVendedor/<%=usuario.ID%>' title="Home" >
         <img src="/Recursos/Logo.png" alt="Home" />
       </a>
     </div>
     <nav>
       <a class="MENUA" href="/" title="Cerrar Sesion">
         <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
-      <a class="MENUA" href="Cuenta.html" title="Cuenta de Usuario">
+      </a>
+      <a class="MENUA" href="/editarUsuario/<%=usuario.ID %>" title="Cuenta de Usuario">
         <img src="/Recursos/User.png" alt="Cuenta">
       </a>
       <a class="MENUA" href='/Productos/<%=usuario.ID%>' title="Publicar">
@@ -64,7 +65,7 @@
             <img style="background-color: #E1C2A1;" src="/Recursos/Lupa.png" alt="Buscar" width="30px" ; >
           </button>
           <input class="Barra" type="text" id="txtIdUsuario1" name="txtIdUsuario1" value="<%= usuario.ID  %>"
-          style="display: none;">
+        style="display: none;">
       </div>
     </form>  
       <div style="padding: 10px;">
@@ -86,7 +87,7 @@
             <input class="Barra" type="text" id="txtEditorial" name="txtEditorial" placeholder="Ingrese la editorial">
             <input class="Barra" type="text" id="txtAnno" name="txtAnno" placeholder="Ingrese el anno de publicacion">
             <input class="Barra" type="text" id="txtGenero" name="txtGenero" placeholder="Ingrese el genero">
-            <input class="Barra" type="text" id="txtIdUsuario" name="txtIdUsuario" value="<%= idUsuario='' %>"
+            <input class="Barra" type="text" id="txtIdUsuario" name="txtIdUsuario" value="<%= usuario.ID %>"
               style="display: none;">
           </div>
     <br>
@@ -101,9 +102,9 @@
   
     <table style="width: 100%; ">
       <tr>
-        <th> <a href="/Productos"  class="boton-efecto">PUBLICAR LIBRO</a></th>
-        <th> <a href="#" class="boton-efecto">MEJOR CALIFICADOS </a></th>
-        <th> <a href="#" class="boton-efecto">NOVEDADES</a></th>
+        <th> <a href="/Productos/<%=usuario.ID%>"  class="boton-efecto">PUBLICAR LIBRO</a></th>
+        <th> <a href="" class="boton-efecto">MEJOR CALIFICADOS </a></th>
+        <th> <a href="/Novedades/<%=usuario.ID%>" class="boton-efecto">NOVEDADES</a></th>
         <th> <a href="#" class="boton-efecto">RECOMENDADOS</a></th>
       </tr>
     </table>
@@ -150,17 +151,17 @@
           <div class="pie-links">
             <h4>Cuenta</h4>
             <ul>
-              <li><a href="#">Cuenta</a></li>
-              <li><a href="#">Carrito</a></li>
-              <li><a href="#">Compras</a></li>
-            </ul>
-          </div>
-          <div class="pie-links">
-            <h4>Tienda</h4>
-            <ul>
-              <li><a href="Home.html">Inicio</a></li>
-              <li><a href="#">Novedades</a></li>
-              <li><a href="#">Categorias</a></li>
+              <li><a href="/editarUsuario/<%=idUsuario%>">Cuenta</a></li>
+                <li><a href="/carrito/<%=idUsuario%>">Carrito</a></li>
+                <li><a href="#">Compras</a></li>
+              </ul>
+            </div>
+            <div class="pie-links">
+              <h4>Tienda</h4>
+              <ul>
+                <li><a href="/homecliente/<%=idUsuario%>">Inicio</a></li>
+                <li><a href="/Novedades/<%=idUsuario%>">Novedades</a></li>
+                <li><a href="#">Categorias</a></li>
             </ul>
           </div>
     

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,7 +52,7 @@
                     <td><%= USUARIOS.Correo%></td>
                     <td><%= USUARIOS.Contrasenna %></td>
                     <td><%= USUARIOS.Fecha_nacimiento instanceof Date ? USUARIOS.Fecha_nacimiento.toISOString().substring(0, 10) : '' %></td>
-                    <td><%= USUARIOS.Fecha_ingreso instanceof Date ? USUARIOS.Fecha_nacimiento.toISOString().substring(0, 10) : '' %></td>
+                    <td><%= USUARIOS.Fecha_ingreso instanceof Date ? USUARIOS.Fecha_ingreso.toISOString().substring(0, 10) : '' %></td>
                     <td><%= USUARIOS.Rol  %></td>
                     
                     <td>
@@ -80,22 +80,7 @@
                     <li><a href="#">Politica de privacidad</a></li>
                     </ul>
                 </div>
-                <div class="pie-links">
-                    <h4>Cuenta</h4>
-                    <ul>
-                    <li><a href="#">Cuenta</a></li>
-                    <li><a href="#">Carrito</a></li>
-                    <li><a href="#">Compras</a></li>
-                    </ul>
-                </div>
-                <div class="pie-links">
-                    <h4>Tienda</h4>
-                    <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Novedades</a></li>
-                    <li><a href="#">Categorias</a></li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
     </footer>
@@ -136,5 +121,3 @@
 
 
 </script>
-
-</html>

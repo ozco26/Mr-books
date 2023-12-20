@@ -12,6 +12,7 @@
   <nav>
     <a class="MENUA" href="/" title="Cerrar Sesion">
       <img src="/Recursos/cerrarSesion.png" alt="Cerrar Sesion">
+    </a>
     <a class="MENUA" href="/editarUsuario/<%=usuario.ID%>" title="Cuenta de Usuario">
       <img src="/Recursos/User.png" alt="Cuenta">
     </a>
@@ -82,8 +83,8 @@
           <input class="Barra" type="text" id="txtNombre" name="txtNombre" placeholder="Ingrese el nombre del libro">
           <input class="Barra" type="text" id="txtAutor" name="txtAutor" placeholder="Ingrese el nombre del autor">
           <input class="Barra" type="text" id="txtEditorial" name="txtEditorial" placeholder="Ingrese la editorial">
-          <input class="Barra" type="text" id="txtAnno" name="txtAnno" placeholder="Ingrese el anno de publicacion">
-          <input class="Barra" type="text" id="txtGenero" name="txtGenero" placeholder="Ingrese el genero">
+          <input class="Barra" type="text" id="txtAnno" name="txtAnno" placeholder="Ingrese el año de publicación">
+          <input class="Barra" type="text" id="txtGenero" name="txtGenero" placeholder="Ingrese el género">
           <input class="Barra" type="text" id="txtIdUsuario" name="txtIdUsuario" value="<%=usuario.ID%>"
             style="display: none;">
         </div>
@@ -101,8 +102,8 @@
   <table style="width: 100%; ">
     <tr>
       <th> <a href="#" class="boton-efecto">MEJOR CALIFICADOS </a></th>
-      <th> <a href="#" class="boton-efecto">NOVEDADES</a></th>
-      <th> <a href="#" class="boton-efecto">RECOMENDADOS</a></th>
+      <th> <a href="/Novedades/<%=usuario.ID%>" class="boton-efecto">NOVEDADES</a></th>
+      <th> <a href="#" class="boton-efecto">Categorias</a></th>
     </tr>
   </table>
   <div class="Catalogo">
@@ -148,16 +149,16 @@
         <div class="pie-links">
           <h4>Cuenta</h4>
           <ul>
-            <li><a href="#">Cuenta</a></li>
-            <li><a href="#">Carrito</a></li>
+            <li><a href="/editarUsuario/<%=usuario.ID%>">Gestione su Cuenta</a></li>
+            <li><a href="/carrito/<%=usuario.ID%>">Carrito</a></li>
             <li><a href="#">Compras</a></li>
           </ul>
         </div>
         <div class="pie-links">
           <h4>Tienda</h4>
           <ul>
-            <li><a href="Home.html">Inicio</a></li>
-            <li><a href="#">Novedades</a></li>
+            <li><a href="/homecliente/<%=usuario.ID%>">Inicio</a></li>
+            <li><a href="/Novedades/<%=usuario.ID%>">Novedades</a></li>
             <li><a href="#">Categorias</a></li>
           </ul>
         </div>

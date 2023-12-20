@@ -27,15 +27,19 @@
   <br>
   <h1>El resultado obtenido es el siguiente: </h1>
   <br>
-  
- 
+  <br>
+  <div >
+    <h3 style="text-align: center; display: none;" id="vacia" >Su busqueda no produjo resultados</h3>
+  </div>
+  <br>
   <div class="Catalogo">
     <% results.forEach((productos)=>{ %>
     <a class="CatalogoA" href="/libro/<%= productos.ID_Producto %>/<%= idUsuario %>">
       <img src="<%= productos.direccionImg %>" alt="<%= productos.Nombre %>" title="<%= productos.Nombre %>" height="300" width="300">
+    
       <p>
         <%= productos.Nombre %>
-      </p>
+      </p></a>
       <% }) %>
   </div>
 
@@ -52,22 +56,7 @@
           </ul>
         </div>
         <div class="pie-links">
-          <h4>Cuenta</h4>
-          <ul>
-            <li><a href="#">Cuenta</a></li>
-            <li><a href="#">Carrito</a></li>
-            <li><a href="#">Compras</a></li>
-          </ul>
-        </div>
-        <div class="pie-links">
-          <h4>Tienda</h4>
-          <ul>
-            <li><a href="Home.html">Inicio</a></li>
-            <li><a href="#">Novedades</a></li>
-            <li><a href="#">Categorias</a></li>
-          </ul>
-        </div>
-
+         
       </div>
     </div>
   </footer>
@@ -76,14 +65,17 @@
 
 
 <script>
-  function mostrarFormulario() {
-    var contenedorFormulario = document.getElementById('contenedorFormulario');
-    contenedorFormulario.style.display = 'block'; // O 'flex', o cualquier valor deseado
+  const vaciaDiv = document.getElementById('vacia');
+  const catalogoDiv = document.querySelector('.Catalogo');
+
+  if (catalogoDiv.children.length === 0) {
+    vaciaDiv.style.display = 'block';
   }
 
-  function goBack() {
-        window.history.back();
+function goBack() {
+  window.history.back();
     }
+
 </script>
 
 </html>
