@@ -523,8 +523,20 @@ router.get("/addCarrito/:idUsuario/:ID_Producto", (req, res) => {
   );
 });
 
+router.get("/Novedades/:idUsuario?", (req, res) => {
 
+    const idUsuario = req.params.idUsuario;
+    const busqueda = 'SELECT * FROM productos where Estado = 5 ORDER BY ID_Producto DESC';
 
+    conexion.query(busqueda ,(err, results) => {
+      if (err) {
+        console.log("Error en Busqueda", err);
+    } else {
+        console.log("Busqueda exitosa"+ results);        
+        res.render("Busqueda.ejs",{results:results, idUsuario});
+    }
+    })
+})
 
 router.post("/updateLibros", controller.updateLibros);
 router.post("/saveProduct", controller.saveProduct);
