@@ -110,7 +110,7 @@
               <h4>Tienda</h4>
               <ul>
                 <li><a href="#">Inicio</a></li>
-                <li><a href="/Novedades/<%=idUsuario %>">Novedades</a></li>
+                <li><a href="/Novedades">Novedades</a></li>
                 <li><a href="#">Categorias</a></li>
               </ul>
             </div>
@@ -138,19 +138,19 @@
       return fechaEmision;
     }
 
-        function Aprobar (usuario,ID_Carrito){
-        console.log("ID:", ID_Carrito);
-        console.log("ID Usuario:", usuario);
-        window.location.href = '/EstadoVendido/' + usuario +"/"+ ID_Carrito;
-        }
+    function Aprobar (usuario,ID_Carrito){
+      console.log("ID:", ID_Carrito);
+      console.log("ID Usuario:", usuario);
+      window.location.href = '/EstadoVendido/' + id +"/"+ ID_Carrito;
+    }
 
-        function enviar(event){
-        Swal.fire({
+    function enviar(event){
+      Swal.fire({
         title: "Su compra ha sido realizada!",
         text: "Gracias por tu Compra, en unos momentos se enviará su factura electrónica!",
         icon: "success",
       })
-          event.preventDefault();
+      event.preventDefault();
         (function(){
           emailjs.init("f1kSJjA9RxtaWYFE8"); // Account Public Key
         })();
@@ -159,17 +159,19 @@
           nombretitular: document.querySelector("#nombre-titular").value,
           email: document.querySelector("#email").value,
           numeroFactura: document.querySelector("#nf").value,
-        fechaEmision: document.querySelector("#fe").value,
-        direccion: document.querySelector("#Descripción").value,
+          fechaEmision: document.querySelector("#fe").value,
+          direccion: document.querySelector("#Descripción").value,
         };
 
         var serviceID = "service_ime895m"; // Email Service ID
         var templateID = "template_tbi0qzb"; // Email Template ID
 
-        emailjs.send(serviceID, templateID, params)
-        .then( res => {
-        })
-        .catch();
+        emailjs.send(serviceID, templateID, params);
+
+        render.
+
+
+
       }
 
   </script>
