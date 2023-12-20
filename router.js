@@ -614,6 +614,18 @@ router.get("/Historia/:idUsuario?", (req, res) => {
     })
 })
 
+router.get('/nosotros',(req,res)=>{
+    res.render('nosotros.ejs');    
+});
+ 
+router.get('/nuestrosServicios',(req,res)=>{
+    res.render('nuestrosServicios.ejs');    
+});
+ 
+router.get('/politicaPrivacidad',(req,res)=>{
+    res.render('politicaPrivacidad.ejs');    
+});
+
 router.post("/updateLibros", controller.updateLibros);
 router.post("/saveProduct", controller.saveProduct);
 router.post("/saveReg", controller.saveReg);
