@@ -99,13 +99,7 @@
   </fieldset>
   <br>
 
-  <table style="width: 100%; ">
-    <tr>
-      <th> <a href="#" class="boton-efecto">MEJOR CALIFICADOS </a></th>
-      <th> <a href="/Novedades/<%=usuario.ID%>" class="boton-efecto">NOVEDADES</a></th>
-      <th> <a href="#" class="boton-efecto">Categorias</a></th>
-    </tr>
-  </table>
+  
   <div class="Catalogo">
     <a class="CatalogoA" href="/libro/<%= productos[0]?.ID_Producto %>/<%= usuario.ID%>">
       <img src="<%= productos[0]?.direccionImg %>" alt="<%= productos[0]?.Nombre %>" title="<%= productos[0]?.Nombre %>" height="300"
