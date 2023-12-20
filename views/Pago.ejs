@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Página principal</title>
+    <title>Página Pago</title>
     <link rel="stylesheet" href="/Estilos/Estilos.Css" />
     <link rel="stylesheet" href="/Estilos/EstilosPago.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -29,8 +29,6 @@
       <p class="pagos">
         <img src="/Recursos/Metodos de pago.png" alt="Metodos de pago" />
       </p>
-
-      <input type="hidden" name ="ID_Carrito" value="<%= ID_Carrito %>">
       <label for="nombre-titular">Nombre del Titular:</label>
       <input type="text" id="nombre-titular" name="nombre-titular" required />
 
@@ -84,13 +82,11 @@
           </table>
       </div>
 </DIV>
-    
-
-    <button type="submit">Pagar</button>
+<input type="hidden" id="nf" value="valorfactura">
+<input type="hidden" id="fe" value="valorfecha">
+    <button onclick="enviar(event);">Pagar</button>
 </form>
     
-
-      
       <footer class="Pie">
         <div class="contenedor">
           <div class="pie-row">
@@ -122,8 +118,8 @@
           </div>
         </div>
       </footer>
-      
 
+    <script>
     var nf = document.getElementById('nf');
     var valorfactura = factura();
     var valorfecha = fecha();
@@ -148,8 +144,8 @@
         window.location.href = '/EstadoVendido/' + usuario +"/"+ ID_Carrito;
         }
 
-        function sendMail(event){
-          Swal.fire({
+        function enviar(event){
+        Swal.fire({
         title: "Su compra ha sido realizada!",
         text: "Gracias por tu Compra, en unos momentos se enviará su factura electrónica!",
         icon: "success",
@@ -175,6 +171,7 @@
         })
         .catch();
       }
+
   </script>
     </body>
 </html>
