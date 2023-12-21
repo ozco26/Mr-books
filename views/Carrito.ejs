@@ -52,11 +52,10 @@
             <td><%= items.Precio %> + IVA</td>
 
             <td>
-              <a
-                href=""
-                onclick="pago('<%= items.ID_Producto %>', '<%=idUsuario %>') ; return false;"
-              >
-                <button type="button">B</button>
+              <a href="" onclick="borrar('<%= items.ID_Producto %>', '<%=idUsuario %>') ; return false;">
+                <button type="button" >
+                  B
+                </button>
               </a>
             </td>
           </tr>
